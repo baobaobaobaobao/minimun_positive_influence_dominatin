@@ -22,11 +22,15 @@
 #include <windows.h>
 #include <math.h>
 
-#define   GMaxVertexNum 18800              //图中点数的上界---根据实际情况可调整
+#define   GMaxVertexNum 37000             //图中点数的上界---根据实际情况可调整
 
 //***注:为了提高算法的效率, 我们对读取或者产生的图进了如下预处理: 按照节点度排序,然后按度序列由大到小重新给所有节点编号,使得新的1号节点度最大,新的最后节点度最小.
 //***这样各个算法中所得的正影响支配集是节点重新编号后的结果,没有转换为原图中节的序号(也没有必要转换过去,因为实验中我们仅需要所求得的正影响支配集的大小和运行时间).
 
+
+/*鲍志强
+这样的话，我们只能求得正影响集大小，其他的求不了。因为每次选择一个点进入D的话，都会进行每个顶点度数的排序。
+*/
 bool      GAdjMatrix[GMaxVertexNum+1][GMaxVertexNum+1];//图的邻接矩阵(0-1矩阵),表示图G.为全局数组能用于所有子程序中
 short int DegreeList[GMaxVertexNum+1];                 //存储图中各点的度,适合最大点度不超过2^15=32768.为全局数组能用于所有子程序中
 bool      DSList[GMaxVertexNum+1];                     //存储图中被选中的正影响支配集, 第i个元素=1表示点i为支配点,=0表示点i非支配点.为全局数组能用于所有子程序中
@@ -118,183 +122,6 @@ void main(int argc,char *argv[])
 
 */
 
-//集成环境下执行部分(begin)****************************************************************
-  int main(void)
-  {
-
-    char  graphfilename[50];
-	char  resultfilename[50];
-    //键盘上输入在ReadGraph()中要打开的图数据文件名(txt文件,带扩展名.文件格式:第一行图的点数n,第二行图的边数m,余下每一行是一条边(i,j)的一个节点i  j)
-	printf("Please input the filename of the data file:\n");
-	scanf("%s",graphfilename);
-    //键盘上输入在下面中要创建的保存计算结果的文件名(txt文件,带扩展名)
-	printf("Please input the filename of the result file:\n");
-	scanf("%s",resultfilename);
-
-//集成环境下执行部分(end)******************************************************************
-
-
-
-
-
-	//------------------------------输入数据--------------------------------------
-
-  	ReadGraph(graphfilename);  //读出图的数据
-    //CreateGraph(graphfilename);  //随机产生一个图,并存储到文件中
-
-
-	//-----------------------------执行算法--------------------------------------
-	FILE *out;
-	clock_t start, end;
-    int dssize;
-
-	//根据给定的结果文件名字打开文件。参数w表示对文件进行写操作
-    if ((out=fopen(resultfilename, "w"))==NULL)
-	{   	fprintf(stderr, "Cannot open the data file.\n");
-			return 0;
-	}
-	fprintf(out,"******The graph file is %s******\n",graphfilename);
-	fprintf(out,"vertexnum=%d,edgenum=%d,maxdegree=%d,averdegree=%6.2lf,density=%10.5lf\n",gvertexnum,gedgenum,maxdegree,2.0*gedgenum/gvertexnum,2.0*gedgenum/(gvertexnum*(gvertexnum-1.0)));
-	fprintf(out, "mindegree=%d,onedegreenum=%d,evendegreenum=%d,odddegreenum=%d\n\n",mindegree,onedegreenum,evendegreenum,gvertexnum-evendegreenum);
-
-    //******贪心近似算法1(文献中方法)*********
-	printf("\nGreedy1_PIDS is running...");
-    start=clock();
-   	dssize=Greedy1_PIDS();      //执行贪心近似算法,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nGreedy1_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-	fprintf(out,"\nGreedy1_PIDS has running time %.3lf.\n", 1.0*(end-start)/CLK_TCK);
-	//getch();
-
-	//******贪心算法2(文献中方法)*********
-	printf("\nGreedy2_PIDS is running...");
-    start=clock();
-   	dssize=Greedy2_PIDS();      //执行贪心近似算法,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nGreedy2_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-	fprintf(out,"\nGreedy2_PIDS has running time %.3lf.\n", 1.0*(end-start)/CLK_TCK);
-	//getch();
-
-
-	//*****新设计的贪心算法1*********
-	printf("\nNewGreedy1_PIDS is running...");
-    start=clock();
-	dssize=NewGreedy1_PIDS();      //执行新设计的贪心算法1,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nNewGreedy1_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-    fprintf(out,"\nNewGreedy1_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
-    //getch();
-
-	//*****新设计的贪心算法2*********
-	printf("\nNewGreedy2_PIDS is running...");
-    start=clock();
-	dssize=NewGreedy2_PIDS();      //执行新设计的贪心算法2,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nNewGreedy2_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-    fprintf(out,"\nNewGreedy2_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
-    //getch();
-
-	//*****新设计的贪心算法2*********
-	printf("\nNewGreedy3_PIDS is running...");
-    start=clock();
-	dssize=NewGreedy3_PIDS();      //执行新设计的贪心算法2,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nNewGreedy3_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-    fprintf(out,"\nNewGreedy3_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
-    //getch();
-
-	//*****新设计的局部贪心算法1*********
-	printf("\nLocalGreedy1_PIDS is running...");
-    start=clock();
-	dssize=LocalGreedy1_PIDS();      //执行新设计的局部贪心算法1,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nLocalGreedy1_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-    fprintf(out,"\nLocalGreedy1_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
-    //getch();
-
-	//*****新设计的局部贪心算法2*********
-	printf("\nLocalGreedy2_PIDS is running...");
-    start=clock();
-	dssize=LocalGreedy2_PIDS();      //执行新设计的局部贪心算法2,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nLocalGreedy2_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-    fprintf(out,"\nLocalGreedy2_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
-    //getch();
-
-	//*****新设计的局部贪心算法3*********
-	printf("\nLocalGreedy3_PIDS is running...");
-    start=clock();
-	dssize=LocalGreedy3_PIDS();      //执行新设计的局部贪心算法3,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nLocalGreedy3_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-    fprintf(out,"\nLocalGreedy3_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
-    //getch();
-
-	//*****新设计的新的局部贪心算法1*********
-	printf("\nNewLocalGreedy1_PIDS is running...");
-    start=clock();
-	dssize=NewLocalGreedy1_PIDS();  //执行新设计的新的局部贪心算法1,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nNewLocalGreedy1_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-    fprintf(out,"\nNewLocalGreedy1_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
-    //getch();
-
-	//*****新设计的新的局部贪心算法2*********
-	printf("\nNewLocalGreedy2_PIDS is running...");
-    start=clock();
-	dssize=NewLocalGreedy2_PIDS();  //执行新设计的新的局部贪心算法2,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nNewLocalGreedy2_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-    fprintf(out,"\nNewLocalGreedy2_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
-    //getch();
-
-	//*****新设计的新的局部贪心算法3*********
-	printf("\nNewLocalGreedy3_PIDS is running...");
-    start=clock();
-	dssize=NewLocalGreedy3_PIDS();  //执行新设计的新的局部贪心算法3,返回所求支配集大小
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nNewLocalGreedy3_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-    fprintf(out,"\nNewLocalGreedy3_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
-    //getch();
-
-
-	fclose(out);           //打开的文件最后必须关闭
-    printf("程序运行完毕!\n");
-	//getch();
-}
 
 
 
@@ -308,6 +135,7 @@ int Greedy1_PIDS(void)
 	{//初始化
 		DSList[i]=0;                         //***记录支配点(值为0的点为非支配点,值为1的点为支配点)
 		Satisfied[i]=-(DegreeList[i]+1)/2;   //***记录每个点的未满足程度(值>=0表示是已满足点; 值<0表示未满足点,且其绝对值表示其未满足的程度)
+		//满意度初始化为这点度数的-1/2
 		Coverage[i]=DegreeList[i];           //***记录每个非支配点(即DSList[.]值为0的点)的邻域内包含有的未满足的点个数--即记录每个非支配点的覆盖面
 	}
     dssize=0;//支配点个数初始化
@@ -335,10 +163,10 @@ int Greedy1_PIDS(void)
 		}
 		DSList[bestvertex]=1;          //加入新的支配点
 		dssize++;                      //支配点个数更新
-		for(j=1;j<=gvertexnum;j++)     //更新各邻点的未满意度
+		for(j=1;j<=gvertexnum;j++)     //更新该加入正影响集的点的各邻点的未满意度，只需要更新已经加入正影响集的领点就ok。
 			if(GAdjMatrix[bestvertex][j])
 			{    Satisfied[j]++;
-			     if(Satisfied[j]==0)   //如果点j被支配次数现在能达到其点度一半,则归于已满足的点类
+			     if(Satisfied[j]==0)   //如果点j被支配次数现在能达到其点度一半,则归于已满足的点类，顺带如果他的邻点属于满意点。则该点加入满意点的集合。
 				 {
 					 uncoverednum--;
 					 for(k=1;k<=gvertexnum;k++)                   //更新相关点的覆盖面Coverage[.]
@@ -369,6 +197,158 @@ int Greedy1_PIDS(void)
 	printf("\nGreedy2_PIDS所求正影响支配集大小为(优化后): %5d\n",newdssize);
 	return newdssize;//返回所求支配集大小
 }
+
+
+
+
+//***用于调试阶段: 检查一个正影响支配集的正确性***
+bool CheckPIDS(int dssize)
+{//用于调试阶段: 对任何算法得到的正影响支配集DSList[1...gvertexnum](其大小为dssize)进行正确性检查, 正确返回1; 否则返回0.
+    int i,j;
+	int newdssize;
+	int temp;
+
+	//检查每点邻域内是否有至少一半的支配点, 并统计实际支配点的个数newdssize
+	newdssize=0;
+	for(i=1;i<=gvertexnum;i++)
+	{   if(DSList[i]==1)
+	        newdssize++;
+	    temp=0;
+		for(j=1;j<=gvertexnum;j++)
+			if(GAdjMatrix[i][j] && DSList[j]==1)
+				temp++;
+		if(temp<(DegreeList[i]+1)/2)  //如果任何点i的邻域内支配点个数不到其点度数的一半, 表示有错
+			return 0;
+	}
+	if(newdssize!=dssize)             //如果实际的支配点个数与原来不符合, 表示有错
+		return 0;
+	return 1;
+}
+
+
+
+
+
+//****由一个正影响支配集导出一个极小正影响支配集****
+int RefinePIDS(int dssize)
+{//可对任何算法得到的正影响支配集DSList[1...gvertexnum]进行极小化处理(其大小为dssize),去掉不必要的支配点最终得到更小的正影响支配集DSList[1...gvertexnum],并返回新的大小
+    int i,j,k;
+	int newdssize;
+	newdssize=dssize;  //获取原正影响支配集的大小
+
+	//按照节点度由小到大的次序来进行下述操作(注意: 图中节点已经按照度由大到小有序,即第1个节点度最大,第gvertexnum节点度最小)
+	for(i=gvertexnum;i>=1;i--)
+		if(DSList[i]==1)  //表示DSList[i]是正影响集中一员，以此检查
+		{	for(j=1;j<=gvertexnum;j++)
+				if(GAdjMatrix[i][j] && Satisfied[j]==0) //此时说明支配点i不可以改为非支配点
+					break;
+			if(j==gvertexnum+1)                           //此时说明支配点i的任何邻点j都有Satisfied[j]<0, 因此节点i可以改为非支配点
+			{
+				newdssize--;
+				DSList[i]=0;
+		        for(k=1;k<=gvertexnum;k++)
+			        if(GAdjMatrix[i][k])
+			           Satisfied[k]--;
+			}
+		}
+
+	return newdssize;//返回极小化后的正影响支配集的大小
+}
+
+
+
+
+
+/*现在开始复现师兄论文。
+第一步，实现Crossver operator*/
+
+
+
+void  CrossverOperator()
+{
+
+/*问题，这个x，y如何定制？*/
+
+    bool      DSList_Z[GMaxVertexNum+1];       //存放Z
+    bool      DSList_X[GMaxVertexNum+1];      //存放X。
+    bool      DSList_Y[GMaxVertexNum+1];      //存放Y。
+//如果随机生成x，y,一半是x，一半是y。
+    for(int i=0; i<(strlen(DSList)/2); i++)
+    {
+        DSList_X[i]=DSList[i];
+        DSList_Y[i]=DSList[(strlen(DSList)/2)+i];
+    }
+
+    //将T置为空集。
+    for(int i=0;i<(strlen(DSList);i++){
+         DSList[i]=0;
+    }
+    /*将x与y进行交叉。生成z。并入T*/
+    for(int i=0; i<strlen(DSList_X); i++)
+    {
+
+        if(DSList_X[i]==DSList_Y[i]&&DSList_X[i]==1)
+        {
+            DSList_Z[i]=1;
+
+        }
+        DSList_Z[i]=0;
+    }
+
+    /*对z进行操作。*/
+
+    for(int i=0; i<strlen(DSList_X); i++)
+    {
+        if(DSList_Z[i]==1)
+        {
+            //产生一个0到1的随机数。
+            float RangNum=rand()/(RAND_MAX+1.0);
+            if(RangNum<0.15)
+            {
+                DSList_Z[i]=0;
+
+            }
+        }
+    }
+
+
+   printf("\n产生的Z的数量: %5d\n",strlen(DSList_Z));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //***文献中已有的贪心算法2***
@@ -1305,56 +1285,8 @@ int NewLocalGreedy3_PIDS(void)
 
 
 
-//***用于调试阶段: 检查一个正影响支配集的正确性***
-bool CheckPIDS(int dssize)
-{//用于调试阶段: 对任何算法得到的正影响支配集DSList[1...gvertexnum](其大小为dssize)进行正确性检查, 正确返回1; 否则返回0.
-    int i,j;
-	int newdssize;
-	int temp;
-
-	//检查每点邻域内是否有至少一半的支配点, 并统计实际支配点的个数newdssize
-	newdssize=0;
-	for(i=1;i<=gvertexnum;i++)
-	{   if(DSList[i]==1)
-	        newdssize++;
-	    temp=0;
-		for(j=1;j<=gvertexnum;j++)
-			if(GAdjMatrix[i][j] && DSList[j]==1)
-				temp++;
-		if(temp<(DegreeList[i]+1)/2)  //如果任何点i的邻域内支配点个数不到其点度数的一半, 表示有错
-			return 0;
-	}
-	if(newdssize!=dssize)             //如果实际的支配点个数与原来不符合, 表示有错
-		return 0;
-	return 1;
-}
 
 
-//****由一个正影响支配集导出一个极小正影响支配集****
-int RefinePIDS(int dssize)
-{//可对任何算法得到的正影响支配集DSList[1...gvertexnum]进行极小化处理(其大小为dssize),去掉不必要的支配点最终得到更小的正影响支配集DSList[1...gvertexnum],并返回新的大小
-    int i,j,k;
-	int newdssize;
-	newdssize=dssize;  //获取原正影响支配集的大小
-
-	//按照节点度由小到大的次序来进行下述操作(注意: 图中节点已经按照度由大到小有序,即第1个节点度最大,第gvertexnum节点度最小)
-	for(i=gvertexnum;i>=1;i--)
-		if(DSList[i]==1)
-		{	for(j=1;j<=gvertexnum;j++)
-				if(GAdjMatrix[i][j] && Satisfied[j]==0) //此时说明支配点i不可以改为非支配点
-					break;
-			if(j==gvertexnum+1)                           //此时说明支配点i的任何邻点j都有Satisfied[j]<0, 因此节点i可以改为非支配点
-			{
-				newdssize--;
-				DSList[i]=0;
-		        for(k=1;k<=gvertexnum;k++)
-			        if(GAdjMatrix[i][k])
-			           Satisfied[k]--;
-			}
-		}
-
-	return newdssize;//返回极小化后的正影响支配集的大小
-}
 
 
 //***输入和输出函数***
@@ -1376,7 +1308,7 @@ void ReadGraph(char *txtgraphfilename)
       int i,j,k;
       for(i=1;i<=gvertexnum;i++)                          //initialize the adjacent matrix
 		for(j=1;j<=gvertexnum;j++)
-			GAdjMatrix[i][j]=0;
+			GAdjMatrix[i][j]=0;             /**/
 
       k=0;                                                 //k 用来记住实际的边数。注：文件中某边可能重复出现多次
       while(!feof(in))                                     //读出每一条边(每条边文件中是用一对点来表示的)
@@ -1462,6 +1394,222 @@ void ReadGraph(char *txtgraphfilename)
 
 }
 
+
+
+
+
+//集成环境下执行部分(begin)****************************************************************
+  int main(void)
+  {
+
+    char  graphfilename[50];
+	char  resultfilename[50];
+    //键盘上输入在ReadGraph()中要打开的图数据文件名(txt文件,带扩展名.文件格式:第一行图的点数n,第二行图的边数m,余下每一行是一条边(i,j)的一个节点i  j)
+	printf("Please input the filename of the data file:\n");
+	scanf("%s",graphfilename);
+    //键盘上输入在下面中要创建的保存计算结果的文件名(txt文件,带扩展名)
+	printf("Please input the filename of the result file:\n");
+	scanf("%s",resultfilename);
+
+//集成环境下执行部分(end)******************************************************************
+
+
+
+
+
+	//------------------------------输入数据--------------------------------------
+
+  	ReadGraph(graphfilename);  //读出图的数据
+    //CreateGraph(graphfilename);  //随机产生一个图,并存储到文件中
+
+
+	//-----------------------------执行算法--------------------------------------
+	FILE *out;
+	clock_t start, end;
+    int dssize;
+
+	//根据给定的结果文件名字打开文件。参数w表示对文件进行写操作
+    if ((out=fopen(resultfilename, "w"))==NULL)
+	{   	fprintf(stderr, "Cannot open the data file.\n");
+			return 0;
+	}
+	fprintf(out,"******The graph file is %s******\n",graphfilename);
+	fprintf(out,"vertexnum=%d,edgenum=%d,maxdegree=%d,averdegree=%6.2lf,density=%10.5lf\n",gvertexnum,gedgenum,maxdegree,2.0*gedgenum/gvertexnum,2.0*gedgenum/(gvertexnum*(gvertexnum-1.0)));
+	fprintf(out, "mindegree=%d,onedegreenum=%d,evendegreenum=%d,odddegreenum=%d\n\n",mindegree,onedegreenum,evendegreenum,gvertexnum-evendegreenum);
+
+    //******贪心近似算法1(文献中方法)*********
+	printf("\nGreedy1_PIDS is running...");
+    start=clock();
+   	dssize=Greedy1_PIDS();      //执行贪心近似算法,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nGreedy1_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+	fprintf(out,"\nGreedy1_PIDS has running time %.3lf.\n", 1.0*(end-start)/CLK_TCK);
+	//getch();
+
+	/*
+	//******贪心算法2(文献中方法)*********
+	printf("\nGreedy2_PIDS is running...");
+    start=clock();
+   	dssize=Greedy2_PIDS();      //执行贪心近似算法,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nGreedy2_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+	fprintf(out,"\nGreedy2_PIDS has running time %.3lf.\n", 1.0*(end-start)/CLK_TCK);
+	//getch();
+
+
+	//*****新设计的贪心算法1*********
+	printf("\nNewGreedy1_PIDS is running...");
+    start=clock();
+	dssize=NewGreedy1_PIDS();      //执行新设计的贪心算法1,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nNewGreedy1_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+    fprintf(out,"\nNewGreedy1_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
+    //getch();
+
+	//*****新设计的贪心算法2*********
+	printf("\nNewGreedy2_PIDS is running...");
+    start=clock();
+	dssize=NewGreedy2_PIDS();      //执行新设计的贪心算法2,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nNewGreedy2_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+    fprintf(out,"\nNewGreedy2_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
+    //getch();
+
+	//*****新设计的贪心算法2*********
+	printf("\nNewGreedy3_PIDS is running...");
+    start=clock();
+	dssize=NewGreedy3_PIDS();      //执行新设计的贪心算法2,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nNewGreedy3_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+    fprintf(out,"\nNewGreedy3_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
+    //getch();
+
+	//*****新设计的局部贪心算法1*********
+	printf("\nLocalGreedy1_PIDS is running...");
+    start=clock();
+	dssize=LocalGreedy1_PIDS();      //执行新设计的局部贪心算法1,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nLocalGreedy1_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+    fprintf(out,"\nLocalGreedy1_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
+    //getch();
+
+	//*****新设计的局部贪心算法2*********
+	printf("\nLocalGreedy2_PIDS is running...");
+    start=clock();
+	dssize=LocalGreedy2_PIDS();      //执行新设计的局部贪心算法2,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nLocalGreedy2_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+    fprintf(out,"\nLocalGreedy2_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
+    //getch();
+
+	//*****新设计的局部贪心算法3*********
+	printf("\nLocalGreedy3_PIDS is running...");
+    start=clock();
+	dssize=LocalGreedy3_PIDS();      //执行新设计的局部贪心算法3,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nLocalGreedy3_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+    fprintf(out,"\nLocalGreedy3_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
+    //getch();
+
+	//*****新设计的新的局部贪心算法1*********
+	printf("\nNewLocalGreedy1_PIDS is running...");
+    start=clock();
+	dssize=NewLocalGreedy1_PIDS();  //执行新设计的新的局部贪心算法1,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nNewLocalGreedy1_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+    fprintf(out,"\nNewLocalGreedy1_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
+    //getch();
+
+	//*****新设计的新的局部贪心算法2*********
+	printf("\nNewLocalGreedy2_PIDS is running...");
+    start=clock();
+	dssize=NewLocalGreedy2_PIDS();  //执行新设计的新的局部贪心算法2,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nNewLocalGreedy2_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+    fprintf(out,"\nNewLocalGreedy2_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
+    //getch();
+
+	//*****新设计的新的局部贪心算法3*********
+	printf("\nNewLocalGreedy3_PIDS is running...");
+    start=clock();
+	dssize=NewLocalGreedy3_PIDS();  //执行新设计的新的局部贪心算法3,返回所求支配集大小
+	end=clock();
+	if(dssize)
+		fprintf(out,"\nNewLocalGreedy3_PIDS obtains a PIDS of size %d.", dssize);
+	else
+		fprintf(out,"\nNo solution to the instance.");
+    fprintf(out,"\nNewLocalGreedy3_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
+    //getch();
+
+
+    */
+
+	fclose(out);           //打开的文件最后必须关闭
+    printf("程序运行完毕!\n");
+	//getch();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*随机产生图的函数没有使用。啊哈哈哈*/
 void CreateGraph(char *txtgraphfilename)
 {//产生无向图,图中n个点1,2,...,n, 图的平均度averd=2m/n, 边的稠密度r=2m/(n(n-1)),因此有r=averd/(n-1).
   //图中任意点i和j之间存在边的概率为r(0<r<1)--r可以看作是边的稠密度.
@@ -1587,3 +1735,5 @@ void CreateGraph(char *txtgraphfilename)
 		fclose(out);                   //打开的文件最后必须关闭
 	}
 }
+
+
