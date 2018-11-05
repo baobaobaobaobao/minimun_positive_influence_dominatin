@@ -1,0 +1,37 @@
+******The graph file is sdfdf******
+vertexnum=0,edgenum=0,maxdegree=0,averdegree= -1.#J,density=  -1.#IND0
+mindegree=0,onedegreenum=0,evendegreenum=0,odddegreenum=0
+
+
+No solution to the instance.
+Greedy1_PIDS has running time 0.005.
+
+No solution to the instance.
+Greedy2_PIDS has running time 0.003.
+
+No solution to the instance.
+NewGreedy1_PIDS has running time 0.004
+
+No solution to the instance.
+NewGreedy2_PIDS has running time 0.005
+
+No solution to the instance.
+NewGreedy3_PIDS has running time 0.005
+
+No solution to the instance.
+LocalGreedy1_PIDS has running time 0.007
+
+No solution to the instance.
+LocalGreedy2_PIDS has running time 0.005
+
+No solution to the instance.
+LocalGreedy3_PIDS has running time 0.003
+
+No solution to the instance.
+NewLocalGreedy1_PIDS has running time 0.003
+
+No solution to the instance.
+NewLocalGreedy2_PIDS has running time 0.003
+
+No solution to the instance.
+NewLocalGreedy3_PIDS has running time 0.002

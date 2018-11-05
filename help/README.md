@@ -1,0 +1,2 @@
+# minimun_positive_influence_dominatin
+基于最小影响支配集的改进算法
