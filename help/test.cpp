@@ -1,17 +1,17 @@
-//Çó½âÉç½»ÍøÂçµÄ×îĞ¡µÄÕıÓ°ÏìÖ§Åä¼¯(Positive Influence Dominating Set)µÄÁ½¸öÎÄÏ×ÖĞÒÑÓĞµÄÌ°ĞÄ½üËÆËã·¨¡¢¼¸¸ö×ÔĞĞÉè¼ÆµÄĞÂµÄÌ°ĞÄËã·¨
-//***Algorithm 1: ÒÑÓĞµÄËã·¨1(Greedy1_PIDS): Ò»¸ö¼òµ¥µÄ½üËÆÌ°ĞÄËã·¨---½üËÆ±ÈÎªH(¦Ä),ÕâÀïH()ÊÇºÍĞ³º¯Êı,¦ÄÊÇÍ¼µÄ×î´óµã¶È; Ê±¼ä¸´ÔÓ¶ÈÎªO(n^3)
-//ÆäÖ÷Òª²ßÂÔ:Ã¿´ÎÑ¡ÔñÄÜÌáÉı¸ü¶à¸öÎ´Âú×ãµãµÄÂú×ã¶ÈµÄÒ»¸ö·ÇÖ§Åäµã±äÎªÖ§Åäµã.
-//À´×ÔÂÛÎÄ: On positive influence dominating sets in social networks,Theoretical Computer Science 412 (2011) 265¨C269
-//***Algorithm 2: ÒÑÓĞµÄËã·¨2(Greedy2_PIDS): ÁíÒ»¸ö¼òµ¥µÄÌ°ĞÄËã·¨---Ã»ÓĞÖ¤Ã÷½üËÆ±È, µ«¾İËµĞ§¹ûÒª±ÈÉÏÃæµÄÌ°ĞÄ·¨ÒªºÃ; Ê±¼ä¸´ÔÓ¶ÈÈÔÎªO(n^3)
-//ÆäÖ÷Òª²ßÂÔ:Ã¿´ÎÑ¡ÔñÄÜÌáÉıÆäËùÓĞÁÚµã²»Âú×ã³Ì¶ÈºÍ×î´óµÄÒ»¸ö·ÇÖ§Åäµã±äÎªÖ§Åäµã.
-//À´×ÔÂÛÎÄ: A New Algorithm for Positive Influence Dominating Set in Social Networks.Proc.ASONAM 2012,253-257,IEEE
+//æ±‚è§£ç¤¾äº¤ç½‘ç»œçš„æœ€å°çš„æ­£å½±å“æ”¯é…é›†(Positive Influence Dominating Set)çš„ä¸¤ä¸ªæ–‡çŒ®ä¸­å·²æœ‰çš„è´ªå¿ƒè¿‘ä¼¼ç®—æ³•ã€å‡ ä¸ªè‡ªè¡Œè®¾è®¡çš„æ–°çš„è´ªå¿ƒç®—æ³•
+//***Algorithm 1: å·²æœ‰çš„ç®—æ³•1(Greedy1_PIDS): ä¸€ä¸ªç®€å•çš„è¿‘ä¼¼è´ªå¿ƒç®—æ³•---è¿‘ä¼¼æ¯”ä¸ºH(Î´),è¿™é‡ŒH()æ˜¯å’Œè°å‡½æ•°,Î´æ˜¯å›¾çš„æœ€å¤§ç‚¹åº¦; æ—¶é—´å¤æ‚åº¦ä¸ºO(n^3)
+//å…¶ä¸»è¦ç­–ç•¥:æ¯æ¬¡é€‰æ‹©èƒ½æå‡æ›´å¤šä¸ªæœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦çš„ä¸€ä¸ªéæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹.
+//æ¥è‡ªè®ºæ–‡: On positive influence dominating sets in social networks,Theoretical Computer Science 412 (2011) 265â€“269
+//***Algorithm 2: å·²æœ‰çš„ç®—æ³•2(Greedy2_PIDS): å¦ä¸€ä¸ªç®€å•çš„è´ªå¿ƒç®—æ³•---æ²¡æœ‰è¯æ˜è¿‘ä¼¼æ¯”, ä½†æ®è¯´æ•ˆæœè¦æ¯”ä¸Šé¢çš„è´ªå¿ƒæ³•è¦å¥½; æ—¶é—´å¤æ‚åº¦ä»ä¸ºO(n^3)
+//å…¶ä¸»è¦ç­–ç•¥:æ¯æ¬¡é€‰æ‹©èƒ½æå‡å…¶æ‰€æœ‰é‚»ç‚¹ä¸æ»¡è¶³ç¨‹åº¦å’Œæœ€å¤§çš„ä¸€ä¸ªéæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹.
+//æ¥è‡ªè®ºæ–‡: A New Algorithm for Positive Influence Dominating Set in Social Networks.Proc.ASONAM 2012,253-257,IEEE
 
-//***Algorithm 3: ×ÔĞĞĞÂÉè¼ÆµÄËã·¨1(NewGreedy1_PIDS): ÉÏÊöÌ°ĞÄËã·¨µÄ²ßÂÔµÄ½áºÏ(ÊµÑé±íÃ÷»ù±¾ÉÏÄÜ±£³Ö½âµÄÖÊÁ¿¸úÒÑÓĞÌ°ĞÄ·¨²î²»¶à); Ê±¼ä¸´ÔÓ¶ÈÎªO(n^3)
-//***Algorithm 4: ×ÔĞĞĞÂÉè¼ÆµÄËã·¨2(NewGreedy2_PIDS): ÉÏÊöÌ°ĞÄËã·¨µÄ²ßÂÔµÄÁíÒ»ÖÖĞÎÊ½µÄ½áºÏ(ÊµÑé±íÃ÷»ù±¾ÉÏÄÜ±£³Ö½âµÄÖÊÁ¿¸úÒÑÓĞÌ°ĞÄ·¨²î²»¶à); Ê±¼ä¸´ÔÓ¶ÈÎªO(n^3)
-//***Algorithm 5: ×ÔĞĞĞÂÉè¼ÆµÄËã·¨3(NewGreedy3_PIDS): ¿ìËÙËã·¨(ÊµÑéÖ¤Ã÷½âµÄÖÊÁ¿±ÈÒÑÓĞÌ°ĞÄ·¨µÄÒª²îÒ»µã,µ«ÔËĞĞÊ±¼ä¿ì, ÊÊÓÃÓÚ´óµÄÉç½»ÍøÂç); Ê±¼ä¸´ÔÓ¶ÈÎªO(n^2)
+//***Algorithm 3: è‡ªè¡Œæ–°è®¾è®¡çš„ç®—æ³•1(NewGreedy1_PIDS): ä¸Šè¿°è´ªå¿ƒç®—æ³•çš„ç­–ç•¥çš„ç»“åˆ(å®éªŒè¡¨æ˜åŸºæœ¬ä¸Šèƒ½ä¿æŒè§£çš„è´¨é‡è·Ÿå·²æœ‰è´ªå¿ƒæ³•å·®ä¸å¤š); æ—¶é—´å¤æ‚åº¦ä¸ºO(n^3)
+//***Algorithm 4: è‡ªè¡Œæ–°è®¾è®¡çš„ç®—æ³•2(NewGreedy2_PIDS): ä¸Šè¿°è´ªå¿ƒç®—æ³•çš„ç­–ç•¥çš„å¦ä¸€ç§å½¢å¼çš„ç»“åˆ(å®éªŒè¡¨æ˜åŸºæœ¬ä¸Šèƒ½ä¿æŒè§£çš„è´¨é‡è·Ÿå·²æœ‰è´ªå¿ƒæ³•å·®ä¸å¤š); æ—¶é—´å¤æ‚åº¦ä¸ºO(n^3)
+//***Algorithm 5: è‡ªè¡Œæ–°è®¾è®¡çš„ç®—æ³•3(NewGreedy3_PIDS): å¿«é€Ÿç®—æ³•(å®éªŒè¯æ˜è§£çš„è´¨é‡æ¯”å·²æœ‰è´ªå¿ƒæ³•çš„è¦å·®ä¸€ç‚¹,ä½†è¿è¡Œæ—¶é—´å¿«, é€‚ç”¨äºå¤§çš„ç¤¾äº¤ç½‘ç»œ); æ—¶é—´å¤æ‚åº¦ä¸ºO(n^2)
 
 //2016-04-16
-//×¢:ÎªÁË¼òµ¥Æğ¼û,ÏÂÎÄÖĞÌáµ½Ö§Åä¼¯DS(Dominating Set)¶¼ÊÇÖ¸ÕıÓ°ÏìÖ§Åä¼¯PIDS(Positive Influence Dominating Set)
+//æ³¨:ä¸ºäº†ç®€å•èµ·è§,ä¸‹æ–‡ä¸­æåˆ°æ”¯é…é›†DS(Dominating Set)éƒ½æ˜¯æŒ‡æ­£å½±å“æ”¯é…é›†PIDS(Positive Influence Dominating Set)
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,90 +22,90 @@
 #include <windows.h>
 #include <math.h>
 
-#define   GMaxVertexNum 37000             //Í¼ÖĞµãÊıµÄÉÏ½ç---¸ù¾İÊµ¼ÊÇé¿ö¿Éµ÷Õû
+#define   GMaxVertexNum 37000             //å›¾ä¸­ç‚¹æ•°çš„ä¸Šç•Œ---æ ¹æ®å®é™…æƒ…å†µå¯è°ƒæ•´
 
-//***×¢:ÎªÁËÌá¸ßËã·¨µÄĞ§ÂÊ, ÎÒÃÇ¶Ô¶ÁÈ¡»òÕß²úÉúµÄÍ¼½øÁËÈçÏÂÔ¤´¦Àí: °´ÕÕ½Úµã¶ÈÅÅĞò,È»ºó°´¶ÈĞòÁĞÓÉ´óµ½Ğ¡ÖØĞÂ¸øËùÓĞ½Úµã±àºÅ,Ê¹µÃĞÂµÄ1ºÅ½Úµã¶È×î´ó,ĞÂµÄ×îºó½Úµã¶È×îĞ¡.
-//***ÕâÑù¸÷¸öËã·¨ÖĞËùµÃµÄÕıÓ°ÏìÖ§Åä¼¯ÊÇ½ÚµãÖØĞÂ±àºÅºóµÄ½á¹û,Ã»ÓĞ×ª»»ÎªÔ­Í¼ÖĞ½ÚµÄĞòºÅ(Ò²Ã»ÓĞ±ØÒª×ª»»¹ıÈ¥,ÒòÎªÊµÑéÖĞÎÒÃÇ½öĞèÒªËùÇóµÃµÄÕıÓ°ÏìÖ§Åä¼¯µÄ´óĞ¡ºÍÔËĞĞÊ±¼ä).
+//***æ³¨:ä¸ºäº†æé«˜ç®—æ³•çš„æ•ˆç‡, æˆ‘ä»¬å¯¹è¯»å–æˆ–è€…äº§ç”Ÿçš„å›¾è¿›äº†å¦‚ä¸‹é¢„å¤„ç†: æŒ‰ç…§èŠ‚ç‚¹åº¦æ’åº,ç„¶åæŒ‰åº¦åºåˆ—ç”±å¤§åˆ°å°é‡æ–°ç»™æ‰€æœ‰èŠ‚ç‚¹ç¼–å·,ä½¿å¾—æ–°çš„1å·èŠ‚ç‚¹åº¦æœ€å¤§,æ–°çš„æœ€åèŠ‚ç‚¹åº¦æœ€å°.
+//***è¿™æ ·å„ä¸ªç®—æ³•ä¸­æ‰€å¾—çš„æ­£å½±å“æ”¯é…é›†æ˜¯èŠ‚ç‚¹é‡æ–°ç¼–å·åçš„ç»“æœ,æ²¡æœ‰è½¬æ¢ä¸ºåŸå›¾ä¸­èŠ‚çš„åºå·(ä¹Ÿæ²¡æœ‰å¿…è¦è½¬æ¢è¿‡å»,å› ä¸ºå®éªŒä¸­æˆ‘ä»¬ä»…éœ€è¦æ‰€æ±‚å¾—çš„æ­£å½±å“æ”¯é…é›†çš„å¤§å°å’Œè¿è¡Œæ—¶é—´).
+using namespace std;
 
-
-/*±«Ö¾Ç¿
-ÕâÑùµÄ»°£¬ÎÒÃÇÖ»ÄÜÇóµÃÕıÓ°Ïì¼¯´óĞ¡£¬ÆäËûµÄÇó²»ÁË¡£ÒòÎªÃ¿´ÎÑ¡ÔñÒ»¸öµã½øÈëDµÄ»°£¬¶¼»á½øĞĞÃ¿¸ö¶¥µã¶ÈÊıµÄÅÅĞò¡£
+/*é²å¿—å¼º
+è¿™æ ·çš„è¯ï¼Œæˆ‘ä»¬åªèƒ½æ±‚å¾—æ­£å½±å“é›†å¤§å°ï¼Œå…¶ä»–çš„æ±‚ä¸äº†ã€‚å› ä¸ºæ¯æ¬¡é€‰æ‹©ä¸€ä¸ªç‚¹è¿›å…¥Dçš„è¯ï¼Œéƒ½ä¼šè¿›è¡Œæ¯ä¸ªé¡¶ç‚¹åº¦æ•°çš„æ’åºã€‚
 */
-bool      GAdjMatrix[GMaxVertexNum+1][GMaxVertexNum+1];//Í¼µÄÁÚ½Ó¾ØÕó(0-1¾ØÕó),±íÊ¾Í¼G.ÎªÈ«¾ÖÊı×éÄÜÓÃÓÚËùÓĞ×Ó³ÌĞòÖĞ
-short int DegreeList[GMaxVertexNum+1];                 //´æ´¢Í¼ÖĞ¸÷µãµÄ¶È,ÊÊºÏ×î´óµã¶È²»³¬¹ı2^15=32768.ÎªÈ«¾ÖÊı×éÄÜÓÃÓÚËùÓĞ×Ó³ÌĞòÖĞ
-bool      DSList[GMaxVertexNum+1];                     //´æ´¢Í¼ÖĞ±»Ñ¡ÖĞµÄÕıÓ°ÏìÖ§Åä¼¯, µÚi¸öÔªËØ=1±íÊ¾µãiÎªÖ§Åäµã,=0±íÊ¾µãi·ÇÖ§Åäµã.ÎªÈ«¾ÖÊı×éÄÜÓÃÓÚËùÓĞ×Ó³ÌĞòÖĞ
+bool      GAdjMatrix[GMaxVertexNum+1][GMaxVertexNum+1];//å›¾çš„é‚»æ¥çŸ©é˜µ(0-1çŸ©é˜µ),è¡¨ç¤ºå›¾G.ä¸ºå…¨å±€æ•°ç»„èƒ½ç”¨äºæ‰€æœ‰å­ç¨‹åºä¸­
+short int DegreeList[GMaxVertexNum+1];                 //å­˜å‚¨å›¾ä¸­å„ç‚¹çš„åº¦,é€‚åˆæœ€å¤§ç‚¹åº¦ä¸è¶…è¿‡2^15=32768.ä¸ºå…¨å±€æ•°ç»„èƒ½ç”¨äºæ‰€æœ‰å­ç¨‹åºä¸­
+bool      DSList[GMaxVertexNum+1];                     //å­˜å‚¨å›¾ä¸­è¢«é€‰ä¸­çš„æ­£å½±å“æ”¯é…é›†, ç¬¬iä¸ªå…ƒç´ =1è¡¨ç¤ºç‚¹iä¸ºæ”¯é…ç‚¹,=0è¡¨ç¤ºç‚¹iéæ”¯é…ç‚¹.ä¸ºå…¨å±€æ•°ç»„èƒ½ç”¨äºæ‰€æœ‰å­ç¨‹åºä¸­
 
-//¸ÅÄî1: Ã¿µãiµÄÂú×ã¶ÈSatisfied[i]¡ª¡ªiÁÚÓòÖĞÖ§Åäµã¸öÊıÓë(d(i)+1)/2Ö®²î. Öµ>=0±íÊ¾µãiÎªÒÑÂú×ãµã, <0±íÊ¾µãiÎªÎ´Âú×ãµãÇÒÆä¾ø¶ÔÖµ´óĞ¡±íÊ¾Î´Âú×ã³Ì¶È.ÊÊºÏ×î´óµã¶È²»³¬¹ı2^15=32768.ÎªÈ«¾ÖÊı×éÄÜÓÃÓÚËùÓĞ×Ó³ÌĞòÖĞ
+//æ¦‚å¿µ1: æ¯ç‚¹içš„æ»¡è¶³åº¦Satisfied[i]â€”â€”ié‚»åŸŸä¸­æ”¯é…ç‚¹ä¸ªæ•°ä¸(d(i)+1)/2ä¹‹å·®. å€¼>=0è¡¨ç¤ºç‚¹iä¸ºå·²æ»¡è¶³ç‚¹, <0è¡¨ç¤ºç‚¹iä¸ºæœªæ»¡è¶³ç‚¹ä¸”å…¶ç»å¯¹å€¼å¤§å°è¡¨ç¤ºæœªæ»¡è¶³ç¨‹åº¦.é€‚åˆæœ€å¤§ç‚¹åº¦ä¸è¶…è¿‡2^15=32768.ä¸ºå…¨å±€æ•°ç»„èƒ½ç”¨äºæ‰€æœ‰å­ç¨‹åºä¸­
 short int Satisfied[GMaxVertexNum+1];
-//¸ÅÄî2: Ã¿¸ö·ÇÖ§Åäµãi(¼´DSList[i]=0)µÄ¸²¸ÇÃæCoverage[i]¡ª¡ªiÁÚÓòÖĞÎ´Âú×ãµãµÄ¸öÊı.Öµ·Ç¸º,±íÊ¾¸ÃµãÈç¹û±äÎªÖ§ÅäµãÔò¿É¸ÄÉÆÕâĞ©ÁÚµãµÄÂú×ã¶È.ÊÊºÏ×î´óµã¶È²»³¬¹ı2^15=32768.ÎªÈ«¾ÖÊı×éÄÜÓÃÓÚËùÓĞ×Ó³ÌĞòÖĞ
-short int Coverage[GMaxVertexNum+1];      //×¢: Ò»µ©·ÇÖ§Åäµãi±ä³ÉÁËÖ§Åäµãºó(DSList[i]=1),ÖµCoverage[i]¾ÍÎŞÒâÒå.
-//¸ÅÄî3: Ã¿¸ö·ÇÖ§Åäµãi(¼´DSList[i]=0)µÄ±»ĞèÒª³Ì¶ÈNeeded[i]¡ª¡ªiÁÚÓòÖĞÎ´Âú×ãµãµÄÂú×ã¶ÈÖ®ºÍ(Îª¸º,Æä¾ø¶ÔÖµÒâÎ¶×ÅµãiµÄÕâĞ©ÁÚµãĞèÒªµãi±äÎªÖ§ÅäµãµÄÇ¿ÁÒ³Ì¶È).ÎªÈ«¾ÖÊı×éÄÜÓÃÓÚËùÓĞ×Ó³ÌĞòÖĞ
-int Needed[GMaxVertexNum+1];              //×¢: Ò»µ©·ÇÖ§Åäµãi±ä³ÉÁËÖ§Åäµãºó(DSList[i]=1),ÖµNeeded[i]¾ÍÎŞÒâÒå. Áí,Needed[..]ÖĞÓĞĞ©ÔªËØÖµ¿ÉÄÜºÜ´ó,×î´ó¿ÉÄÜ»á´ïµ½2*Delta*Delta, ÆäÖĞDeltaÎªÍ¼µÄ×î´ó¶È.
+//æ¦‚å¿µ2: æ¯ä¸ªéæ”¯é…ç‚¹i(å³DSList[i]=0)çš„è¦†ç›–é¢Coverage[i]â€”â€”ié‚»åŸŸä¸­æœªæ»¡è¶³ç‚¹çš„ä¸ªæ•°.å€¼éè´Ÿ,è¡¨ç¤ºè¯¥ç‚¹å¦‚æœå˜ä¸ºæ”¯é…ç‚¹åˆ™å¯æ”¹å–„è¿™äº›é‚»ç‚¹çš„æ»¡è¶³åº¦.é€‚åˆæœ€å¤§ç‚¹åº¦ä¸è¶…è¿‡2^15=32768.ä¸ºå…¨å±€æ•°ç»„èƒ½ç”¨äºæ‰€æœ‰å­ç¨‹åºä¸­
+short int Coverage[GMaxVertexNum+1];      //æ³¨: ä¸€æ—¦éæ”¯é…ç‚¹iå˜æˆäº†æ”¯é…ç‚¹å(DSList[i]=1),å€¼Coverage[i]å°±æ— æ„ä¹‰.
+//æ¦‚å¿µ3: æ¯ä¸ªéæ”¯é…ç‚¹i(å³DSList[i]=0)çš„è¢«éœ€è¦ç¨‹åº¦Needed[i]â€”â€”ié‚»åŸŸä¸­æœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦ä¹‹å’Œ(ä¸ºè´Ÿ,å…¶ç»å¯¹å€¼æ„å‘³ç€ç‚¹içš„è¿™äº›é‚»ç‚¹éœ€è¦ç‚¹iå˜ä¸ºæ”¯é…ç‚¹çš„å¼ºçƒˆç¨‹åº¦).ä¸ºå…¨å±€æ•°ç»„èƒ½ç”¨äºæ‰€æœ‰å­ç¨‹åºä¸­
+int Needed[GMaxVertexNum+1];              //æ³¨: ä¸€æ—¦éæ”¯é…ç‚¹iå˜æˆäº†æ”¯é…ç‚¹å(DSList[i]=1),å€¼Needed[i]å°±æ— æ„ä¹‰. å¦,Needed[..]ä¸­æœ‰äº›å…ƒç´ å€¼å¯èƒ½å¾ˆå¤§,æœ€å¤§å¯èƒ½ä¼šè¾¾åˆ°2*Delta*Delta, å…¶ä¸­Deltaä¸ºå›¾çš„æœ€å¤§åº¦.
 
-int    gvertexnum;                        //Í¼ÖĞµãµÄÊµ¼Ê¸öÊı
-long   gedgenum;                          //Í¼ÖĞ±ßµÄÊµ¼ÊÌõÊı
-short int maxdegree;                      //±£´æÍ¼µÄ×î´óµã¶È,ÊÊºÏ×î´óµã¶È²»³¬¹ı2^15=32768
-short int mindegree;                      //Í¼µÄ×îĞ¡¶È
-short int evendegreenum;                  //Í¼µÄ¶ÈÎªÅ¼ÊıµÄµãµÄ¸öÊı
-short int onedegreenum;                   //¶ÈÎª1µÄµãµÄ¸öÊı
+int    gvertexnum;                        //å›¾ä¸­ç‚¹çš„å®é™…ä¸ªæ•°
+long   gedgenum;                          //å›¾ä¸­è¾¹çš„å®é™…æ¡æ•°
+short int maxdegree;                      //ä¿å­˜å›¾çš„æœ€å¤§ç‚¹åº¦,é€‚åˆæœ€å¤§ç‚¹åº¦ä¸è¶…è¿‡2^15=32768
+short int mindegree;                      //å›¾çš„æœ€å°åº¦
+short int evendegreenum;                  //å›¾çš„åº¦ä¸ºå¶æ•°çš„ç‚¹çš„ä¸ªæ•°
+short int onedegreenum;                   //åº¦ä¸º1çš„ç‚¹çš„ä¸ªæ•°
 
-//***Ì°ĞÄ²ßÂÔ(°üÀ¨ÎÄÏ×ÖĞÒÑÓĞµÄÁ½¸öÌ°ĞÄËã·¨ºÍ×ÔĞĞÉè¼ÆµÄ¼¸ÖÖĞÂµÄÌ°ĞÄËã·¨ÖĞËù²ÉÓÃµÄ¼¸ÖÖ»ù±¾²ßÂÔ)***
+//***è´ªå¿ƒç­–ç•¥(åŒ…æ‹¬æ–‡çŒ®ä¸­å·²æœ‰çš„ä¸¤ä¸ªè´ªå¿ƒç®—æ³•å’Œè‡ªè¡Œè®¾è®¡çš„å‡ ç§æ–°çš„è´ªå¿ƒç®—æ³•ä¸­æ‰€é‡‡ç”¨çš„å‡ ç§åŸºæœ¬ç­–ç•¥)***
 
-//²ßÂÔ1: ÓÅÏÈÑ¡Ôñ¸²¸ÇÃæ´ó(¼û¸ÅÄî2: Coverage[])µÄ·ÇÖ§Åäµã±äÎªÖ§Åäµã. º¬Òå: ÄÜÌáÉı×î¶à¸öÎ´Âú×ãµãµÄÂú×ã¶È
-//²ßÂÔ2: ÓÅÏÈÑ¡Ôñ±»ĞèÒª³Ì¶È×î´ó(¼û¸ÅÄî3: Needed[])µÄ·ÇÖ§Åäµã±äÎªÖ§Åäµã. º¬Òå: ÄÜ»º½âĞèÒª³Ì¶È×î¸ß(ºôÉù×î¸ß)µÄÄÇĞ©Î´Âú×ãÁÚµãµÄÂú×ã¶È.
-//²ßÂÔ3: ÓÅÏÈÑ¡ÔñÎ´Âú×ã³Ì¶È×î´óµÄµãu(¼û¸ÅÄî1:Satisfied[]),ÔÙ²ÉÓÃÊÊµ±²ßÂÔ(±ÈÈç²ßÂÔ1»ò²ßÂÔ2)À´Ñ¡È¡ÆäÒ»¸ö·ÇÖ§ÅäµãĞÍÁÚµãw±äÎªÖ§Åäµã, À´¸ÄÉÆuµÄÎ´Âú×ã¶È.
-//²ßÂÔ4: ÓÅÏÈÑ¡ÔñÎ´Âú×ã³Ì¶È×î´óµÄµãu(¼û¸ÅÄî1:Satisfied[]),ÔÙ²ÉÓÃÊÊµ±²ßÂÔ(±ÈÈç²ßÂÔ1»ò²ßÂÔ2)À´Ñ¡È¡ÆäÈô¸É¸ö·ÇÖ§ÅäµãĞÍÁÚµã±äÎªÖ§Åäµã, ÈÃuµãÒ»´ÎĞÔ³ÉÎªÒÑÂú×ãµã.
-
-
-//Part0: ÊäÈëÊä³ö
-void ReadGraph(char *txtgraphfilename);    //´ÓÎÄ¼şÖĞ¶ÁÈ¡Í¼µÄÊı¾İ£¬µÃµ½Í¼µÄÁÚ½Ó¾ØÕó¼°µã¶ÈÁĞ±í.
-                                           //***×¢Òâ: ÎªÁËÄÜÔÚËã·¨ÖĞÌá¸ßĞ§ÂÊ,»¹ÔÚ¸Ã¹ı³ÌÖĞ°´ÕÕµã¶ÈÓÉ´óµ½Ğ¡ÖØĞÂ¸øµã±àºÅ,Ê¹µÃ½Úµã1µÄ¶È×î´ó,½ÚµãgvertexnumµÄ¶È×îĞ¡
-void CreateGraph(char *txtgraphfilename);  //Ëæ»ú²úÉúÒ»¸öÍ¼(¸ø¶¨µãÊıºÍÆ½¾ù¶È),²¢±£´æ¸ÃÍ¼µ½Ö¸¶¨µÄÎÄ¼şÖĞ
-                                           //***×¢Òâ: ÎªÁËÄÜÔÚËã·¨ÖĞÌá¸ßĞ§ÂÊ, »¹ÔÚ¸Ã¹ı³ÌÖĞ°´ÕÕµã¶ÈÓÉ´óµ½Ğ¡ÖØĞÂ¸øµã±àºÅ,Ê¹µÃ½Úµã1µÄ¶È×î´ó,½ÚµãgvertexnumµÄ¶È×îĞ¡
+//ç­–ç•¥1: ä¼˜å…ˆé€‰æ‹©è¦†ç›–é¢å¤§(è§æ¦‚å¿µ2: Coverage[])çš„éæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹. å«ä¹‰: èƒ½æå‡æœ€å¤šä¸ªæœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦
+//ç­–ç•¥2: ä¼˜å…ˆé€‰æ‹©è¢«éœ€è¦ç¨‹åº¦æœ€å¤§(è§æ¦‚å¿µ3: Needed[])çš„éæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹. å«ä¹‰: èƒ½ç¼“è§£éœ€è¦ç¨‹åº¦æœ€é«˜(å‘¼å£°æœ€é«˜)çš„é‚£äº›æœªæ»¡è¶³é‚»ç‚¹çš„æ»¡è¶³åº¦.
+//ç­–ç•¥3: ä¼˜å…ˆé€‰æ‹©æœªæ»¡è¶³ç¨‹åº¦æœ€å¤§çš„ç‚¹u(è§æ¦‚å¿µ1:Satisfied[]),å†é‡‡ç”¨é€‚å½“ç­–ç•¥(æ¯”å¦‚ç­–ç•¥1æˆ–ç­–ç•¥2)æ¥é€‰å–å…¶ä¸€ä¸ªéæ”¯é…ç‚¹å‹é‚»ç‚¹wå˜ä¸ºæ”¯é…ç‚¹, æ¥æ”¹å–„uçš„æœªæ»¡è¶³åº¦.
+//ç­–ç•¥4: ä¼˜å…ˆé€‰æ‹©æœªæ»¡è¶³ç¨‹åº¦æœ€å¤§çš„ç‚¹u(è§æ¦‚å¿µ1:Satisfied[]),å†é‡‡ç”¨é€‚å½“ç­–ç•¥(æ¯”å¦‚ç­–ç•¥1æˆ–ç­–ç•¥2)æ¥é€‰å–å…¶è‹¥å¹²ä¸ªéæ”¯é…ç‚¹å‹é‚»ç‚¹å˜ä¸ºæ”¯é…ç‚¹, è®©uç‚¹ä¸€æ¬¡æ€§æˆä¸ºå·²æ»¡è¶³ç‚¹.
 
 
-//Part1: ***ÎÄÏ×ÖĞÒÑÓĞµÄÁ½ÖÖËã·¨***
-//Ì°ĞÄ½üËÆËã·¨1(ÎÄÏ×ÖĞ·½·¨)
-int Greedy1_PIDS(void);  //Ì°ĞÄ²ßÂÔ: ²ßÂÔ1
-//Ì°ĞÄËã·¨2(ÎÄÏ×ÖĞ·½·¨)
-int Greedy2_PIDS(void);  //Ì°ĞÄ²ßÂÔ: ²ßÂÔ2
+//Part0: è¾“å…¥è¾“å‡º
+void ReadGraph(char *txtgraphfilename);    //ä»æ–‡ä»¶ä¸­è¯»å–å›¾çš„æ•°æ®ï¼Œå¾—åˆ°å›¾çš„é‚»æ¥çŸ©é˜µåŠç‚¹åº¦åˆ—è¡¨.
+                                           //***æ³¨æ„: ä¸ºäº†èƒ½åœ¨ç®—æ³•ä¸­æé«˜æ•ˆç‡,è¿˜åœ¨è¯¥è¿‡ç¨‹ä¸­æŒ‰ç…§ç‚¹åº¦ç”±å¤§åˆ°å°é‡æ–°ç»™ç‚¹ç¼–å·,ä½¿å¾—èŠ‚ç‚¹1çš„åº¦æœ€å¤§,èŠ‚ç‚¹gvertexnumçš„åº¦æœ€å°
+void CreateGraph(char *txtgraphfilename);  //éšæœºäº§ç”Ÿä¸€ä¸ªå›¾(ç»™å®šç‚¹æ•°å’Œå¹³å‡åº¦),å¹¶ä¿å­˜è¯¥å›¾åˆ°æŒ‡å®šçš„æ–‡ä»¶ä¸­
+                                           //***æ³¨æ„: ä¸ºäº†èƒ½åœ¨ç®—æ³•ä¸­æé«˜æ•ˆç‡, è¿˜åœ¨è¯¥è¿‡ç¨‹ä¸­æŒ‰ç…§ç‚¹åº¦ç”±å¤§åˆ°å°é‡æ–°ç»™ç‚¹ç¼–å·,ä½¿å¾—èŠ‚ç‚¹1çš„åº¦æœ€å¤§,èŠ‚ç‚¹gvertexnumçš„åº¦æœ€å°
 
 
-//Part2: ***×ÔĞĞÉè¼ÆµÄĞÂËã·¨***
-//ĞÂÉè¼ÆµÄÌ°ĞÄËã·¨1
-int NewGreedy1_PIDS(void); //ÎÄÏ×ÖĞÁ½Ì°ĞÄ²ßÂÔµÄ½áºÏ: ÏÈ²ÉÓÃ²ßÂÔ1, ÔÚ²ßÂÔ1Óöµ½¶à¸öµã¿ÉÑ¡µÄÇé¿öÏÂÔÚÕâĞ©µãÖĞ²ÉÓÃ²ßÂÔ2À´×÷Ñ¡Ôñ
-//ĞÂÉè¼ÆµÄÌ°ĞÄËã·¨2
-int NewGreedy2_PIDS(void); //ÎÄÏ×ÖĞÁ½Ì°ĞÄ²ßÂÔµÄ½áºÏ: ÏÈ²ÉÓÃ²ßÂÔ2, ÔÚ²ßÂÔ2Óöµ½¶à¸öµã¿ÉÑ¡µÄÇé¿öÏÂÔÚÕâĞ©µãÖĞ²ÉÓÃ²ßÂÔ1À´×÷Ñ¡Ôñ
-//ĞÂÉè¼ÆµÄÌ°ĞÄËã·¨3
-int NewGreedy3_PIDS(void); //ÎÄÏ×ÖĞÁ½Ì°ĞÄ²ßÂÔµÄ½áºÏ: ÏÈ²ÉÓÃ²ßÂÔ2, ÔÚ²ßÂÔ2Óöµ½¶à¸öµã¿ÉÑ¡µÄÇé¿öÏÂÔÚÕâĞ©µãÖĞ²ÉÓÃ²ßÂÔ1(»»Îª¸²¸ÇÃæĞ¡µÄÓÅÏÈ)À´×÷Ñ¡Ôñ
+//Part1: ***æ–‡çŒ®ä¸­å·²æœ‰çš„ä¸¤ç§ç®—æ³•***
+//è´ªå¿ƒè¿‘ä¼¼ç®—æ³•1(æ–‡çŒ®ä¸­æ–¹æ³•)
+int Greedy1_PIDS(void);  //è´ªå¿ƒç­–ç•¥: ç­–ç•¥1
+//è´ªå¿ƒç®—æ³•2(æ–‡çŒ®ä¸­æ–¹æ³•)
+int Greedy2_PIDS(void);  //è´ªå¿ƒç­–ç•¥: ç­–ç•¥2
 
 
-//ĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄ·½·¨1
-int LocalGreedy1_PIDS(void);     //²ßÂÔ: Ã¿´ÎÑ¡Ôñµ±Ç°×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞ·´¸´Ê¹ÓÃ²ßÂÔ1Ö±µ½uÂú×ãÎªÖ¹
-//ĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄ·½·¨2
-int LocalGreedy2_PIDS(void);     //²ßÂÔ: Ã¿´ÎÑ¡Ôñµ±Ç°×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞ·´¸´Ê¹ÓÃ²ßÂÔ2Ö±µ½uÂú×ãÎªÖ¹
-//ĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄ·½·¨3(¿ìËÙËã·¨--¸ÃËã·¨Ê±¼ä¸´ÔÓ¶ÈÎªO(n^2),ÆäËûËã·¨Ê±¼ä¸´ÔÓ¶¼ÊÇO(n^3))
-int LocalGreedy3_PIDS(void);     //²ßÂÔ: Ã¿´ÎÑ¡Ôñµ±Ç°×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞ°´µã¶ÈÓÉ´óµ½Ğ¡ÒÀ´ÎÌí¼ÓĞÂµÄÖ§ÅäµãÖ±µ½uÂú×ãÎªÖ¹.(¶ÁÍ¼»ò½¨Í¼Ê±Ô¤´¦ÀíÖĞÍ¼µãĞòÒÑ°´µã¶È½µĞòÅÅÁË,¹Ê×ÔÈ»´ÎĞò¼´¿É)
+//Part2: ***è‡ªè¡Œè®¾è®¡çš„æ–°ç®—æ³•***
+//æ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•1
+int NewGreedy1_PIDS(void); //æ–‡çŒ®ä¸­ä¸¤è´ªå¿ƒç­–ç•¥çš„ç»“åˆ: å…ˆé‡‡ç”¨ç­–ç•¥1, åœ¨ç­–ç•¥1é‡åˆ°å¤šä¸ªç‚¹å¯é€‰çš„æƒ…å†µä¸‹åœ¨è¿™äº›ç‚¹ä¸­é‡‡ç”¨ç­–ç•¥2æ¥ä½œé€‰æ‹©
+//æ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•2
+int NewGreedy2_PIDS(void); //æ–‡çŒ®ä¸­ä¸¤è´ªå¿ƒç­–ç•¥çš„ç»“åˆ: å…ˆé‡‡ç”¨ç­–ç•¥2, åœ¨ç­–ç•¥2é‡åˆ°å¤šä¸ªç‚¹å¯é€‰çš„æƒ…å†µä¸‹åœ¨è¿™äº›ç‚¹ä¸­é‡‡ç”¨ç­–ç•¥1æ¥ä½œé€‰æ‹©
+//æ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•3
+int NewGreedy3_PIDS(void); //æ–‡çŒ®ä¸­ä¸¤è´ªå¿ƒç­–ç•¥çš„ç»“åˆ: å…ˆé‡‡ç”¨ç­–ç•¥2, åœ¨ç­–ç•¥2é‡åˆ°å¤šä¸ªç‚¹å¯é€‰çš„æƒ…å†µä¸‹åœ¨è¿™äº›ç‚¹ä¸­é‡‡ç”¨ç­–ç•¥1(æ¢ä¸ºè¦†ç›–é¢å°çš„ä¼˜å…ˆ)æ¥ä½œé€‰æ‹©
 
 
-//ĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄ·½·¨1
-int NewLocalGreedy1_PIDS(void);  //²ßÂÔ: Ã¿´ÎÑ¡Ôñµ±Ç°×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞÊ¹ÓÃ²ßÂÔ1(Ê¹ÓÃ1´Î)
-//ĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄ·½·¨2
-int NewLocalGreedy2_PIDS(void);  //²ßÂÔ: Ã¿´ÎÑ¡Ôñµ±Ç°×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞÊ¹ÓÃ²ßÂÔ2(Ê¹ÓÃ1´Î)
-                                 //×î²»Âú×ãµãµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞÊ¹ÓÃ²ßÂÔ2(º¬Òå:A×îĞèÒª±ğÈË+BÒ²×î±»ÈËĞèÒª)
-//ĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄ·½·¨3(¿ìËÙËã·¨--¸ÃËã·¨Ê±¼ä¸´ÔÓ¶ÈÎªO(n^2),ÆäËüËã·¨Ê±¼ä¸´ÔÓ¶¼ÊÇO(n^3))
-int NewLocalGreedy3_PIDS(void);  //²ßÂÔ: Ã¿´ÎÑ¡Ôñµ±Ç°×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞÌí¼Ó×î¶ÈµÄµãÎªĞÂÖ§Åäµã.(¶ÁÍ¼»ò½¨Í¼Ê±Ô¤´¦ÀíÖĞÍ¼µãĞòÒÑ°´µã¶È½µĞòÅÅÁË)
+//æ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•1
+int LocalGreedy1_PIDS(void);     //ç­–ç•¥: æ¯æ¬¡é€‰æ‹©å½“å‰æœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­åå¤ä½¿ç”¨ç­–ç•¥1ç›´åˆ°uæ»¡è¶³ä¸ºæ­¢
+//æ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•2
+int LocalGreedy2_PIDS(void);     //ç­–ç•¥: æ¯æ¬¡é€‰æ‹©å½“å‰æœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­åå¤ä½¿ç”¨ç­–ç•¥2ç›´åˆ°uæ»¡è¶³ä¸ºæ­¢
+//æ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•3(å¿«é€Ÿç®—æ³•--è¯¥ç®—æ³•æ—¶é—´å¤æ‚åº¦ä¸ºO(n^2),å…¶ä»–ç®—æ³•æ—¶é—´å¤æ‚éƒ½æ˜¯O(n^3))
+int LocalGreedy3_PIDS(void);     //ç­–ç•¥: æ¯æ¬¡é€‰æ‹©å½“å‰æœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­æŒ‰ç‚¹åº¦ç”±å¤§åˆ°å°ä¾æ¬¡æ·»åŠ æ–°çš„æ”¯é…ç‚¹ç›´åˆ°uæ»¡è¶³ä¸ºæ­¢.(è¯»å›¾æˆ–å»ºå›¾æ—¶é¢„å¤„ç†ä¸­å›¾ç‚¹åºå·²æŒ‰ç‚¹åº¦é™åºæ’äº†,æ•…è‡ªç„¶æ¬¡åºå³å¯)
+
+
+//æ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•1
+int NewLocalGreedy1_PIDS(void);  //ç­–ç•¥: æ¯æ¬¡é€‰æ‹©å½“å‰æœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­ä½¿ç”¨ç­–ç•¥1(ä½¿ç”¨1æ¬¡)
+//æ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•2
+int NewLocalGreedy2_PIDS(void);  //ç­–ç•¥: æ¯æ¬¡é€‰æ‹©å½“å‰æœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­ä½¿ç”¨ç­–ç•¥2(ä½¿ç”¨1æ¬¡)
+                                 //æœ€ä¸æ»¡è¶³ç‚¹çš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­ä½¿ç”¨ç­–ç•¥2(å«ä¹‰:Aæœ€éœ€è¦åˆ«äºº+Bä¹Ÿæœ€è¢«äººéœ€è¦)
+//æ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•3(å¿«é€Ÿç®—æ³•--è¯¥ç®—æ³•æ—¶é—´å¤æ‚åº¦ä¸ºO(n^2),å…¶å®ƒç®—æ³•æ—¶é—´å¤æ‚éƒ½æ˜¯O(n^3))
+int NewLocalGreedy3_PIDS(void);  //ç­–ç•¥: æ¯æ¬¡é€‰æ‹©å½“å‰æœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­æ·»åŠ æœ€åº¦çš„ç‚¹ä¸ºæ–°æ”¯é…ç‚¹.(è¯»å›¾æˆ–å»ºå›¾æ—¶é¢„å¤„ç†ä¸­å›¾ç‚¹åºå·²æŒ‰ç‚¹åº¦é™åºæ’äº†)
 
 
 
-//Part4: ***¿ÉÓÃÓÚ¸÷Ëã·¨ÖĞµÄ×Ó³ÌĞò***
-int RefinePIDS(int dssize);    //¿É¶ÔÈÎºÎËã·¨µÃµ½µÄÕıÓ°ÏìÖ§Åä¼¯DSList[1...gvertexnum]½øĞĞ¼«Ğ¡»¯´¦Àí(Æä´óĞ¡Îªdssize),È¥µô²»±ØÒªµÄÖ§Åäµã×îÖÕµÃµ½¸üĞ¡µÄÕıÓ°ÏìÖ§Åä¼¯DSList[1...gvertexnum],²¢·µ»ØĞÂµÄ´óĞ¡
-bool CheckPIDS(int dssize);    //***ÓÃÓÚµ÷ÊÔ½×¶Î: ¶ÔÈÎºÎËã·¨µÃµ½µÄÕıÓ°ÏìÖ§Åä¼¯DSList[1...gvertexnum](Æä´óĞ¡Îªdssize)½øĞĞÕıÈ·ĞÔ¼ì²é, ÕıÈ··µ»Ø1;·ñÔò·µ»Ø0.
+//Part4: ***å¯ç”¨äºå„ç®—æ³•ä¸­çš„å­ç¨‹åº***
+int RefinePIDS(int dssize);    //å¯å¯¹ä»»ä½•ç®—æ³•å¾—åˆ°çš„æ­£å½±å“æ”¯é…é›†DSList[1...gvertexnum]è¿›è¡Œæå°åŒ–å¤„ç†(å…¶å¤§å°ä¸ºdssize),å»æ‰ä¸å¿…è¦çš„æ”¯é…ç‚¹æœ€ç»ˆå¾—åˆ°æ›´å°çš„æ­£å½±å“æ”¯é…é›†DSList[1...gvertexnum],å¹¶è¿”å›æ–°çš„å¤§å°
+bool CheckPIDS(int dssize);    //***ç”¨äºè°ƒè¯•é˜¶æ®µ: å¯¹ä»»ä½•ç®—æ³•å¾—åˆ°çš„æ­£å½±å“æ”¯é…é›†DSList[1...gvertexnum](å…¶å¤§å°ä¸ºdssize)è¿›è¡Œæ­£ç¡®æ€§æ£€æŸ¥, æ­£ç¡®è¿”å›1;å¦åˆ™è¿”å›0.
 
 /*
-//ÃüÁîĞĞÖ´ĞĞ²¿·Ö(begin)*****************************************************************************************************
+//å‘½ä»¤è¡Œæ‰§è¡Œéƒ¨åˆ†(begin)*****************************************************************************************************
 void main(int argc,char *argv[])
-{//ÃüÁîĞĞÖ´ĞĞ¸Ã³ÌĞò, ÓĞÈı¸ö²ÎÊı: µÚÒ»¸ö²ÎÊıÊÇ¿ÉÖ´ĞĞµÄÎÄ¼şÃû, µÚ¶ş¸ö²ÎÊıÊÇÒÑÓĞµÄÍ¼ÎÄ¼şÃû, µÚÈı¸ö²ÎÊıÊÇ±£´æ¼ÆËã½á¹ûµÄÎÄ¼ş
+{//å‘½ä»¤è¡Œæ‰§è¡Œè¯¥ç¨‹åº, æœ‰ä¸‰ä¸ªå‚æ•°: ç¬¬ä¸€ä¸ªå‚æ•°æ˜¯å¯æ‰§è¡Œçš„æ–‡ä»¶å, ç¬¬äºŒä¸ªå‚æ•°æ˜¯å·²æœ‰çš„å›¾æ–‡ä»¶å, ç¬¬ä¸‰ä¸ªå‚æ•°æ˜¯ä¿å­˜è®¡ç®—ç»“æœçš„æ–‡ä»¶
 
     if(argc!=3)
 	{
@@ -116,99 +116,99 @@ void main(int argc,char *argv[])
 	char *graphfilename;
 	char *resultfilename;
 
-	graphfilename=argv[1];    //»ñÈ¡: Í¼ÎÄ¼şÃû
-	resultfilename=argv[2];   //»ñÈ¡: ½á¹ûÎÄ¼şÃû
-//ÃüÁîĞĞÖ´ĞĞ²¿·Ö(end)*********************************************************************************************************
+	graphfilename=argv[1];    //è·å–: å›¾æ–‡ä»¶å
+	resultfilename=argv[2];   //è·å–: ç»“æœæ–‡ä»¶å
+//å‘½ä»¤è¡Œæ‰§è¡Œéƒ¨åˆ†(end)*********************************************************************************************************
 
 */
 
 
 
 
-//***ÎÄÏ×ÖĞÒÑÓĞµÄÌ°ĞÄ½üËÆËã·¨1***
+//***æ–‡çŒ®ä¸­å·²æœ‰çš„è´ªå¿ƒè¿‘ä¼¼ç®—æ³•1***
 int Greedy1_PIDS(void)
-{//²ßÂÔ:ÓÅÏÈÑ¡ÔñÄÜÌáÉı¸ü¶à¸öÎ´Âú×ãµãµÄÂú×ã¶È(¼´¸²¸ÇÃæ×î´ó)µÄÒ»¸ö·ÇÖ§Åäµã±äÎªÖ§Åäµã.
- //ÊµÏÖ·½·¨: ÓÅÏÈÑ¡È¡Êı×éCoverage[...]ÖĞÈ¡×î´óÖµµÄÄÇ¸ö·ÇÖ§Åä½Úµã(DSList[]Öµ0µÄµãÊÇ·ÇÖ§Åäµã)±äÎªÖ§Åäµã.
+{//ç­–ç•¥:ä¼˜å…ˆé€‰æ‹©èƒ½æå‡æ›´å¤šä¸ªæœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦(å³è¦†ç›–é¢æœ€å¤§)çš„ä¸€ä¸ªéæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹.
+ //å®ç°æ–¹æ³•: ä¼˜å…ˆé€‰å–æ•°ç»„Coverage[...]ä¸­å–æœ€å¤§å€¼çš„é‚£ä¸ªéæ”¯é…èŠ‚ç‚¹(DSList[]å€¼0çš„ç‚¹æ˜¯éæ”¯é…ç‚¹)å˜ä¸ºæ”¯é…ç‚¹.
 	int i,j,k,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                         //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2;   //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
-		//ÂúÒâ¶È³õÊ¼»¯ÎªÕâµã¶ÈÊıµÄ-1/2
-		Coverage[i]=DegreeList[i];           //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄÁÚÓòÄÚ°üº¬ÓĞµÄÎ´Âú×ãµÄµã¸öÊı--¼´¼ÇÂ¼Ã¿¸ö·ÇÖ§ÅäµãµÄ¸²¸ÇÃæ
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                         //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2;   //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
+		//æ»¡æ„åº¦åˆå§‹åŒ–ä¸ºè¿™ç‚¹åº¦æ•°çš„-1/2
+		Coverage[i]=DegreeList[i];           //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„é‚»åŸŸå†…åŒ…å«æœ‰çš„æœªæ»¡è¶³çš„ç‚¹ä¸ªæ•°--å³è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹çš„è¦†ç›–é¢
 	}
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
 
-	//Ô¤´¦Àí(ÂÔ): ËùÓĞµã¶È1µÄµãÁÚµã±Ø¶¨Ñ¡×÷Ö§Åäµã(Ä³Ğ©¶ÈÎª1¿ÉÄÜÒ²Òª±»Ñ¡×÷Ö§Åäµã,±ÈÈçÒ»¸öµãÓë¶à¸ö¶È1µÄµãÏàÁÚÊ±)
-	//Ì°ĞÄ½üËÆËã·¨
+	//é¢„å¤„ç†(ç•¥): æ‰€æœ‰ç‚¹åº¦1çš„ç‚¹é‚»ç‚¹å¿…å®šé€‰ä½œæ”¯é…ç‚¹(æŸäº›åº¦ä¸º1å¯èƒ½ä¹Ÿè¦è¢«é€‰ä½œæ”¯é…ç‚¹,æ¯”å¦‚ä¸€ä¸ªç‚¹ä¸å¤šä¸ªåº¦1çš„ç‚¹ç›¸é‚»æ—¶)
+	//è´ªå¿ƒè¿‘ä¼¼ç®—æ³•
 	int maxcoverage, bestvertex;
 	int uncoverednum;
-	uncoverednum=gvertexnum;   //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Î´Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;   //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æœªæ»¡è¶³ç‚¹çš„ä¸ªæ•°
 
-	while(uncoverednum)        //Èç¹û»¹ÓĞÎ´Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	while(uncoverednum)        //å¦‚æœè¿˜æœ‰æœªæ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 	{
-		maxcoverage=0;        //³õÊ¼»¯.¸Ã±äÁ¿±íÊ¾ĞÂÌí¼ÓÒ»¸öÖ§Åäµã×î¶à¿ÉÖ§Åä¶àÉÙ¸öÎ´Âú×ãµÄµã
+		maxcoverage=0;        //åˆå§‹åŒ–.è¯¥å˜é‡è¡¨ç¤ºæ–°æ·»åŠ ä¸€ä¸ªæ”¯é…ç‚¹æœ€å¤šå¯æ”¯é…å¤šå°‘ä¸ªæœªæ»¡è¶³çš„ç‚¹
 		for(i=1;i<=gvertexnum;i++)
-			if(DSList[i]==0 && Coverage[i]>maxcoverage)  //ËùÓĞ·ÇÖ§Åäµã¶¼¿ÉÄÜÒªÑ¡È¡(°üÀ¨Ä³Ğ©¶ÈÎª1µÄµã¿ÉÄÜ±»Ñ¡×÷Ö§Åäµã)
-			{//Ì°ĞÄµØÑ¡Ôñ×î¼Ñ½Úµã×÷ÎªĞÂµÄÖ§Åäµã
+			if(DSList[i]==0 && Coverage[i]>maxcoverage)  //æ‰€æœ‰éæ”¯é…ç‚¹éƒ½å¯èƒ½è¦é€‰å–(åŒ…æ‹¬æŸäº›åº¦ä¸º1çš„ç‚¹å¯èƒ½è¢«é€‰ä½œæ”¯é…ç‚¹)
+			{//è´ªå¿ƒåœ°é€‰æ‹©æœ€ä½³èŠ‚ç‚¹ä½œä¸ºæ–°çš„æ”¯é…ç‚¹
 					maxcoverage=Coverage[i];
 					bestvertex=i;
 			}
-        if(maxcoverage==0)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÎ´Âú×ãµãµÄÂú×ã¶È. ¿ÉÒÔÖ¤Ã÷ÔÚÎŞ¹ÂÁ¢µãµÄÍ¼ÖĞÕâÖÖÇé¿ö²»»á·¢Éú
+        if(maxcoverage==0)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦. å¯ä»¥è¯æ˜åœ¨æ— å­¤ç«‹ç‚¹çš„å›¾ä¸­è¿™ç§æƒ…å†µä¸ä¼šå‘ç”Ÿ
 		{
 			printf("No solution to the instance!\n");
 			return 0;
 		}
-		DSList[bestvertex]=1;          //¼ÓÈëĞÂµÄÖ§Åäµã
-		dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-		for(j=1;j<=gvertexnum;j++)     //¸üĞÂ¸Ã¼ÓÈëÕıÓ°Ïì¼¯µÄµãµÄ¸÷ÁÚµãµÄÎ´ÂúÒâ¶È£¬Ö»ĞèÒª¸üĞÂÒÑ¾­¼ÓÈëÕıÓ°Ïì¼¯µÄÁìµã¾Íok¡£
+		DSList[bestvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+		dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+		for(j=1;j<=gvertexnum;j++)     //æ›´æ–°è¯¥åŠ å…¥æ­£å½±å“é›†çš„ç‚¹çš„å„é‚»ç‚¹çš„æœªæ»¡æ„åº¦ï¼Œåªéœ€è¦æ›´æ–°å·²ç»åŠ å…¥æ­£å½±å“é›†çš„é¢†ç‚¹å°±okã€‚
 			if(GAdjMatrix[bestvertex][j])
 			{    Satisfied[j]++;
-			     if(Satisfied[j]==0)   //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÒÑÂú×ãµÄµãÀà£¬Ë³´øÈç¹ûËûµÄÁÚµãÊôÓÚÂúÒâµã¡£Ôò¸Ãµã¼ÓÈëÂúÒâµãµÄ¼¯ºÏ¡£
+			     if(Satisfied[j]==0)   //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºå·²æ»¡è¶³çš„ç‚¹ç±»ï¼Œé¡ºå¸¦å¦‚æœä»–çš„é‚»ç‚¹å±äºæ»¡æ„ç‚¹ã€‚åˆ™è¯¥ç‚¹åŠ å…¥æ»¡æ„ç‚¹çš„é›†åˆã€‚
 				 {
 					 uncoverednum--;
-					 for(k=1;k<=gvertexnum;k++)                   //¸üĞÂÏà¹ØµãµÄ¸²¸ÇÃæCoverage[.]
-							if(GAdjMatrix[j][k] && DSList[k]==0)  //ÁÚµãÊÇ·ÇÖ§ÅäµãÊ±²ÅÓĞ±ØÒª¸üĞÂ
+					 for(k=1;k<=gvertexnum;k++)                   //æ›´æ–°ç›¸å…³ç‚¹çš„è¦†ç›–é¢Coverage[.]
+							if(GAdjMatrix[j][k] && DSList[k]==0)  //é‚»ç‚¹æ˜¯éæ”¯é…ç‚¹æ—¶æ‰æœ‰å¿…è¦æ›´æ–°
 								Coverage[k]--;
 				 }
 			}
 	}
 
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with Greedy1_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-    printf("\nGreedy1_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
-    //ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+    printf("\nGreedy1_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
+    //ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with Greedy1_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nGreedy2_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nGreedy2_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
 
 
-//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éÒ»¸öÕıÓ°ÏìÖ§Åä¼¯µÄÕıÈ·ĞÔ***
+//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥ä¸€ä¸ªæ­£å½±å“æ”¯é…é›†çš„æ­£ç¡®æ€§***
 bool CheckPIDS(int dssize)
-{//ÓÃÓÚµ÷ÊÔ½×¶Î: ¶ÔÈÎºÎËã·¨µÃµ½µÄÕıÓ°ÏìÖ§Åä¼¯DSList[1...gvertexnum](Æä´óĞ¡Îªdssize)½øĞĞÕıÈ·ĞÔ¼ì²é, ÕıÈ··µ»Ø1; ·ñÔò·µ»Ø0.
+{//ç”¨äºè°ƒè¯•é˜¶æ®µ: å¯¹ä»»ä½•ç®—æ³•å¾—åˆ°çš„æ­£å½±å“æ”¯é…é›†DSList[1...gvertexnum](å…¶å¤§å°ä¸ºdssize)è¿›è¡Œæ­£ç¡®æ€§æ£€æŸ¥, æ­£ç¡®è¿”å›1; å¦åˆ™è¿”å›0.
     int i,j;
 	int newdssize;
 	int temp;
 
-	//¼ì²éÃ¿µãÁÚÓòÄÚÊÇ·ñÓĞÖÁÉÙÒ»°ëµÄÖ§Åäµã, ²¢Í³¼ÆÊµ¼ÊÖ§ÅäµãµÄ¸öÊınewdssize
+	//æ£€æŸ¥æ¯ç‚¹é‚»åŸŸå†…æ˜¯å¦æœ‰è‡³å°‘ä¸€åŠçš„æ”¯é…ç‚¹, å¹¶ç»Ÿè®¡å®é™…æ”¯é…ç‚¹çš„ä¸ªæ•°newdssize
 	newdssize=0;
 	for(i=1;i<=gvertexnum;i++)
 	{   if(DSList[i]==1)
@@ -217,10 +217,10 @@ bool CheckPIDS(int dssize)
 		for(j=1;j<=gvertexnum;j++)
 			if(GAdjMatrix[i][j] && DSList[j]==1)
 				temp++;
-		if(temp<(DegreeList[i]+1)/2)  //Èç¹ûÈÎºÎµãiµÄÁÚÓòÄÚÖ§Åäµã¸öÊı²»µ½Æäµã¶ÈÊıµÄÒ»°ë, ±íÊ¾ÓĞ´í
+		if(temp<(DegreeList[i]+1)/2)  //å¦‚æœä»»ä½•ç‚¹içš„é‚»åŸŸå†…æ”¯é…ç‚¹ä¸ªæ•°ä¸åˆ°å…¶ç‚¹åº¦æ•°çš„ä¸€åŠ, è¡¨ç¤ºæœ‰é”™
 			return 0;
 	}
-	if(newdssize!=dssize)             //Èç¹ûÊµ¼ÊµÄÖ§Åäµã¸öÊıÓëÔ­À´²»·ûºÏ, ±íÊ¾ÓĞ´í
+	if(newdssize!=dssize)             //å¦‚æœå®é™…çš„æ”¯é…ç‚¹ä¸ªæ•°ä¸åŸæ¥ä¸ç¬¦åˆ, è¡¨ç¤ºæœ‰é”™
 		return 0;
 	return 1;
 }
@@ -229,20 +229,20 @@ bool CheckPIDS(int dssize)
 
 
 
-//****ÓÉÒ»¸öÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯****
+//****ç”±ä¸€ä¸ªæ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†****
 int RefinePIDS(int dssize)
-{//¿É¶ÔÈÎºÎËã·¨µÃµ½µÄÕıÓ°ÏìÖ§Åä¼¯DSList[1...gvertexnum]½øĞĞ¼«Ğ¡»¯´¦Àí(Æä´óĞ¡Îªdssize),È¥µô²»±ØÒªµÄÖ§Åäµã×îÖÕµÃµ½¸üĞ¡µÄÕıÓ°ÏìÖ§Åä¼¯DSList[1...gvertexnum],²¢·µ»ØĞÂµÄ´óĞ¡
+{//å¯å¯¹ä»»ä½•ç®—æ³•å¾—åˆ°çš„æ­£å½±å“æ”¯é…é›†DSList[1...gvertexnum]è¿›è¡Œæå°åŒ–å¤„ç†(å…¶å¤§å°ä¸ºdssize),å»æ‰ä¸å¿…è¦çš„æ”¯é…ç‚¹æœ€ç»ˆå¾—åˆ°æ›´å°çš„æ­£å½±å“æ”¯é…é›†DSList[1...gvertexnum],å¹¶è¿”å›æ–°çš„å¤§å°
     int i,j,k;
 	int newdssize;
-	newdssize=dssize;  //»ñÈ¡Ô­ÕıÓ°ÏìÖ§Åä¼¯µÄ´óĞ¡
+	newdssize=dssize;  //è·å–åŸæ­£å½±å“æ”¯é…é›†çš„å¤§å°
 
-	//°´ÕÕ½Úµã¶ÈÓÉĞ¡µ½´óµÄ´ÎĞòÀ´½øĞĞÏÂÊö²Ù×÷(×¢Òâ: Í¼ÖĞ½ÚµãÒÑ¾­°´ÕÕ¶ÈÓÉ´óµ½Ğ¡ÓĞĞò,¼´µÚ1¸ö½Úµã¶È×î´ó,µÚgvertexnum½Úµã¶È×îĞ¡)
+	//æŒ‰ç…§èŠ‚ç‚¹åº¦ç”±å°åˆ°å¤§çš„æ¬¡åºæ¥è¿›è¡Œä¸‹è¿°æ“ä½œ(æ³¨æ„: å›¾ä¸­èŠ‚ç‚¹å·²ç»æŒ‰ç…§åº¦ç”±å¤§åˆ°å°æœ‰åº,å³ç¬¬1ä¸ªèŠ‚ç‚¹åº¦æœ€å¤§,ç¬¬gvertexnumèŠ‚ç‚¹åº¦æœ€å°)
 	for(i=gvertexnum;i>=1;i--)
-		if(DSList[i]==1)  //±íÊ¾DSList[i]ÊÇÕıÓ°Ïì¼¯ÖĞÒ»Ô±£¬ÒÔ´Ë¼ì²é
+		if(DSList[i]==1)  //è¡¨ç¤ºDSList[i]æ˜¯æ­£å½±å“é›†ä¸­ä¸€å‘˜ï¼Œä»¥æ­¤æ£€æŸ¥
 		{	for(j=1;j<=gvertexnum;j++)
-				if(GAdjMatrix[i][j] && Satisfied[j]==0) //´ËÊ±ËµÃ÷Ö§Åäµãi²»¿ÉÒÔ¸ÄÎª·ÇÖ§Åäµã
+				if(GAdjMatrix[i][j] && Satisfied[j]==0) //æ­¤æ—¶è¯´æ˜æ”¯é…ç‚¹iä¸å¯ä»¥æ”¹ä¸ºéæ”¯é…ç‚¹
 					break;
-			if(j==gvertexnum+1)                           //´ËÊ±ËµÃ÷Ö§ÅäµãiµÄÈÎºÎÁÚµãj¶¼ÓĞSatisfied[j]<0, Òò´Ë½Úµãi¿ÉÒÔ¸ÄÎª·ÇÖ§Åäµã
+			if(j==gvertexnum+1)                           //æ­¤æ—¶è¯´æ˜æ”¯é…ç‚¹içš„ä»»ä½•é‚»ç‚¹jéƒ½æœ‰Satisfied[j]<0, å› æ­¤èŠ‚ç‚¹iå¯ä»¥æ”¹ä¸ºéæ”¯é…ç‚¹
 			{
 				newdssize--;
 				DSList[i]=0;
@@ -252,75 +252,72 @@ int RefinePIDS(int dssize)
 			}
 		}
 
-	return newdssize;//·µ»Ø¼«Ğ¡»¯ºóµÄÕıÓ°ÏìÖ§Åä¼¯µÄ´óĞ¡
+	return newdssize;//è¿”å›æå°åŒ–åçš„æ­£å½±å“æ”¯é…é›†çš„å¤§å°
 }
 
 
 
-
-
-/*ÏÖÔÚ¿ªÊ¼¸´ÏÖÊ¦ĞÖÂÛÎÄ¡£
-µÚÒ»²½£¬ÊµÏÖCrossver operator*/
-
-
-
-void  CrossverOperator()
-{
-
-/*ÎÊÌâ£¬Õâ¸öx£¬yÈçºÎ¶¨ÖÆ£¿*/
-
-    bool      DSList_Z[GMaxVertexNum+1];       //´æ·ÅZ
-    bool      DSList_X[GMaxVertexNum+1];      //´æ·ÅX¡£
-    bool      DSList_Y[GMaxVertexNum+1];      //´æ·ÅY¡£
-//Èç¹ûËæ»úÉú³Éx£¬y,Ò»°ëÊÇx£¬Ò»°ëÊÇy¡£
-    for(int i=0; i<(strlen(DSList)/2); i++)
-    {
-        DSList_X[i]=DSList[i];
-        DSList_Y[i]=DSList[(strlen(DSList)/2)+i];
-    }
-
-    //½«TÖÃÎª¿Õ¼¯¡£
-    for(int i=0;i<(strlen(DSList);i++){
-         DSList[i]=0;
-    }
-    /*½«xÓëy½øĞĞ½»²æ¡£Éú³Éz¡£²¢ÈëT*/
-    for(int i=0; i<strlen(DSList_X); i++)
-    {
-
-        if(DSList_X[i]==DSList_Y[i]&&DSList_X[i]==1)
-        {
-            DSList_Z[i]=1;
-
-        }
-        DSList_Z[i]=0;
-    }
-
-    /*¶Ôz½øĞĞ²Ù×÷¡£*/
-
-    for(int i=0; i<strlen(DSList_X); i++)
-    {
-        if(DSList_Z[i]==1)
-        {
-            //²úÉúÒ»¸ö0µ½1µÄËæ»úÊı¡£
-            float RangNum=rand()/(RAND_MAX+1.0);
-            if(RangNum<0.15)
-            {
-                DSList_Z[i]=0;
-
-            }
-        }
-    }
-
-
-   printf("\n²úÉúµÄZµÄÊıÁ¿: %5d\n",strlen(DSList_Z));
-}
-
-
-
-
-
-
-
+//
+//
+///*ç°åœ¨å¼€å§‹å¤ç°å¸ˆå…„è®ºæ–‡ã€‚
+//ç¬¬ä¸€æ­¥ï¼Œå®ç°Crossver operator*/
+//
+//int t=0;       //ç§ç¾¤è¿­ä»£æ¬¡æ•°
+//
+//void  CrossverOperator()
+//{
+//
+///*é—®é¢˜ï¼Œè¿™ä¸ªxï¼Œyå¦‚ä½•å®šåˆ¶ï¼Ÿ*/
+//
+///*æ‰èƒ½å¾ˆå¥½åœ°ç”Ÿæˆä¸€ä¸ªZå’Œä¸€ä¸ªTã€‚é€šè¿‡ä¸€æ¬¡ç®—æ³•è¿è¡Œã€‚
+//æˆ‘è§‰å¾—xä¹Ÿæ˜¯Té•¿åº¦çš„ã€‚yä¹Ÿæ˜¯té•¿åº¦çš„ã€‚è¿™æ ·ç”Ÿæˆçš„æ¯”è¾ƒå¥½ã€‚*/
+//
+//    bool      DSList_Z[GMaxVertexNum+1];       //å­˜æ”¾Z
+//    bool      DSList_X[GMaxVertexNum+1];      //å­˜æ”¾Xã€‚
+//    bool      DSList_Y[GMaxVertexNum+1];      //å­˜æ”¾Yã€‚
+////å¦‚æœéšæœºç”Ÿæˆxï¼Œy,ä¸€åŠæ˜¯xï¼Œä¸€åŠæ˜¯yã€‚
+//    for(int i=0; i<(strlen(DSList)/2); i++)
+//    {
+//        DSList_X[i]=DSList[i];
+//        DSList_Y[i]=DSList[(strlen(DSList)/2)+i];
+//    }
+//
+//    //å°†Tç½®ä¸ºç©ºé›†ã€‚
+//    for(int i=0;i<(strlen(DSList);i++){
+//         DSList[i]=0;
+//    }
+//    /*å°†xä¸yè¿›è¡Œäº¤å‰ã€‚ç”Ÿæˆzã€‚å¹¶å…¥T*/
+//    for(int i=0; i<strlen(DSList_X); i++)
+//    {
+//
+//        if(DSList_X[i]==DSList_Y[i]&&DSList_X[i]==1)
+//        {
+//            DSList_Z[i]=1;
+//
+//        }
+//        DSList_Z[i]=0;
+//    }
+//
+//    /*å¯¹zè¿›è¡Œæ“ä½œã€‚*/
+//
+//    for(int i=0; i<strlen(DSList_X); i++)
+//    {
+//        if(DSList_Z[i]==1)
+//        {
+//            //äº§ç”Ÿä¸€ä¸ª0åˆ°1çš„éšæœºæ•°ã€‚
+//            float RangNum=rand()/(RAND_MAX+1.0);
+//            if(RangNum<0.15)
+//            {
+//                DSList_Z[i]=0;
+//
+//            }
+//        }
+//    }
+//
+//
+//   printf("\näº§ç”Ÿçš„Zçš„æ•°é‡: %5d\n",strlen(DSList_Z));
+//}
+//
 
 
 
@@ -329,433 +326,577 @@ void  CrossverOperator()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//***ÎÄÏ×ÖĞÒÑÓĞµÄÌ°ĞÄËã·¨2***
-int Greedy2_PIDS(void)
-{//²ßÂÔ: ÓÅÏÈÌí¼ÓÄÜÌáÉıÆäËùÓĞÁÚµãÎ´Âú×ã³Ì¶ÈºÍ×î´ó(¼´±»ĞèÒª³Ì¶È×î´ó)µÄÒ»¸ö·ÇÖ§Åäµã±äÎªÖ§Åäµã,Ö±µ½ËùÓĞµã¶¼Âú×ãÎªÖ¹.
- //ÊµÏÖ·½·¨: ÓÅÏÈÑ¡È¡Êı×éNeeded[...]ÖĞÈ¡Öµ×îĞ¡(¼´¾ø¶ÔÖµ×î´ó)µÄÄÇ¸ö·ÇÖ§Åä½Úµã(DSList[.]Öµ0µÄµãÊÇ·ÇÖ§Åäµã)±äÎªÖ§Åäµã.
+//***æ”¹é€ ç®—æ³•ã€‚***
+int Greedy1_PIDS_ILMA(void)
+{//ç­–ç•¥:ä¼˜å…ˆé€‰æ‹©èƒ½æå‡æ›´å¤šä¸ªæœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦(å³è¦†ç›–é¢æœ€å¤§)çš„ä¸€ä¸ªéæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹.
+ //å®ç°æ–¹æ³•: ä¼˜å…ˆé€‰å–æ•°ç»„Coverage[...]ä¸­å–æœ€å¤§å€¼çš„é‚£ä¸ªéæ”¯é…èŠ‚ç‚¹(DSList[]å€¼0çš„ç‚¹æ˜¯éæ”¯é…ç‚¹)å˜ä¸ºæ”¯é…ç‚¹.
 	int i,j,k,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                       //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2; //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                         //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2;   //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
+		//æ»¡æ„åº¦åˆå§‹åŒ–ä¸ºè¿™ç‚¹åº¦æ•°çš„-1/2
+		Coverage[i]=DegreeList[i];
+		cout<<Coverage[i]<<"";
+		     //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„é‚»åŸŸå†…åŒ…å«æœ‰çš„æœªæ»¡è¶³çš„ç‚¹ä¸ªæ•°--å³è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹çš„è¦†ç›–é¢
+	}
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
+    bool  RCL[GMaxVertexNum+1];
+    for(int i=0;i<GMaxVertexNum;i++){
+        RCL[i]=0;
+    }
+
+	//é¢„å¤„ç†(ç•¥): æ‰€æœ‰ç‚¹åº¦1çš„ç‚¹é‚»ç‚¹å¿…å®šé€‰ä½œæ”¯é…ç‚¹(æŸäº›åº¦ä¸º1å¯èƒ½ä¹Ÿè¦è¢«é€‰ä½œæ”¯é…ç‚¹,æ¯”å¦‚ä¸€ä¸ªç‚¹ä¸å¤šä¸ªåº¦1çš„ç‚¹ç›¸é‚»æ—¶)
+	//è´ªå¿ƒè¿‘ä¼¼ç®—æ³•
+	int maxcoverage=0, bestvertex=0,mincoverage=0;
+	int uncoverednum=0;
+	uncoverednum=gvertexnum;   //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æœªæ»¡è¶³ç‚¹çš„ä¸ªæ•°
+
+
+    /*è¦è¿›è¡Œæ”¹é€ äº†ã€‚*/
+       maxcoverage=0;
+        //æ‰¾å‡ºæœ€å¤§çš„è¦†ç›–é¢
+        for(int i=1; i<=gvertexnum; i++)
+        {
+            if(DSList[i]==0 && Coverage[i]>maxcoverage)  //æ‰€æœ‰éæ”¯é…ç‚¹éƒ½å¯èƒ½è¦é€‰å–(åŒ…æ‹¬æŸäº›åº¦ä¸º1çš„ç‚¹å¯èƒ½è¢«é€‰ä½œæ”¯é…ç‚¹)
+            {
+               maxcoverage=Coverage[i];
+            }
+
+        }
+
+       cout<<"max   coverage is  "<<maxcoverage<<endl;
+        // æ‰¾å‡ºæœ€å°çš„è¦†ç›–é¢ã€‚
+         mincoverage=10;
+        for(i=1; i<=gvertexnum; i++)
+        {
+            if(DSList[i]==0 && Coverage[i]<mincoverage)  //æ‰€æœ‰éæ”¯é…ç‚¹éƒ½å¯èƒ½è¦é€‰å–(åŒ…æ‹¬æŸäº›åº¦ä¸º1çš„ç‚¹å¯èƒ½è¢«é€‰ä½œæ”¯é…ç‚¹)
+            {
+
+                mincoverage=Coverage[i];
+            }
+
+        }
+        cout<<"min   coverage is  "<<mincoverage<<endl;
+
+
+               //åœ¨æ­¤æˆ‘ä»¬è®¾å®šæˆ‘ä»¬çš„threï¼Œä¹Ÿå°±æ˜¯é˜•å€¼
+        //é¦–å…ˆéœ€è¦è®¾å®šaå€¼ã€‚ä¹Ÿå°±æ˜¯ä¸€ä¸ªå‚æ•°ã€‚æˆ‘ä»¬é¦–å…ˆé€‰æ‹©æ–‡çŒ®ä¸­æ‰€è¯´çš„ä¸º
+
+        int  Thre=mincoverage+0.8*(maxcoverage-mincoverage);
+        printf("%d,every  threshold value is",&Thre);
+        //æ„é€ æˆ‘ä»¬çš„RCL
+
+        for(i=1; i<=gvertexnum; i++)
+        {
+            if(DSList[i]==0 && Coverage[i]>=Thre)  //æ‰€æœ‰éæ”¯é…ç‚¹éƒ½å¯èƒ½è¦é€‰å–(åŒ…æ‹¬æŸäº›åº¦ä¸º1çš„ç‚¹å¯èƒ½è¢«é€‰ä½œæ”¯é…ç‚¹)
+            {
+                RCL[i]=1;
+            }
+        }
+
+
+
+        int x;
+        do{
+                //éšæœºäº§ç”Ÿ0~100çš„æ•°ã€‚
+                srand((int)time(NULL));//è®¾å®šéšæœºæ•°ç§å­
+                x=rand();
+               printf("\nevery  value is: %5d\n",x);
+                //éšæœºä»RCLä¸­æŒ‘é€‰ä¸€ä¸ªæ•°ã€‚
+
+        }while(RCL[x]==true);
+
+         bestvertex=x;
+       //åœ¨æœªè¢«é€‰æ‹©çš„èŠ‚ç‚¹ä¸­ï¼Œæ‰¾å‡ºæœ€å¤§å’Œæœ€å°çš„è¦†ç›–é¢ã€‚
+//    while(uncoverednum&&!CheckPIDS(dssize))
+//    {
+//
+//
+//
+//
+//        if(maxcoverage==0)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦. å¯ä»¥è¯æ˜åœ¨æ— å­¤ç«‹ç‚¹çš„å›¾ä¸­è¿™ç§æƒ…å†µä¸ä¼šå‘ç”Ÿ
+//        {
+//            printf("No solution to the instance!\n");
+//            return 0;
+//        }
+//        DSList[bestvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+//        dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+//        for(j=1; j<=gvertexnum; j++)   //æ›´æ–°è¯¥åŠ å…¥æ­£å½±å“é›†çš„ç‚¹çš„å„é‚»ç‚¹çš„æœªæ»¡æ„åº¦ï¼Œåªéœ€è¦æ›´æ–°å·²ç»åŠ å…¥æ­£å½±å“é›†çš„é¢†ç‚¹å°±okã€‚
+//            if(GAdjMatrix[bestvertex][j])
+//            {
+//                Satisfied[j]++;
+//                if(Satisfied[j]==0)   //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºå·²æ»¡è¶³çš„ç‚¹ç±»ï¼Œé¡ºå¸¦å¦‚æœä»–çš„é‚»ç‚¹å±äºæ»¡æ„ç‚¹ã€‚åˆ™è¯¥ç‚¹åŠ å…¥æ»¡æ„ç‚¹çš„é›†åˆã€‚
+//                {
+//                    uncoverednum--;
+//                    for(k=1; k<=gvertexnum; k++)                 //æ›´æ–°ç›¸å…³ç‚¹çš„è¦†ç›–é¢Coverage[.]
+//                        if(GAdjMatrix[j][k] && DSList[k]==0)  //é‚»ç‚¹æ˜¯éæ”¯é…ç‚¹æ—¶æ‰æœ‰å¿…è¦æ›´æ–°
+//                            Coverage[k]--;
+//                }
+//            }
+//
+//    }
+    int newdssize;
+	newdssize=RefinePIDS(dssize);
+
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
+	if(!CheckPIDS(newdssize))
+	{	printf("There is some wrong with Greedy1_PIDS!\n");
+		getch();
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
+
+    printf("\nGreedy1_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
+    //ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
+
+
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
+	if(!CheckPIDS(newdssize))
+	{	printf("There is some wrong with Greedy1_PIDS!\n");
+		getch();
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
+
+	printf("\nGreedy2_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//***æ–‡çŒ®ä¸­å·²æœ‰çš„è´ªå¿ƒç®—æ³•2***
+int Greedy2_PIDS(void)
+{//ç­–ç•¥: ä¼˜å…ˆæ·»åŠ èƒ½æå‡å…¶æ‰€æœ‰é‚»ç‚¹æœªæ»¡è¶³ç¨‹åº¦å’Œæœ€å¤§(å³è¢«éœ€è¦ç¨‹åº¦æœ€å¤§)çš„ä¸€ä¸ªéæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹,ç›´åˆ°æ‰€æœ‰ç‚¹éƒ½æ»¡è¶³ä¸ºæ­¢.
+ //å®ç°æ–¹æ³•: ä¼˜å…ˆé€‰å–æ•°ç»„Needed[...]ä¸­å–å€¼æœ€å°(å³ç»å¯¹å€¼æœ€å¤§)çš„é‚£ä¸ªéæ”¯é…èŠ‚ç‚¹(DSList[.]å€¼0çš„ç‚¹æ˜¯éæ”¯é…ç‚¹)å˜ä¸ºæ”¯é…ç‚¹.
+	int i,j,k,dssize;
+
+	for(i=1;i<=gvertexnum;i++)
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                       //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2; //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
 	}
 
     for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		Needed[i]=0;         //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄËùÓĞÎ´Âú×ãÁÚµãµÄÎ´Âú×ã¶ÈÖ®ºÍ(Îª¸ºÊı,Æä¾ø¶ÔÖµ±íÊ¾¸Ã·ÇÖ§Åäµã±»ĞèÒªµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		Needed[i]=0;         //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„æ‰€æœ‰æœªæ»¡è¶³é‚»ç‚¹çš„æœªæ»¡è¶³åº¦ä¹‹å’Œ(ä¸ºè´Ÿæ•°,å…¶ç»å¯¹å€¼è¡¨ç¤ºè¯¥éæ”¯é…ç‚¹è¢«éœ€è¦çš„ç¨‹åº¦)
 		for(j=1;j<=gvertexnum;j++)
            if(GAdjMatrix[i][j])
 			   Needed[i]+=Satisfied[j];
 
 	}
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
 
-	//Ô¤´¦Àí(ÂÔ): ËùÓĞµã¶È1µÄµãÁÚµã±Ø¶¨Ñ¡×÷Ö§Åäµã(Ä³Ğ©¶ÈÎª1¿ÉÄÜÒ²Òª±»Ñ¡×÷Ö§Åäµã,±ÈÈçÒ»¸öµãÓë¶à¸ö¶È1µÄµãÏàÁÚÊ±)
-	//Ì°ĞÄËã·¨
+	//é¢„å¤„ç†(ç•¥): æ‰€æœ‰ç‚¹åº¦1çš„ç‚¹é‚»ç‚¹å¿…å®šé€‰ä½œæ”¯é…ç‚¹(æŸäº›åº¦ä¸º1å¯èƒ½ä¹Ÿè¦è¢«é€‰ä½œæ”¯é…ç‚¹,æ¯”å¦‚ä¸€ä¸ªç‚¹ä¸å¤šä¸ªåº¦1çš„ç‚¹ç›¸é‚»æ—¶)
+	//è´ªå¿ƒç®—æ³•
 	int minneeded, bestvertex;
 	int uncoverednum;
-	uncoverednum=gvertexnum;   //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Î´Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;   //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æœªæ»¡è¶³ç‚¹çš„ä¸ªæ•°
 
-	while(uncoverednum)        //Èç¹û»¹ÓĞÎ´Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	while(uncoverednum)        //å¦‚æœè¿˜æœ‰æœªæ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 	{
-		minneeded=0;           //³õÊ¼»¯Îª0.Ò»°ãÎª¸ºÊı
+		minneeded=0;           //åˆå§‹åŒ–ä¸º0.ä¸€èˆ¬ä¸ºè´Ÿæ•°
 		for(i=1;i<=gvertexnum;i++)
-			if(DSList[i]==0 && Needed[i]<minneeded)  //ËùÓĞ·ÇÖ§Åäµã¶¼¿ÉÄÜÒªÑ¡È¡(°üÀ¨Ä³Ğ©¶ÈÎª1µÄµã¿ÉÄÜ±»Ñ¡×÷Ö§Åäµã)
-			{//Ì°ĞÄµØÑ¡Ôñ×î¼Ñ½Úµã×÷ÎªĞÂµÄÖ§Åäµã
+			if(DSList[i]==0 && Needed[i]<minneeded)  //æ‰€æœ‰éæ”¯é…ç‚¹éƒ½å¯èƒ½è¦é€‰å–(åŒ…æ‹¬æŸäº›åº¦ä¸º1çš„ç‚¹å¯èƒ½è¢«é€‰ä½œæ”¯é…ç‚¹)
+			{//è´ªå¿ƒåœ°é€‰æ‹©æœ€ä½³èŠ‚ç‚¹ä½œä¸ºæ–°çš„æ”¯é…ç‚¹
 					minneeded=Needed[i];
 					bestvertex=i;
 			}
-        if(minneeded==0)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÎ´Âú×ãµãµÄÂú×ã¶È. ¿ÉÒÔÖ¤Ã÷ÔÚÎŞ¹ÂÁ¢µãµÄÍ¼ÖĞÕâÖÖÇé¿ö²»»á·¢Éú
+        if(minneeded==0)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦. å¯ä»¥è¯æ˜åœ¨æ— å­¤ç«‹ç‚¹çš„å›¾ä¸­è¿™ç§æƒ…å†µä¸ä¼šå‘ç”Ÿ
 		{
 			printf("No solution to the instance!\n");
 			return 0;
 		}
-		DSList[bestvertex]=1;          //¼ÓÈëĞÂµÄÖ§Åäµã
-		dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-		for(j=1;j<=gvertexnum;j++)     //¸üĞÂ¸÷ÁÚµãµÄÎ´Âú×ã³Ì¶È
+		DSList[bestvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+		dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+		for(j=1;j<=gvertexnum;j++)     //æ›´æ–°å„é‚»ç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦
 			if(GAdjMatrix[bestvertex][j])
 			{    Satisfied[j]++;
-  		         if(Satisfied[j]<=0)   //Ö»ÓĞ¶ÔÖ®Ç°µÄÎ´Âú×ãµÄÁÚµã(¸Õ¸Õ»ñµÃÂú×ãµÄµãÖ®Ç°Ò²ÊÇÎ´Âú×ãµã)²ÅÓĞ±ØÒª¸üĞÂÏà¹ØĞÅÏ¢
-				 {	 for(k=1;k<=gvertexnum;k++)               //¸üĞÂÏà¹ØµãµÄÁÚµãµÄ²»Âú×ãÖ®ºÍNeeded[]
-    					if(GAdjMatrix[j][k] && DSList[k]==0)  //ÁÚµãÊÇ·ÇÖ§ÅäµãÊ±²ÅÓĞ±ØÒª¸üĞÂ
-								Needed[k]++;                  //×¢: ÖµÎª¸º,Æä¾ø¶ÔÖµ±íÊ¾±»ĞèÒªµÄ³Ì¶È
+  		         if(Satisfied[j]<=0)   //åªæœ‰å¯¹ä¹‹å‰çš„æœªæ»¡è¶³çš„é‚»ç‚¹(åˆšåˆšè·å¾—æ»¡è¶³çš„ç‚¹ä¹‹å‰ä¹Ÿæ˜¯æœªæ»¡è¶³ç‚¹)æ‰æœ‰å¿…è¦æ›´æ–°ç›¸å…³ä¿¡æ¯
+				 {	 for(k=1;k<=gvertexnum;k++)               //æ›´æ–°ç›¸å…³ç‚¹çš„é‚»ç‚¹çš„ä¸æ»¡è¶³ä¹‹å’ŒNeeded[]
+    					if(GAdjMatrix[j][k] && DSList[k]==0)  //é‚»ç‚¹æ˜¯éæ”¯é…ç‚¹æ—¶æ‰æœ‰å¿…è¦æ›´æ–°
+								Needed[k]++;                  //æ³¨: å€¼ä¸ºè´Ÿ,å…¶ç»å¯¹å€¼è¡¨ç¤ºè¢«éœ€è¦çš„ç¨‹åº¦
 				 }
-				 if(Satisfied[j]==0)                          //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÒÑÂú×ãµÄµãÀà
+				 if(Satisfied[j]==0)                          //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºå·²æ»¡è¶³çš„ç‚¹ç±»
 						 uncoverednum--;
 			}
 	}
 
-    //***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+    //***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with Greedy2_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nGreedy2_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
-    //ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+	printf("\nGreedy2_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
+    //ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with Greedy2_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nGreedy2_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nGreedy2_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
-//***ĞÂÉè¼ÆµÄÌ°ĞÄËã·¨1***
+//***æ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•1***
 int NewGreedy1_PIDS(void)
-{//¸ÃËã·¨Êµ¼ÊÉÏÊÇÎÄÏ×ÖĞÁ½¸öÌ°ĞÄËã·¨²ßÂÔµÄÒ»ÖÖ½áºÏµÄÓ¦ÓÃ.
- //²ßÂÔ1:ÓÅÏÈÑ¡ÔñÄÜÌáÉı×î¶à¸öÎ´Âú×ãµãµÄÂú×ã¶È(¼´¸²¸ÇÃæ×î´ó)µÄÒ»¸ö·ÇÖ§Åäµã±äÎªÖ§Åäµã.
- //ÊµÏÖ·½·¨: ÓÅÏÈÑ¡È¡Coverage[...]ÖĞÈ¡×î´óÖµµÄÄÇ¸ö·ÇÖ§Åä½Úµãu(DSList[u]=0)±äÎªÖ§Åäµã.
- //²ßÂÔ2: Èç¹ûÓĞ¶à¸ö¸²¸ÇÃæ×î´óµÄ½ÚµãuµÄÊ±, ÓÅÏÈÑ¡ÔñÄÇ¸öÄÜÌáÉıÆäÁÚµã²»Âú×ã³Ì¶ÈºÍ¾ø¶ÔÖµ×î´ó(¼´±»ĞèÒª³Ì¶È×î´ó)µÄÒ»¸ö·ÇÖ§Åäµãu±äÎªÖ§Åäµã.
- //ÊµÏÖ·½·¨: ÔÚCoverage[u]Öµ×î´óµÄ¶à¸ö½ÚµãuÖĞÓÅÏÈÑ¡È¡Needed[u]Öµ×îĞ¡(¼´¾ø¶ÔÖµ×î´ó)µÄÄÇ¸ö·ÇÖ§Åä½Úµãu(DSList[u]=0)±äÎªÖ§Åäµã.
+{//è¯¥ç®—æ³•å®é™…ä¸Šæ˜¯æ–‡çŒ®ä¸­ä¸¤ä¸ªè´ªå¿ƒç®—æ³•ç­–ç•¥çš„ä¸€ç§ç»“åˆçš„åº”ç”¨.
+ //ç­–ç•¥1:ä¼˜å…ˆé€‰æ‹©èƒ½æå‡æœ€å¤šä¸ªæœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦(å³è¦†ç›–é¢æœ€å¤§)çš„ä¸€ä¸ªéæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹.
+ //å®ç°æ–¹æ³•: ä¼˜å…ˆé€‰å–Coverage[...]ä¸­å–æœ€å¤§å€¼çš„é‚£ä¸ªéæ”¯é…èŠ‚ç‚¹u(DSList[u]=0)å˜ä¸ºæ”¯é…ç‚¹.
+ //ç­–ç•¥2: å¦‚æœæœ‰å¤šä¸ªè¦†ç›–é¢æœ€å¤§çš„èŠ‚ç‚¹uçš„æ—¶, ä¼˜å…ˆé€‰æ‹©é‚£ä¸ªèƒ½æå‡å…¶é‚»ç‚¹ä¸æ»¡è¶³ç¨‹åº¦å’Œç»å¯¹å€¼æœ€å¤§(å³è¢«éœ€è¦ç¨‹åº¦æœ€å¤§)çš„ä¸€ä¸ªéæ”¯é…ç‚¹uå˜ä¸ºæ”¯é…ç‚¹.
+ //å®ç°æ–¹æ³•: åœ¨Coverage[u]å€¼æœ€å¤§çš„å¤šä¸ªèŠ‚ç‚¹uä¸­ä¼˜å…ˆé€‰å–Needed[u]å€¼æœ€å°(å³ç»å¯¹å€¼æœ€å¤§)çš„é‚£ä¸ªéæ”¯é…èŠ‚ç‚¹u(DSList[u]=0)å˜ä¸ºæ”¯é…ç‚¹.
 	int i,j,k,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                         //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2;   //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
-		Coverage[i]=DegreeList[i];           //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄÁÚÓòÄÚ°üº¬ÓĞµÄÎ´Âú×ãµÄµã¸öÊı--¼´¼ÇÂ¼Ã¿¸ö·ÇÖ§ÅäµãµÄ¸²¸ÇÃæ
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                         //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2;   //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
+		Coverage[i]=DegreeList[i];           //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„é‚»åŸŸå†…åŒ…å«æœ‰çš„æœªæ»¡è¶³çš„ç‚¹ä¸ªæ•°--å³è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹çš„è¦†ç›–é¢
 	}
 
     for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		Needed[i]=0;                 //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄËùÓĞÎ´Âú×ãÁÚµãµÄÎ´Âú×ã¶ÈÖ®ºÍ(Îª¸ºÊı,Æä¾ø¶ÔÖµ±íÊ¾¸Ã·ÇÖ§Åäµã±»ĞèÒªµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		Needed[i]=0;                 //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„æ‰€æœ‰æœªæ»¡è¶³é‚»ç‚¹çš„æœªæ»¡è¶³åº¦ä¹‹å’Œ(ä¸ºè´Ÿæ•°,å…¶ç»å¯¹å€¼è¡¨ç¤ºè¯¥éæ”¯é…ç‚¹è¢«éœ€è¦çš„ç¨‹åº¦)
 		for(j=1;j<=gvertexnum;j++)
            if(GAdjMatrix[i][j])
 			   Needed[i]+=Satisfied[j];
 
 	}
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
 
-	//Ô¤´¦Àí(ÂÔ): ËùÓĞµã¶È1µÄµãÁÚµã±Ø¶¨Ñ¡×÷Ö§Åäµã(Ä³Ğ©¶ÈÎª1¿ÉÄÜÒ²Òª±»Ñ¡×÷Ö§Åäµã,±ÈÈçÒ»¸öµãÓë¶à¸ö¶È1µÄµãÏàÁÚÊ±)
-	//¸Ä½øµÄÌ°ĞÄ½üËÆËã·¨
+	//é¢„å¤„ç†(ç•¥): æ‰€æœ‰ç‚¹åº¦1çš„ç‚¹é‚»ç‚¹å¿…å®šé€‰ä½œæ”¯é…ç‚¹(æŸäº›åº¦ä¸º1å¯èƒ½ä¹Ÿè¦è¢«é€‰ä½œæ”¯é…ç‚¹,æ¯”å¦‚ä¸€ä¸ªç‚¹ä¸å¤šä¸ªåº¦1çš„ç‚¹ç›¸é‚»æ—¶)
+	//æ”¹è¿›çš„è´ªå¿ƒè¿‘ä¼¼ç®—æ³•
 	int maxcoverage, minneeded, bestvertex;
 	int uncoverednum;
-	uncoverednum=gvertexnum;   //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Ã»ÓĞ±»Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;   //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æ²¡æœ‰è¢«æ»¡è¶³ç‚¹çš„ä¸ªæ•°
 
-	while(uncoverednum)        //Èç¹û»¹ÓĞÃ»ÓĞ±»Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	while(uncoverednum)        //å¦‚æœè¿˜æœ‰æ²¡æœ‰è¢«æ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 	{
-		maxcoverage=0;         //³õÊ¼»¯.ÓÃÓÚÌ°ĞÄ²ßÂÔ1
-		minneeded=0;           //³õÊ¼»¯.ÓÃÓÚÌ°ĞÄ²ßÂÔ2
+		maxcoverage=0;         //åˆå§‹åŒ–.ç”¨äºè´ªå¿ƒç­–ç•¥1
+		minneeded=0;           //åˆå§‹åŒ–.ç”¨äºè´ªå¿ƒç­–ç•¥2
 		for(i=1;i<=gvertexnum;i++)
-		{	if(DSList[i]==0)   //ËùÓĞ·ÇÖ§Åäµã¶¼¿ÉÄÜÒªÑ¡È¡(°üÀ¨Ä³Ğ©¶ÈÎª1µÄµã¿ÉÄÜĞëÑ¡×÷Ö§Åäµã)
+		{	if(DSList[i]==0)   //æ‰€æœ‰éæ”¯é…ç‚¹éƒ½å¯èƒ½è¦é€‰å–(åŒ…æ‹¬æŸäº›åº¦ä¸º1çš„ç‚¹å¯èƒ½é¡»é€‰ä½œæ”¯é…ç‚¹)
 			{
-				if(Coverage[i]>maxcoverage)  //Ì°ĞÄ²ßÂÔ1: ÓÅÏÈÑ¡Ôñ¸²¸ÇÃæ´óµÄ·ÇÖ§ÅäµãÎªĞÂµÄÖ§Åäµã
+				if(Coverage[i]>maxcoverage)  //è´ªå¿ƒç­–ç•¥1: ä¼˜å…ˆé€‰æ‹©è¦†ç›–é¢å¤§çš„éæ”¯é…ç‚¹ä¸ºæ–°çš„æ”¯é…ç‚¹
 				{
 					maxcoverage=Coverage[i];
 					bestvertex=i;
 				}
 				else if(Coverage[i]==maxcoverage && Coverage[i]>0 && Needed[i]<minneeded)
-				{//Ì°ĞÄ²ßÂÔ2: ¸²¸ÇÃæÍ¬Ñù×î´óµÄÇé¿öÏÂÔòÓÅÏÈÑ¡Ôñ±»ĞèÒª³Ì¶È×î´ó(¼´Satisfied[u]×îĞ¡µÄu)µÄ·ÇÖ§ÅäµãÎªĞÂµÄÖ§Åäµã
+				{//è´ªå¿ƒç­–ç•¥2: è¦†ç›–é¢åŒæ ·æœ€å¤§çš„æƒ…å†µä¸‹åˆ™ä¼˜å…ˆé€‰æ‹©è¢«éœ€è¦ç¨‹åº¦æœ€å¤§(å³Satisfied[u]æœ€å°çš„u)çš„éæ”¯é…ç‚¹ä¸ºæ–°çš„æ”¯é…ç‚¹
 					minneeded=Needed[i];
 					bestvertex=i;
 				}
 			}
 		}
-        if(maxcoverage==0)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÃ»ÓĞÂú×ãµÄµãµÄ±»Ö§Åä³Ì¶È. ¿ÉÒÔÖ¤Ã÷ÕâÖÖÇé¿öÓ¦¸Ã²»»á·¢Éú
+        if(maxcoverage==0)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æ²¡æœ‰æ»¡è¶³çš„ç‚¹çš„è¢«æ”¯é…ç¨‹åº¦. å¯ä»¥è¯æ˜è¿™ç§æƒ…å†µåº”è¯¥ä¸ä¼šå‘ç”Ÿ
 		{
 			printf("No solution to the instance!\n");
 			return 0;
 		}
-		DSList[bestvertex]=1;          //¼ÓÈëĞÂµÄÖ§Åäµã
-		dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-		for(j=1;j<=gvertexnum;j++)     //¸üĞÂ¸÷ÁÚµãÎ´Âú×ã³Ì¶È
+		DSList[bestvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+		dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+		for(j=1;j<=gvertexnum;j++)     //æ›´æ–°å„é‚»ç‚¹æœªæ»¡è¶³ç¨‹åº¦
 			if(GAdjMatrix[bestvertex][j])
 			{    Satisfied[j]++;
-				 if(Satisfied[j]<=0) //Ö»ÓĞ¶ÔÖ®Ç°µÄÎ´Âú×ãµÄÁÚµã(¸Õ¸Õ»ñµÃÂú×ãµÄµãÖ®Ç°Ò²ÊÇÎ´Âú×ãµã)²ÅÓĞ±ØÒª¸üĞÂÏà¹ØĞÅÏ¢
-				 {	 for(k=1;k<=gvertexnum;k++)               //¸üĞÂÏà¹ØµãµÄÁÚµãµÄ²»Âú×ãÖ®ºÍNeeded[.]**************
-    					if(GAdjMatrix[j][k] && DSList[k]==0)  //ÁÚµãÊÇ·ÇÖ§ÅäµãÊ±²ÅÓĞ±ØÒª¸üĞÂ*************
-								Needed[k]++;          //×¢Òâ£ºÖµÎª¸º£¬Æä¾ø¶ÔÖµ±íÊ¾±»ĞèÒªµÄ³Ì¶È*************
+				 if(Satisfied[j]<=0) //åªæœ‰å¯¹ä¹‹å‰çš„æœªæ»¡è¶³çš„é‚»ç‚¹(åˆšåˆšè·å¾—æ»¡è¶³çš„ç‚¹ä¹‹å‰ä¹Ÿæ˜¯æœªæ»¡è¶³ç‚¹)æ‰æœ‰å¿…è¦æ›´æ–°ç›¸å…³ä¿¡æ¯
+				 {	 for(k=1;k<=gvertexnum;k++)               //æ›´æ–°ç›¸å…³ç‚¹çš„é‚»ç‚¹çš„ä¸æ»¡è¶³ä¹‹å’ŒNeeded[.]**************
+    					if(GAdjMatrix[j][k] && DSList[k]==0)  //é‚»ç‚¹æ˜¯éæ”¯é…ç‚¹æ—¶æ‰æœ‰å¿…è¦æ›´æ–°*************
+								Needed[k]++;          //æ³¨æ„ï¼šå€¼ä¸ºè´Ÿï¼Œå…¶ç»å¯¹å€¼è¡¨ç¤ºè¢«éœ€è¦çš„ç¨‹åº¦*************
 				 }
-			     if(Satisfied[j]==0) //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÂú×ãµÄµãÀà
+			     if(Satisfied[j]==0) //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºæ»¡è¶³çš„ç‚¹ç±»
 				 {	 uncoverednum--;
-					 for(k=1;k<=gvertexnum;k++)               //¸üĞÂÏà¹ØµãµÄ¸²¸ÇÃæCoverage[.]**************
+					 for(k=1;k<=gvertexnum;k++)               //æ›´æ–°ç›¸å…³ç‚¹çš„è¦†ç›–é¢Coverage[.]**************
 						if(GAdjMatrix[j][k] && DSList[k]==0)  //*************
 							Coverage[k]--;                    //*************
 				 }
 			}
 	}
 
-   //***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+   //***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with NewGreedy1_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
 
-    printf("\nNewGreedy1_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
-	//ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+    printf("\nNewGreedy1_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
+	//ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with NewGreedy1_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nNewGreedy1_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nNewGreedy1_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
 
-//***ĞÂÉè¼ÆµÄÌ°ĞÄËã·¨2***
+//***æ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•2***
 int NewGreedy2_PIDS(void)
-{//¸ÃËã·¨Êµ¼ÊÉÏÊÇÎÄÏ×ÖĞÁ½¸öÌ°ĞÄËã·¨²ßÂÔµÄÒ»ÖÖ½áºÏµÄÓ¦ÓÃ.
- //²ßÂÔ2: ÓÅÏÈÑ¡ÔñÄÜÌáÉıÆäÁÚµã²»Âú×ã³Ì¶ÈºÍ¾ø¶ÔÖµ×î´ó(¼´±»ĞèÒª³Ì¶È×î´ó)µÄÒ»¸ö·ÇÖ§Åäµãu±äÎªÖ§Åäµã.
- //ÊµÏÖ·½·¨: ÓÅÏÈÑ¡È¡Needed[u]Öµ×îĞ¡(¼´¾ø¶ÔÖµ×î´ó)µÄÄÇ¸ö·ÇÖ§Åä½Úµãu(DSList[u]=0)±äÎªÖ§Åäµã.
- //²ßÂÔ1: Èç¹ûÓĞ¶à¸ö±»ĞèÒª³Ì¶È×î´óµÄ½ÚµãÊ±, ÔòÓÅÏÈÑ¡ÔñÄÜÌáÉı×î¶à¸öÎ´Âú×ãµãµÄÂú×ã¶È(¼´¸²¸ÇÃæ×î´ó)µÄÒ»¸ö·ÇÖ§Åäµãu±äÎªÖ§Åäµã.
- //ÊµÏÖ·½·¨: ÔÚNeeded[u]¾ø¶ÔÖµ×î´óµÄ¶à¸ö½ÚµãuÖĞÓÅÏÈÑ¡È¡Coverage[...]×î´óÖµµÄÄÇ¸ö·ÇÖ§Åä½Úµãu(DSList[u]=0)±äÎªÖ§Åäµã.
+{//è¯¥ç®—æ³•å®é™…ä¸Šæ˜¯æ–‡çŒ®ä¸­ä¸¤ä¸ªè´ªå¿ƒç®—æ³•ç­–ç•¥çš„ä¸€ç§ç»“åˆçš„åº”ç”¨.
+ //ç­–ç•¥2: ä¼˜å…ˆé€‰æ‹©èƒ½æå‡å…¶é‚»ç‚¹ä¸æ»¡è¶³ç¨‹åº¦å’Œç»å¯¹å€¼æœ€å¤§(å³è¢«éœ€è¦ç¨‹åº¦æœ€å¤§)çš„ä¸€ä¸ªéæ”¯é…ç‚¹uå˜ä¸ºæ”¯é…ç‚¹.
+ //å®ç°æ–¹æ³•: ä¼˜å…ˆé€‰å–Needed[u]å€¼æœ€å°(å³ç»å¯¹å€¼æœ€å¤§)çš„é‚£ä¸ªéæ”¯é…èŠ‚ç‚¹u(DSList[u]=0)å˜ä¸ºæ”¯é…ç‚¹.
+ //ç­–ç•¥1: å¦‚æœæœ‰å¤šä¸ªè¢«éœ€è¦ç¨‹åº¦æœ€å¤§çš„èŠ‚ç‚¹æ—¶, åˆ™ä¼˜å…ˆé€‰æ‹©èƒ½æå‡æœ€å¤šä¸ªæœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦(å³è¦†ç›–é¢æœ€å¤§)çš„ä¸€ä¸ªéæ”¯é…ç‚¹uå˜ä¸ºæ”¯é…ç‚¹.
+ //å®ç°æ–¹æ³•: åœ¨Needed[u]ç»å¯¹å€¼æœ€å¤§çš„å¤šä¸ªèŠ‚ç‚¹uä¸­ä¼˜å…ˆé€‰å–Coverage[...]æœ€å¤§å€¼çš„é‚£ä¸ªéæ”¯é…èŠ‚ç‚¹u(DSList[u]=0)å˜ä¸ºæ”¯é…ç‚¹.
 
 	int i,j,k,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                         //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2;   //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
-		Coverage[i]=DegreeList[i];           //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄÁÚÓòÄÚ°üº¬ÓĞµÄÎ´Âú×ãµÄµã¸öÊı--¼´¼ÇÂ¼Ã¿¸ö·ÇÖ§ÅäµãµÄ¸²¸ÇÃæ
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                         //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2;   //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
+		Coverage[i]=DegreeList[i];           //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„é‚»åŸŸå†…åŒ…å«æœ‰çš„æœªæ»¡è¶³çš„ç‚¹ä¸ªæ•°--å³è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹çš„è¦†ç›–é¢
 	}
 
     for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		Needed[i]=0;                 //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄËùÓĞÎ´Âú×ãÁÚµãµÄÎ´Âú×ã¶ÈÖ®ºÍ(Îª¸ºÊı,Æä¾ø¶ÔÖµ±íÊ¾¸Ã·ÇÖ§Åäµã±»ĞèÒªµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		Needed[i]=0;                 //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„æ‰€æœ‰æœªæ»¡è¶³é‚»ç‚¹çš„æœªæ»¡è¶³åº¦ä¹‹å’Œ(ä¸ºè´Ÿæ•°,å…¶ç»å¯¹å€¼è¡¨ç¤ºè¯¥éæ”¯é…ç‚¹è¢«éœ€è¦çš„ç¨‹åº¦)
 		for(j=1;j<=gvertexnum;j++)
            if(GAdjMatrix[i][j])
 			   Needed[i]+=Satisfied[j];
 
 	}
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
 
-	//Ô¤´¦Àí(ÂÔ): ËùÓĞµã¶È1µÄµãÁÚµã±Ø¶¨Ñ¡×÷Ö§Åäµã(Ä³Ğ©¶ÈÎª1¿ÉÄÜÒ²Òª±»Ñ¡×÷Ö§Åäµã,±ÈÈçÒ»¸öµãÓë¶à¸ö¶È1µÄµãÏàÁÚÊ±)
-	//¸Ä½øµÄÌ°ĞÄ½üËÆËã·¨
+	//é¢„å¤„ç†(ç•¥): æ‰€æœ‰ç‚¹åº¦1çš„ç‚¹é‚»ç‚¹å¿…å®šé€‰ä½œæ”¯é…ç‚¹(æŸäº›åº¦ä¸º1å¯èƒ½ä¹Ÿè¦è¢«é€‰ä½œæ”¯é…ç‚¹,æ¯”å¦‚ä¸€ä¸ªç‚¹ä¸å¤šä¸ªåº¦1çš„ç‚¹ç›¸é‚»æ—¶)
+	//æ”¹è¿›çš„è´ªå¿ƒè¿‘ä¼¼ç®—æ³•
 	int maxcoverage, minneeded, bestvertex;
 	int uncoverednum;
-	uncoverednum=gvertexnum;   //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Ã»ÓĞ±»Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;   //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æ²¡æœ‰è¢«æ»¡è¶³ç‚¹çš„ä¸ªæ•°
 
-	while(uncoverednum)        //Èç¹û»¹ÓĞÃ»ÓĞ±»Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	while(uncoverednum)        //å¦‚æœè¿˜æœ‰æ²¡æœ‰è¢«æ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 	{
-		maxcoverage=0;         //³õÊ¼»¯.ÓÃÓÚÌ°ĞÄ²ßÂÔ1
-		minneeded=0;           //³õÊ¼»¯.ÓÃÓÚÌ°ĞÄ²ßÂÔ2
+		maxcoverage=0;         //åˆå§‹åŒ–.ç”¨äºè´ªå¿ƒç­–ç•¥1
+		minneeded=0;           //åˆå§‹åŒ–.ç”¨äºè´ªå¿ƒç­–ç•¥2
 		for(i=1;i<=gvertexnum;i++)
-		{	if(DSList[i]==0)   //ËùÓĞ·ÇÖ§Åäµã¶¼¿ÉÄÜÒªÑ¡È¡(°üÀ¨Ä³Ğ©¶ÈÎª1µÄµã¿ÉÄÜĞëÑ¡×÷Ö§Åäµã)
+		{	if(DSList[i]==0)   //æ‰€æœ‰éæ”¯é…ç‚¹éƒ½å¯èƒ½è¦é€‰å–(åŒ…æ‹¬æŸäº›åº¦ä¸º1çš„ç‚¹å¯èƒ½é¡»é€‰ä½œæ”¯é…ç‚¹)
 			{
-				if(minneeded>Needed[i])  //Ì°ĞÄ²ßÂÔ2: ÓÅÏÈÑ¡Ôñ±»ĞèÒª³Ì¶È×î´ó(¼´Needed[u]×îĞ¡µÄu)µÄ·ÇÖ§ÅäµãÎªĞÂµÄÖ§Åäµã
+				if(minneeded>Needed[i])  //è´ªå¿ƒç­–ç•¥2: ä¼˜å…ˆé€‰æ‹©è¢«éœ€è¦ç¨‹åº¦æœ€å¤§(å³Needed[u]æœ€å°çš„u)çš„éæ”¯é…ç‚¹ä¸ºæ–°çš„æ”¯é…ç‚¹
 				{
 					minneeded=Needed[i];
 					bestvertex=i;
 				}
 				else if(Needed[i]==minneeded && Needed[i]<0 && Coverage[i]>maxcoverage)
-				{//Ì°ĞÄ²ßÂÔ1: ±»ĞèÒª³Ì¶ÈÍ¬Ñù×î´óµÄÇé¿öÏÂÔòÓÅÏÈÑ¡Ôñ¸²¸ÇÃæ´óµÄÒ»¸ö·ÇÖ§ÅäµãÎªĞÂµÄÖ§Åäµã
+				{//è´ªå¿ƒç­–ç•¥1: è¢«éœ€è¦ç¨‹åº¦åŒæ ·æœ€å¤§çš„æƒ…å†µä¸‹åˆ™ä¼˜å…ˆé€‰æ‹©è¦†ç›–é¢å¤§çš„ä¸€ä¸ªéæ”¯é…ç‚¹ä¸ºæ–°çš„æ”¯é…ç‚¹
 					maxcoverage=Coverage[i];
 					bestvertex=i;
 				}
 			}
 		}
-        if(minneeded==0)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÃ»ÓĞÂú×ãµÄµãµÄ±»Ö§Åä³Ì¶È. ¿ÉÒÔÖ¤Ã÷ÕâÖÖÇé¿öÓ¦¸Ã²»»á·¢Éú
+        if(minneeded==0)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æ²¡æœ‰æ»¡è¶³çš„ç‚¹çš„è¢«æ”¯é…ç¨‹åº¦. å¯ä»¥è¯æ˜è¿™ç§æƒ…å†µåº”è¯¥ä¸ä¼šå‘ç”Ÿ
 		{
 			printf("No solution to the instance!\n");
 			return 0;
 		}
-		DSList[bestvertex]=1;          //¼ÓÈëĞÂµÄÖ§Åäµã
-		dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-		for(j=1;j<=gvertexnum;j++)     //¸üĞÂ¸÷ÁÚµãÎ´Âú×ã³Ì¶È
+		DSList[bestvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+		dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+		for(j=1;j<=gvertexnum;j++)     //æ›´æ–°å„é‚»ç‚¹æœªæ»¡è¶³ç¨‹åº¦
 			if(GAdjMatrix[bestvertex][j])
 			{    Satisfied[j]++;
-				 if(Satisfied[j]<=0)   //Ö»ÓĞ¶ÔÖ®Ç°µÄÎ´Âú×ãµÄÁÚµã(¸Õ¸Õ»ñµÃÂú×ãµÄµãÖ®Ç°Ò²ÊÇÎ´Âú×ãµã)²ÅÓĞ±ØÒª¸üĞÂÏà¹ØĞÅÏ¢
-				 {	 for(k=1;k<=gvertexnum;k++)               //¸üĞÂÏà¹ØµãµÄÁÚµãµÄ²»Âú×ãÖ®ºÍNeeded[.]**************
-    					if(GAdjMatrix[j][k] && DSList[k]==0)  //ÁÚµãÊÇ·ÇÖ§ÅäµãÊ±²ÅÓĞ±ØÒª¸üĞÂ*************
-								Needed[k]++;                  //×¢£ºÖµÎª¸º£¬Æä¾ø¶ÔÖµ±íÊ¾±»ĞèÒªµÄ³Ì¶È*************
+				 if(Satisfied[j]<=0)   //åªæœ‰å¯¹ä¹‹å‰çš„æœªæ»¡è¶³çš„é‚»ç‚¹(åˆšåˆšè·å¾—æ»¡è¶³çš„ç‚¹ä¹‹å‰ä¹Ÿæ˜¯æœªæ»¡è¶³ç‚¹)æ‰æœ‰å¿…è¦æ›´æ–°ç›¸å…³ä¿¡æ¯
+				 {	 for(k=1;k<=gvertexnum;k++)               //æ›´æ–°ç›¸å…³ç‚¹çš„é‚»ç‚¹çš„ä¸æ»¡è¶³ä¹‹å’ŒNeeded[.]**************
+    					if(GAdjMatrix[j][k] && DSList[k]==0)  //é‚»ç‚¹æ˜¯éæ”¯é…ç‚¹æ—¶æ‰æœ‰å¿…è¦æ›´æ–°*************
+								Needed[k]++;                  //æ³¨ï¼šå€¼ä¸ºè´Ÿï¼Œå…¶ç»å¯¹å€¼è¡¨ç¤ºè¢«éœ€è¦çš„ç¨‹åº¦*************
 				 }
-			     if(Satisfied[j]==0) //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÂú×ãµÄµãÀà
+			     if(Satisfied[j]==0) //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºæ»¡è¶³çš„ç‚¹ç±»
 				 {	 uncoverednum--;
-					 for(k=1;k<=gvertexnum;k++)               //¸üĞÂÏà¹ØµãµÄ¸²¸ÇÃæCoverage[.]**************
+					 for(k=1;k<=gvertexnum;k++)               //æ›´æ–°ç›¸å…³ç‚¹çš„è¦†ç›–é¢Coverage[.]**************
 						if(GAdjMatrix[j][k] && DSList[k]==0)  //*************
 							Coverage[k]--;                    //*************
 				 }
 			}
 	}
 
-   //***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+   //***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with NewGreedy2_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-    printf("\nNewGreedy2_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
-    //ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+    printf("\nNewGreedy2_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
+    //ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with NewGreedy2_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nNewGreedy2_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nNewGreedy2_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
-//***ĞÂÉè¼ÆµÄÌ°ĞÄËã·¨3***
+//***æ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•3***
 int NewGreedy3_PIDS(void)
-{//¸ÃËã·¨Êµ¼ÊÉÏÊÇÎÄÏ×ÖĞÁ½¸öÌ°ĞÄËã·¨²ßÂÔµÄÒ»ÖÖ½áºÏµÄÓ¦ÓÃ.
- //²ßÂÔ2: ÓÅÏÈÑ¡ÔñÄÜÌáÉıÆäÁÚµã²»Âú×ã³Ì¶ÈºÍ¾ø¶ÔÖµ×î´ó(¼´±»ĞèÒª³Ì¶È×î´ó)µÄÒ»¸ö·ÇÖ§Åäµãu±äÎªÖ§Åäµã.
- //ÊµÏÖ·½·¨: ÓÅÏÈÑ¡È¡Needed[u]Öµ×îĞ¡(¼´¾ø¶ÔÖµ×î´ó)µÄÄÇ¸ö·ÇÖ§Åä½Úµãu(DSList[u]=0)±äÎªÖ§Åäµã.
- //²ßÂÔ1: Èç¹ûÓĞ¶à¸ö±»ĞèÒª³Ì¶È×î´óµÄ½ÚµãÊ±, ÔòÓÅÏÈÑ¡ÔñÄÜÌáÉı×îĞ¡¸öÎ´Âú×ãµãµÄÂú×ã¶È(¼´¸²¸ÇÃæ×î Ğ¡)µÄÒ»¸ö·ÇÖ§Åäµãu±äÎªÖ§Åäµã.
- //ÊµÏÖ·½·¨: ÔÚNeeded[u]¾ø¶ÔÖµ×î´óµÄ¶à¸ö½ÚµãuÖĞÓÅÏÈÑ¡È¡Coverage[...]×îĞ¡ Öµ(´ËÊ±Æ½¾ùÃ¿¸öÎ´Âú×ãµãµÄ²»Âú×ã¶ÈºÜ´ó)µÄÄÇ¸ö·ÇÖ§Åä½Úµãu(DSList[u]=0)±äÎªÖ§Åäµã.
+{//è¯¥ç®—æ³•å®é™…ä¸Šæ˜¯æ–‡çŒ®ä¸­ä¸¤ä¸ªè´ªå¿ƒç®—æ³•ç­–ç•¥çš„ä¸€ç§ç»“åˆçš„åº”ç”¨.
+ //ç­–ç•¥2: ä¼˜å…ˆé€‰æ‹©èƒ½æå‡å…¶é‚»ç‚¹ä¸æ»¡è¶³ç¨‹åº¦å’Œç»å¯¹å€¼æœ€å¤§(å³è¢«éœ€è¦ç¨‹åº¦æœ€å¤§)çš„ä¸€ä¸ªéæ”¯é…ç‚¹uå˜ä¸ºæ”¯é…ç‚¹.
+ //å®ç°æ–¹æ³•: ä¼˜å…ˆé€‰å–Needed[u]å€¼æœ€å°(å³ç»å¯¹å€¼æœ€å¤§)çš„é‚£ä¸ªéæ”¯é…èŠ‚ç‚¹u(DSList[u]=0)å˜ä¸ºæ”¯é…ç‚¹.
+ //ç­–ç•¥1: å¦‚æœæœ‰å¤šä¸ªè¢«éœ€è¦ç¨‹åº¦æœ€å¤§çš„èŠ‚ç‚¹æ—¶, åˆ™ä¼˜å…ˆé€‰æ‹©èƒ½æå‡æœ€å°ä¸ªæœªæ»¡è¶³ç‚¹çš„æ»¡è¶³åº¦(å³è¦†ç›–é¢æœ€ å°)çš„ä¸€ä¸ªéæ”¯é…ç‚¹uå˜ä¸ºæ”¯é…ç‚¹.
+ //å®ç°æ–¹æ³•: åœ¨Needed[u]ç»å¯¹å€¼æœ€å¤§çš„å¤šä¸ªèŠ‚ç‚¹uä¸­ä¼˜å…ˆé€‰å–Coverage[...]æœ€å° å€¼(æ­¤æ—¶å¹³å‡æ¯ä¸ªæœªæ»¡è¶³ç‚¹çš„ä¸æ»¡è¶³åº¦å¾ˆå¤§)çš„é‚£ä¸ªéæ”¯é…èŠ‚ç‚¹u(DSList[u]=0)å˜ä¸ºæ”¯é…ç‚¹.
 
 	int i,j,k,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                         //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2;   //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
-		Coverage[i]=DegreeList[i];           //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄÁÚÓòÄÚ°üº¬ÓĞµÄÎ´Âú×ãµÄµã¸öÊı--¼´¼ÇÂ¼Ã¿¸ö·ÇÖ§ÅäµãµÄ¸²¸ÇÃæ
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                         //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2;   //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
+		Coverage[i]=DegreeList[i];           //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„é‚»åŸŸå†…åŒ…å«æœ‰çš„æœªæ»¡è¶³çš„ç‚¹ä¸ªæ•°--å³è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹çš„è¦†ç›–é¢
 	}
 
     for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		Needed[i]=0;                 //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄËùÓĞÎ´Âú×ãÁÚµãµÄÎ´Âú×ã¶ÈÖ®ºÍ(Îª¸ºÊı,Æä¾ø¶ÔÖµ±íÊ¾¸Ã·ÇÖ§Åäµã±»ĞèÒªµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		Needed[i]=0;                 //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„æ‰€æœ‰æœªæ»¡è¶³é‚»ç‚¹çš„æœªæ»¡è¶³åº¦ä¹‹å’Œ(ä¸ºè´Ÿæ•°,å…¶ç»å¯¹å€¼è¡¨ç¤ºè¯¥éæ”¯é…ç‚¹è¢«éœ€è¦çš„ç¨‹åº¦)
 		for(j=1;j<=gvertexnum;j++)
            if(GAdjMatrix[i][j])
 			   Needed[i]+=Satisfied[j];
 
 	}
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
 
-	//Ô¤´¦Àí(ÂÔ): ËùÓĞµã¶È1µÄµãÁÚµã±Ø¶¨Ñ¡×÷Ö§Åäµã(Ä³Ğ©¶ÈÎª1¿ÉÄÜÒ²Òª±»Ñ¡×÷Ö§Åäµã,±ÈÈçÒ»¸öµãÓë¶à¸ö¶È1µÄµãÏàÁÚÊ±)
-	//¸Ä½øµÄÌ°ĞÄ½üËÆËã·¨
+	//é¢„å¤„ç†(ç•¥): æ‰€æœ‰ç‚¹åº¦1çš„ç‚¹é‚»ç‚¹å¿…å®šé€‰ä½œæ”¯é…ç‚¹(æŸäº›åº¦ä¸º1å¯èƒ½ä¹Ÿè¦è¢«é€‰ä½œæ”¯é…ç‚¹,æ¯”å¦‚ä¸€ä¸ªç‚¹ä¸å¤šä¸ªåº¦1çš„ç‚¹ç›¸é‚»æ—¶)
+	//æ”¹è¿›çš„è´ªå¿ƒè¿‘ä¼¼ç®—æ³•
 	int mincoverage, minneeded, bestvertex;
 	int uncoverednum;
-	uncoverednum=gvertexnum;   //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Ã»ÓĞ±»Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;   //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æ²¡æœ‰è¢«æ»¡è¶³ç‚¹çš„ä¸ªæ•°
 
-	while(uncoverednum)        //Èç¹û»¹ÓĞÃ»ÓĞ±»Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	while(uncoverednum)        //å¦‚æœè¿˜æœ‰æ²¡æœ‰è¢«æ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 	{
-		mincoverage=gvertexnum;  //³õÊ¼»¯.ÓÃÓÚÌ°ĞÄ²ßÂÔ1
-		minneeded=0;             //³õÊ¼»¯.ÓÃÓÚÌ°ĞÄ²ßÂÔ2
+		mincoverage=gvertexnum;  //åˆå§‹åŒ–.ç”¨äºè´ªå¿ƒç­–ç•¥1
+		minneeded=0;             //åˆå§‹åŒ–.ç”¨äºè´ªå¿ƒç­–ç•¥2
 		for(i=1;i<=gvertexnum;i++)
-		{	if(DSList[i]==0)   //ËùÓĞ·ÇÖ§Åäµã¶¼¿ÉÄÜÒªÑ¡È¡(°üÀ¨Ä³Ğ©¶ÈÎª1µÄµã¿ÉÄÜĞëÑ¡×÷Ö§Åäµã)
+		{	if(DSList[i]==0)   //æ‰€æœ‰éæ”¯é…ç‚¹éƒ½å¯èƒ½è¦é€‰å–(åŒ…æ‹¬æŸäº›åº¦ä¸º1çš„ç‚¹å¯èƒ½é¡»é€‰ä½œæ”¯é…ç‚¹)
 			{
-				if(minneeded>Needed[i])  //Ì°ĞÄ²ßÂÔ2: ÓÅÏÈÑ¡Ôñ±»ĞèÒª³Ì¶È×î´ó(¼´Needed[u]×îĞ¡µÄu)µÄ·ÇÖ§ÅäµãÎªĞÂµÄÖ§Åäµã
+				if(minneeded>Needed[i])  //è´ªå¿ƒç­–ç•¥2: ä¼˜å…ˆé€‰æ‹©è¢«éœ€è¦ç¨‹åº¦æœ€å¤§(å³Needed[u]æœ€å°çš„u)çš„éæ”¯é…ç‚¹ä¸ºæ–°çš„æ”¯é…ç‚¹
 				{
 					minneeded=Needed[i];
 					bestvertex=i;
 				}
 				else if(Needed[i]==minneeded && Needed[i]<0 && Coverage[i]<mincoverage)
-				{//Ì°ĞÄ²ßÂÔ1: ±»ĞèÒª³Ì¶ÈÍ¬Ñù×î´óµÄÇé¿öÏÂÔòÓÅÏÈÑ¡Ôñ¸²¸ÇÃæ´óµÄÒ»¸ö·ÇÖ§ÅäµãÎªĞÂµÄÖ§Åäµã
+				{//è´ªå¿ƒç­–ç•¥1: è¢«éœ€è¦ç¨‹åº¦åŒæ ·æœ€å¤§çš„æƒ…å†µä¸‹åˆ™ä¼˜å…ˆé€‰æ‹©è¦†ç›–é¢å¤§çš„ä¸€ä¸ªéæ”¯é…ç‚¹ä¸ºæ–°çš„æ”¯é…ç‚¹
 					mincoverage=Coverage[i];
 					bestvertex=i;
 				}
 			}
 		}
-        if(minneeded==0)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÃ»ÓĞÂú×ãµÄµãµÄ±»Ö§Åä³Ì¶È. ¿ÉÒÔÖ¤Ã÷ÕâÖÖÇé¿öÓ¦¸Ã²»»á·¢Éú
+        if(minneeded==0)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æ²¡æœ‰æ»¡è¶³çš„ç‚¹çš„è¢«æ”¯é…ç¨‹åº¦. å¯ä»¥è¯æ˜è¿™ç§æƒ…å†µåº”è¯¥ä¸ä¼šå‘ç”Ÿ
 		{
 			printf("No solution to the instance!\n");
 			return 0;
 		}
-		DSList[bestvertex]=1;          //¼ÓÈëĞÂµÄÖ§Åäµã
-		dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-		for(j=1;j<=gvertexnum;j++)     //¸üĞÂ¸÷ÁÚµãÎ´Âú×ã³Ì¶È
+		DSList[bestvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+		dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+		for(j=1;j<=gvertexnum;j++)     //æ›´æ–°å„é‚»ç‚¹æœªæ»¡è¶³ç¨‹åº¦
 			if(GAdjMatrix[bestvertex][j])
 			{    Satisfied[j]++;
-				 if(Satisfied[j]<=0)   //Ö»ÓĞ¶ÔÖ®Ç°µÄÎ´Âú×ãµÄÁÚµã(¸Õ¸Õ»ñµÃÂú×ãµÄµãÖ®Ç°Ò²ÊÇÎ´Âú×ãµã)²ÅÓĞ±ØÒª¸üĞÂÏà¹ØĞÅÏ¢
-				 {	 for(k=1;k<=gvertexnum;k++)               //¸üĞÂÏà¹ØµãµÄÁÚµãµÄ²»Âú×ãÖ®ºÍNeeded[.]**************
-    					if(GAdjMatrix[j][k] && DSList[k]==0)  //ÁÚµãÊÇ·ÇÖ§ÅäµãÊ±²ÅÓĞ±ØÒª¸üĞÂ*************
-								Needed[k]++;                  //×¢£ºÖµÎª¸º£¬Æä¾ø¶ÔÖµ±íÊ¾±»ĞèÒªµÄ³Ì¶È*************
+				 if(Satisfied[j]<=0)   //åªæœ‰å¯¹ä¹‹å‰çš„æœªæ»¡è¶³çš„é‚»ç‚¹(åˆšåˆšè·å¾—æ»¡è¶³çš„ç‚¹ä¹‹å‰ä¹Ÿæ˜¯æœªæ»¡è¶³ç‚¹)æ‰æœ‰å¿…è¦æ›´æ–°ç›¸å…³ä¿¡æ¯
+				 {	 for(k=1;k<=gvertexnum;k++)               //æ›´æ–°ç›¸å…³ç‚¹çš„é‚»ç‚¹çš„ä¸æ»¡è¶³ä¹‹å’ŒNeeded[.]**************
+    					if(GAdjMatrix[j][k] && DSList[k]==0)  //é‚»ç‚¹æ˜¯éæ”¯é…ç‚¹æ—¶æ‰æœ‰å¿…è¦æ›´æ–°*************
+								Needed[k]++;                  //æ³¨ï¼šå€¼ä¸ºè´Ÿï¼Œå…¶ç»å¯¹å€¼è¡¨ç¤ºè¢«éœ€è¦çš„ç¨‹åº¦*************
 				 }
-			     if(Satisfied[j]==0) //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÂú×ãµÄµãÀà
+			     if(Satisfied[j]==0) //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºæ»¡è¶³çš„ç‚¹ç±»
 				 {	 uncoverednum--;
-					 for(k=1;k<=gvertexnum;k++)               //¸üĞÂÏà¹ØµãµÄ¸²¸ÇÃæCoverage[.]**************
+					 for(k=1;k<=gvertexnum;k++)               //æ›´æ–°ç›¸å…³ç‚¹çš„è¦†ç›–é¢Coverage[.]**************
 						if(GAdjMatrix[j][k] && DSList[k]==0)  //*************
 							Coverage[k]--;                    //*************
 				 }
 			}
 	}
 
-   //***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+   //***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with NewGreedy3_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-    printf("\nNewGreedy3_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
-    //ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+    printf("\nNewGreedy3_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
+    //ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with NewGreedy3_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nNewGreedy3_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nNewGreedy3_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
 
-//***ĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄ·½·¨1***
+//***æ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•1***
 int LocalGreedy1_PIDS(void)
-{//²ßÂÔ: Ã¿´ÎÑ¡ÔñÒ»¸ö×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞ·´¸´Ê¹ÓÃ²ßÂÔ1Ö±µ½uÂú×ãÎªÖ¹.
- //×î²»Âú×ãµãuÊÇSatisfied[.]ÖµÎª¸ºÇÒ¾ø¶ÔÖµ×î´óµÄµã.ÔÚµãuµÄÁÚÓòÖĞÓÅÏÈÒÀ´ÎÑ¡Ôñ¸²¸ÇÃæ×î´óµÄÈô¸É·ÇÖ§Åäµã±äÎªÖ§Åäµã(¼´ÓÅÏÈÑ¡ÔñCoverage[.]Öµ´óÇÒÓëuÏàÁÚµÄ·ÇÖ§Åäµã),Ö±µ½µãuÂú×ãÎªÖ¹.
+{//ç­–ç•¥: æ¯æ¬¡é€‰æ‹©ä¸€ä¸ªæœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­åå¤ä½¿ç”¨ç­–ç•¥1ç›´åˆ°uæ»¡è¶³ä¸ºæ­¢.
+ //æœ€ä¸æ»¡è¶³ç‚¹uæ˜¯Satisfied[.]å€¼ä¸ºè´Ÿä¸”ç»å¯¹å€¼æœ€å¤§çš„ç‚¹.åœ¨ç‚¹uçš„é‚»åŸŸä¸­ä¼˜å…ˆä¾æ¬¡é€‰æ‹©è¦†ç›–é¢æœ€å¤§çš„è‹¥å¹²éæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹(å³ä¼˜å…ˆé€‰æ‹©Coverage[.]å€¼å¤§ä¸”ä¸uç›¸é‚»çš„éæ”¯é…ç‚¹),ç›´åˆ°ç‚¹uæ»¡è¶³ä¸ºæ­¢.
 
 	int i,j,k,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                       //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2; //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
-		Coverage[i]=DegreeList[i];         //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄÁÚÓòÄÚ°üº¬ÓĞµÄÎ´Âú×ãµÄµã¸öÊı--¼´¼ÇÂ¼Ã¿¸ö·ÇÖ§ÅäµãµÄ¸²¸ÇÃæ
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                       //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2; //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
+		Coverage[i]=DegreeList[i];         //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„é‚»åŸŸå†…åŒ…å«æœ‰çš„æœªæ»¡è¶³çš„ç‚¹ä¸ªæ•°--å³è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹çš„è¦†ç›–é¢
 	}
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
-	//¾Ö²¿Ì°ĞÄËã·¨
+	//å±€éƒ¨è´ªå¿ƒç®—æ³•
 	int uncoverednum;
 	int currentvertex, minsatisfied, maxcoverage, maxcvertex;
 
-	uncoverednum=gvertexnum;   //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Î´Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;   //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æœªæ»¡è¶³ç‚¹çš„ä¸ªæ•°
 	while(uncoverednum)
-	{//Èç¹ûuncoverednum>0, ¼´»¹ÓĞÎ´Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	{//å¦‚æœuncoverednum>0, å³è¿˜æœ‰æœªæ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 
-        minsatisfied=0;        //ÓÃÓÚÕÒ³öÂú×ã³Ì¶È×îĞ¡µÄ½Úµã(¼´Satisfied[]ÖµÎª¸ºÇÒÖµ×îĞ¡µÄµã,Æä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ã³Ì¶ÈµÄ×î´ó)
+        minsatisfied=0;        //ç”¨äºæ‰¾å‡ºæ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹(å³Satisfied[]å€¼ä¸ºè´Ÿä¸”å€¼æœ€å°çš„ç‚¹,å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³ç¨‹åº¦çš„æœ€å¤§)
 		currentvertex=0;
-		for(i=1;i<=gvertexnum;i++)   //Ñ°ÕÒµ±Ç°Âú×ã³Ì¶È×îĞ¡µÄ½Úµã´¦Àí(Èç¹û¼òµ¥µã´¦Àí,Ò²¿ÉÒÔ°´µã¶È×î´óµÄÎ´Âú×ã½ÚµãÓÅÏÈ´úÌæ)
+		for(i=1;i<=gvertexnum;i++)   //å¯»æ‰¾å½“å‰æ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹å¤„ç†(å¦‚æœç®€å•ç‚¹å¤„ç†,ä¹Ÿå¯ä»¥æŒ‰ç‚¹åº¦æœ€å¤§çš„æœªæ»¡è¶³èŠ‚ç‚¹ä¼˜å…ˆä»£æ›¿)
 		    if(Satisfied[i]<minsatisfied)
 			{
 		    	minsatisfied=Satisfied[i];
@@ -764,38 +905,38 @@ int LocalGreedy1_PIDS(void)
 
 		if(currentvertex==0) break;
 
-        //******¾Ö²¿Ì°ĞÄ²ßÂÔ:Ò»´ÎĞÔ½«µ±Ç°Î´Âú×ãµÄ½Úµãcurrentvertex±äÎªÂú×ã½Úµã(ÒÀ´Î½«ÆäÁÚÓòÖĞ¸²¸ÇÃæ×î´óµÄÈô¸É·ÇÖ§Åäµã±äÎªÖ§Åäµã)
-		while(Satisfied[currentvertex]<0) //Satisfied[currentvertex]<0±íÊ¾currentvertexÊÇÎ´Âú×ãµã
+        //******å±€éƒ¨è´ªå¿ƒç­–ç•¥:ä¸€æ¬¡æ€§å°†å½“å‰æœªæ»¡è¶³çš„èŠ‚ç‚¹currentvertexå˜ä¸ºæ»¡è¶³èŠ‚ç‚¹(ä¾æ¬¡å°†å…¶é‚»åŸŸä¸­è¦†ç›–é¢æœ€å¤§çš„è‹¥å¹²éæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹)
+		while(Satisfied[currentvertex]<0) //Satisfied[currentvertex]<0è¡¨ç¤ºcurrentvertexæ˜¯æœªæ»¡è¶³ç‚¹
 		{
-			maxcoverage=0;   //ÓÃÓÚÕÒ³öÄÜ¸²¸ÇÎ´Âú×ã½Úµã×î¶àµÄÒ»¸ö·ÇÖ§Åäµã(currentvertexµÄÁÚµã)
+			maxcoverage=0;   //ç”¨äºæ‰¾å‡ºèƒ½è¦†ç›–æœªæ»¡è¶³èŠ‚ç‚¹æœ€å¤šçš„ä¸€ä¸ªéæ”¯é…ç‚¹(currentvertexçš„é‚»ç‚¹)
 
-			//¿ÉÒÔÈ¡ÏûÏÂÃæ¼¸ĞĞ±ê¼ÇÎª  //**µÄ´úÂë(Èç¹ûÊµÑé·¢ÏÖ²»¿¼ÂÇµ±Ç°µãÒ²¿É±äÎªÖ§ÅäµãÊ±Ğ§¹û¸üºÃµÄ»°)
-			//if(DSList[currentvertex]==0 && Coverage[currentvertex]>maxcoverage)  //** Èç¹ûµ±Ç°Î´Âú×ã½ÚµãcurrentvertexÊÇ·ÇÖ§ÅäµãÊ±,Ò²¿¼ÂÇËü¿É±äÎªÖ§Åäµã
+			//å¯ä»¥å–æ¶ˆä¸‹é¢å‡ è¡Œæ ‡è®°ä¸º  //**çš„ä»£ç (å¦‚æœå®éªŒå‘ç°ä¸è€ƒè™‘å½“å‰ç‚¹ä¹Ÿå¯å˜ä¸ºæ”¯é…ç‚¹æ—¶æ•ˆæœæ›´å¥½çš„è¯)
+			//if(DSList[currentvertex]==0 && Coverage[currentvertex]>maxcoverage)  //** å¦‚æœå½“å‰æœªæ»¡è¶³èŠ‚ç‚¹currentvertexæ˜¯éæ”¯é…ç‚¹æ—¶,ä¹Ÿè€ƒè™‘å®ƒå¯å˜ä¸ºæ”¯é…ç‚¹
 			//{	maxcoverage=Coverage[currentvertex];  //*
 			//	maxcvertex=currentvertex;      //*
 			//}
 
 			for(i=1;i<=gvertexnum;i++)
 			{
-				if(GAdjMatrix[currentvertex][i] && DSList[i]==0 && Coverage[i]>maxcoverage)  //¾Ö²¿Ì°ĞÄµØÑ¡ÔñÒ»¸öÁÚµã(·ÇÖ§Åäµã)
+				if(GAdjMatrix[currentvertex][i] && DSList[i]==0 && Coverage[i]>maxcoverage)  //å±€éƒ¨è´ªå¿ƒåœ°é€‰æ‹©ä¸€ä¸ªé‚»ç‚¹(éæ”¯é…ç‚¹)
 				{   	maxcoverage=Coverage[i];
 						maxcvertex=i;
 				}
 			}
-		    if(maxcoverage==0)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎÁÚµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÎ´Âú×ãµÄµãµÄÂú×ã³Ì¶È. ¿ÉÒÔÖ¤Ã÷ÕâÖÖÇé¿öÔÚ²»º¬¹ÂÁ¢µãµÄÍ¼ÖĞ²»»á·¢Éú
+		    if(maxcoverage==0)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•é‚»ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æœªæ»¡è¶³çš„ç‚¹çš„æ»¡è¶³ç¨‹åº¦. å¯ä»¥è¯æ˜è¿™ç§æƒ…å†µåœ¨ä¸å«å­¤ç«‹ç‚¹çš„å›¾ä¸­ä¸ä¼šå‘ç”Ÿ
 			{
 				printf("No solution to the instance!\n");
 				return 0;
 			}
 
-			DSList[maxcvertex]=1;          //¼ÓÈëĞÂµÄÖ§Åäµã
-			dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-			for(j=1;j<=gvertexnum;j++)     //¸üĞÂÏà¹ØµãµÄÎ´Âú×ã³Ì¶ÈSatisfied[.]
+			DSList[maxcvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+			dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+			for(j=1;j<=gvertexnum;j++)     //æ›´æ–°ç›¸å…³ç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦Satisfied[.]
 				if(GAdjMatrix[maxcvertex][j])
 				{   Satisfied[j]++;
-					if(Satisfied[j]==0)    //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÂú×ãµÄµãÀà
+					if(Satisfied[j]==0)    //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºæ»¡è¶³çš„ç‚¹ç±»
 					{	uncoverednum--;
-					    for(k=1;k<=gvertexnum;k++)               //¸üĞÂÏà¹ØµãµÄ¸²¸ÇÃæCoverage[.]**************
+					    for(k=1;k<=gvertexnum;k++)               //æ›´æ–°ç›¸å…³ç‚¹çš„è¦†ç›–é¢Coverage[.]**************
 							if(GAdjMatrix[j][k] && DSList[k]==0)
 								Coverage[k]--;
 					}
@@ -804,62 +945,62 @@ int LocalGreedy1_PIDS(void)
 	}
 
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with LocalGreedy1_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nLocalGreedy1_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
-	//ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+	printf("\nLocalGreedy1_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
+	//ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with LocaGreedy1_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nLocalGreedy1_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nLocalGreedy1_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
 
-//***ĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄ·½·¨2***
+//***æ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•2***
 int LocalGreedy2_PIDS(void)
-{//²ßÂÔ: Ã¿´ÎÑ¡ÔñÒ»¸ö×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞ·´¸´Ê¹ÓÃ²ßÂÔ2Ö±µ½uÂú×ãÎªÖ¹.
- //×î²»Âú×ãµãuÊÇSatisfied[.]ÖµÎª¸ºÇÒ¾ø¶ÔÖµ×î´óµÄµã.ÔÚµãuµÄÁÚÓòÖĞÓÅÏÈÒÀ´ÎÑ¡Ôñ±»ĞèÒª³Ì¶È×î´óµÄÈô¸É·ÇÖ§Åäµã±äÎªÖ§Åäµã(¼´ÓÅÏÈÑ¡ÔñNeeded[.]¾ø¶ÔÖµ´óÇÒÓëuÏàÁÚµÄ·ÇÖ§Åäµã),Ö±µ½µãuÂú×ãÎªÖ¹.
+{//ç­–ç•¥: æ¯æ¬¡é€‰æ‹©ä¸€ä¸ªæœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­åå¤ä½¿ç”¨ç­–ç•¥2ç›´åˆ°uæ»¡è¶³ä¸ºæ­¢.
+ //æœ€ä¸æ»¡è¶³ç‚¹uæ˜¯Satisfied[.]å€¼ä¸ºè´Ÿä¸”ç»å¯¹å€¼æœ€å¤§çš„ç‚¹.åœ¨ç‚¹uçš„é‚»åŸŸä¸­ä¼˜å…ˆä¾æ¬¡é€‰æ‹©è¢«éœ€è¦ç¨‹åº¦æœ€å¤§çš„è‹¥å¹²éæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹(å³ä¼˜å…ˆé€‰æ‹©Needed[.]ç»å¯¹å€¼å¤§ä¸”ä¸uç›¸é‚»çš„éæ”¯é…ç‚¹),ç›´åˆ°ç‚¹uæ»¡è¶³ä¸ºæ­¢.
 
 	int i,j,k,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                       //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2; //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                       //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2; //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
 	}
     for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		Needed[i]=0;         //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄËùÓĞÎ´Âú×ãÁÚµãµÄÎ´Âú×ã¶ÈÖ®ºÍ(Îª¸ºÊı,Æä¾ø¶ÔÖµ±íÊ¾¸Ã·ÇÖ§Åäµã±»ĞèÒªµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		Needed[i]=0;         //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„æ‰€æœ‰æœªæ»¡è¶³é‚»ç‚¹çš„æœªæ»¡è¶³åº¦ä¹‹å’Œ(ä¸ºè´Ÿæ•°,å…¶ç»å¯¹å€¼è¡¨ç¤ºè¯¥éæ”¯é…ç‚¹è¢«éœ€è¦çš„ç¨‹åº¦)
 		for(j=1;j<=gvertexnum;j++)
            if(GAdjMatrix[i][j])
 			   Needed[i]+=Satisfied[j];
 
 	}
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
-	//¾Ö²¿Ì°ĞÄËã·¨
+	//å±€éƒ¨è´ªå¿ƒç®—æ³•
 	int uncoverednum;
 	int currentvertex, minsatisfied, minneeded, minneededvertex;
 
-	uncoverednum=gvertexnum;         //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Î´Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;         //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æœªæ»¡è¶³ç‚¹çš„ä¸ªæ•°
 	while(uncoverednum)
-	{//Èç¹ûuncoverednum>0, ¼´»¹ÓĞÎ´Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	{//å¦‚æœuncoverednum>0, å³è¿˜æœ‰æœªæ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 
-        minsatisfied=0;              //ÓÃÓÚÕÒ³öÂú×ã³Ì¶È×îĞ¡µÄ½Úµã(¼´Satisfied[]ÖµÎª¸ºÇÒÖµ×îĞ¡µÄµã,Æä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ã³Ì¶ÈµÄ×î´ó)
+        minsatisfied=0;              //ç”¨äºæ‰¾å‡ºæ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹(å³Satisfied[]å€¼ä¸ºè´Ÿä¸”å€¼æœ€å°çš„ç‚¹,å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³ç¨‹åº¦çš„æœ€å¤§)
 		currentvertex=0;
-		for(i=1;i<=gvertexnum;i++)   //Ñ°ÕÒµ±Ç°Âú×ã³Ì¶È×îĞ¡µÄ½Úµã´¦Àí(Èç¹û¼òµ¥µã´¦Àí,Ò²¿ÉÒÔ°´µã¶È×î´óµÄÎ´Âú×ã½ÚµãÓÅÏÈ´úÌæ)
+		for(i=1;i<=gvertexnum;i++)   //å¯»æ‰¾å½“å‰æ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹å¤„ç†(å¦‚æœç®€å•ç‚¹å¤„ç†,ä¹Ÿå¯ä»¥æŒ‰ç‚¹åº¦æœ€å¤§çš„æœªæ»¡è¶³èŠ‚ç‚¹ä¼˜å…ˆä»£æ›¿)
 		    if(Satisfied[i]<minsatisfied)
 			{
 		    	minsatisfied=Satisfied[i];
@@ -868,95 +1009,95 @@ int LocalGreedy2_PIDS(void)
 
 		if(currentvertex==0) break;
 
-        //******¾Ö²¿Ì°ĞÄ·¨²ßÂÔ:Ò»´ÎĞÔ½«µ±Ç°Î´Âú×ãµÄ½Úµãcurrentvertex±äÎªÂú×ã½Úµã(ÒÀ´Î½«ÆäÁÚÓòÖĞ±»ĞèÒª³Ì¶È×î´óµÄÈô¸É·ÇÖ§Åäµã±äÎªÖ§Åäµã)
-		while(Satisfied[currentvertex]<0) //Satisfied[currentvertex]<0±íÊ¾currentvertexÊÇÎ´Âú×ãµã
+        //******å±€éƒ¨è´ªå¿ƒæ³•ç­–ç•¥:ä¸€æ¬¡æ€§å°†å½“å‰æœªæ»¡è¶³çš„èŠ‚ç‚¹currentvertexå˜ä¸ºæ»¡è¶³èŠ‚ç‚¹(ä¾æ¬¡å°†å…¶é‚»åŸŸä¸­è¢«éœ€è¦ç¨‹åº¦æœ€å¤§çš„è‹¥å¹²éæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹)
+		while(Satisfied[currentvertex]<0) //Satisfied[currentvertex]<0è¡¨ç¤ºcurrentvertexæ˜¯æœªæ»¡è¶³ç‚¹
 		{
-			minneeded=0;   //ÓÃÓÚÕÒ³ö±»ĞèÒª³Ì¶È×î´ó(¼´Needed[]ÖµÎª¸ºÇÒ¾ø¶ÔÖµ×î´ó)µÄÒ»¸ö·ÇÖ§Åäµã(currentvertexµÄÁÚµã)
+			minneeded=0;   //ç”¨äºæ‰¾å‡ºè¢«éœ€è¦ç¨‹åº¦æœ€å¤§(å³Needed[]å€¼ä¸ºè´Ÿä¸”ç»å¯¹å€¼æœ€å¤§)çš„ä¸€ä¸ªéæ”¯é…ç‚¹(currentvertexçš„é‚»ç‚¹)
 
-			//¿ÉÒÔÈ¡ÏûÏÂÃæ¼¸ĞĞ±ê¼ÇÎª  //**µÄ´úÂë(Èç¹ûÊµÑé·¢ÏÖ²»¿¼ÂÇµ±Ç°µãÒ²¿É±äÎªÖ§ÅäµãÊ±Ğ§¹û¸üºÃµÄ»°)
-			//if(DSList[currentvertex]==0 && Needed[currentvertex]<minneeded)  //** Èç¹ûµ±Ç°Î´Âú×ã½ÚµãcurrentvertexÊÇ·ÇÖ§ÅäµãÊ±,Ò²¿¼ÂÇËü¿É±äÎªÖ§Åäµã
+			//å¯ä»¥å–æ¶ˆä¸‹é¢å‡ è¡Œæ ‡è®°ä¸º  //**çš„ä»£ç (å¦‚æœå®éªŒå‘ç°ä¸è€ƒè™‘å½“å‰ç‚¹ä¹Ÿå¯å˜ä¸ºæ”¯é…ç‚¹æ—¶æ•ˆæœæ›´å¥½çš„è¯)
+			//if(DSList[currentvertex]==0 && Needed[currentvertex]<minneeded)  //** å¦‚æœå½“å‰æœªæ»¡è¶³èŠ‚ç‚¹currentvertexæ˜¯éæ”¯é…ç‚¹æ—¶,ä¹Ÿè€ƒè™‘å®ƒå¯å˜ä¸ºæ”¯é…ç‚¹
 			//{	minneeded=Needed[currentvertex];  //*
 			//	minneededvertex=currentvertex;      //*
 			//}
 
 			for(i=1;i<=gvertexnum;i++)
 			{
-				if(GAdjMatrix[currentvertex][i] && DSList[i]==0 && Needed[i]<minneeded)  //¾Ö²¿Ì°ĞÄµØÑ¡ÔñÒ»¸öÁÚµã(·ÇÖ§Åäµã)
+				if(GAdjMatrix[currentvertex][i] && DSList[i]==0 && Needed[i]<minneeded)  //å±€éƒ¨è´ªå¿ƒåœ°é€‰æ‹©ä¸€ä¸ªé‚»ç‚¹(éæ”¯é…ç‚¹)
 				{   	minneeded=Needed[i];
 						minneededvertex=i;
 				}
 			}
-		    if(minneeded==0)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎÁÚµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÎ´Âú×ãµÄµãµÄÂú×ã³Ì¶È. ¿ÉÒÔÖ¤Ã÷ÕâÖÖÇé¿öÔÚ²»º¬¹ÂÁ¢µãµÄÍ¼ÖĞ²»»á·¢Éú
+		    if(minneeded==0)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•é‚»ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æœªæ»¡è¶³çš„ç‚¹çš„æ»¡è¶³ç¨‹åº¦. å¯ä»¥è¯æ˜è¿™ç§æƒ…å†µåœ¨ä¸å«å­¤ç«‹ç‚¹çš„å›¾ä¸­ä¸ä¼šå‘ç”Ÿ
 			{
 				printf("No solution to the instance!\n");
 				return 0;
 			}
 
-			DSList[minneededvertex]=1;          //¼ÓÈëĞÂµÄÖ§Åäµã
-			dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-			for(j=1;j<=gvertexnum;j++)     //¸üĞÂÏà¹ØµãµÄÎ´Âú×ã³Ì¶ÈSatisfied[.]
+			DSList[minneededvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+			dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+			for(j=1;j<=gvertexnum;j++)     //æ›´æ–°ç›¸å…³ç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦Satisfied[.]
 				if(GAdjMatrix[minneededvertex][j])
 				{    Satisfied[j]++;
-  					if(Satisfied[j]<=0)   //Ö»ÓĞ¶ÔÖ®Ç°µÄÎ´Âú×ãµÄÁÚµã(¸Õ¸Õ»ñµÃÂú×ãµÄµãÖ®Ç°Ò²ÊÇÎ´Âú×ãµã)²ÅÓĞ±ØÒª¸üĞÂÏà¹ØĞÅÏ¢
-					{	for(k=1;k<=gvertexnum;k++)                //¸üĞÂÏà¹ØµãµÄÁÚµãµÄ²»Âú×ãÖ®ºÍNeeded[]
-    						if(GAdjMatrix[j][k] && DSList[k]==0)  //ÁÚµãÊÇ·ÇÖ§ÅäµãÊ±²ÅÓĞ±ØÒª¸üĞÂ
-								Needed[k]++;                      //×¢: ÖµÎª¸º,Æä¾ø¶ÔÖµ±íÊ¾±»ĞèÒªµÄ³Ì¶È
+  					if(Satisfied[j]<=0)   //åªæœ‰å¯¹ä¹‹å‰çš„æœªæ»¡è¶³çš„é‚»ç‚¹(åˆšåˆšè·å¾—æ»¡è¶³çš„ç‚¹ä¹‹å‰ä¹Ÿæ˜¯æœªæ»¡è¶³ç‚¹)æ‰æœ‰å¿…è¦æ›´æ–°ç›¸å…³ä¿¡æ¯
+					{	for(k=1;k<=gvertexnum;k++)                //æ›´æ–°ç›¸å…³ç‚¹çš„é‚»ç‚¹çš„ä¸æ»¡è¶³ä¹‹å’ŒNeeded[]
+    						if(GAdjMatrix[j][k] && DSList[k]==0)  //é‚»ç‚¹æ˜¯éæ”¯é…ç‚¹æ—¶æ‰æœ‰å¿…è¦æ›´æ–°
+								Needed[k]++;                      //æ³¨: å€¼ä¸ºè´Ÿ,å…¶ç»å¯¹å€¼è¡¨ç¤ºè¢«éœ€è¦çš„ç¨‹åº¦
 					}
-					if(Satisfied[j]==0)                           //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÒÑÂú×ãµÄµãÀà
+					if(Satisfied[j]==0)                           //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºå·²æ»¡è¶³çš„ç‚¹ç±»
 						 uncoverednum--;
 				}
 		}
 	}
 
-    //***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+    //***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with LocalGreedy2_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nLocalGreedy2_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
+	printf("\nLocalGreedy2_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
 
-    //ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+    //ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with LocaGreedy2_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nLocalGreedy2_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nLocalGreedy2_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
-//***ĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄ·½·¨3(¿ìËÙËã·¨--¸ÃËã·¨Ê±¼ä¸´ÔÓ¶ÈÎªO(n^2),ÆäËûËã·¨Ê±¼ä¸´ÔÓ¶¼ÊÇO(n^3))***
+//***æ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•3(å¿«é€Ÿç®—æ³•--è¯¥ç®—æ³•æ—¶é—´å¤æ‚åº¦ä¸ºO(n^2),å…¶ä»–ç®—æ³•æ—¶é—´å¤æ‚éƒ½æ˜¯O(n^3))***
 int LocalGreedy3_PIDS(void)
-{//²ßÂÔ: Ã¿´ÎÑ¡ÔñÒ»¸ö×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞ·´¸´Ìí¼Óµã¶È´óµÄµã×÷ÎªĞÂµÄÖ§Åäµã,Ö±µ½uÂú×ãÎªÖ¹.
- //×î²»Âú×ãµãuÊÇSatisfied[.]ÖµÎª¸ºÇÒ¾ø¶ÔÖµ×î´óµÄµã.µãuÁÚÓòÖĞÒÀ´ÎÌí¼Óµã¶È´óµÄµã×÷ÎªĞÂµÄÖ§Åäµã(¶ÁÍ¼»ò½¨Í¼Ê±Ô¤´¦ÀíÖĞÍ¼µãĞòÒÑ°´µã¶È½µĞòÅÅÁË,¹Ê×ÔÈ»´ÎĞò¼´¿É),Ö±µ½µãuÂú×ãÎªÖ¹.
+{//ç­–ç•¥: æ¯æ¬¡é€‰æ‹©ä¸€ä¸ªæœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­åå¤æ·»åŠ ç‚¹åº¦å¤§çš„ç‚¹ä½œä¸ºæ–°çš„æ”¯é…ç‚¹,ç›´åˆ°uæ»¡è¶³ä¸ºæ­¢.
+ //æœ€ä¸æ»¡è¶³ç‚¹uæ˜¯Satisfied[.]å€¼ä¸ºè´Ÿä¸”ç»å¯¹å€¼æœ€å¤§çš„ç‚¹.ç‚¹ué‚»åŸŸä¸­ä¾æ¬¡æ·»åŠ ç‚¹åº¦å¤§çš„ç‚¹ä½œä¸ºæ–°çš„æ”¯é…ç‚¹(è¯»å›¾æˆ–å»ºå›¾æ—¶é¢„å¤„ç†ä¸­å›¾ç‚¹åºå·²æŒ‰ç‚¹åº¦é™åºæ’äº†,æ•…è‡ªç„¶æ¬¡åºå³å¯),ç›´åˆ°ç‚¹uæ»¡è¶³ä¸ºæ­¢.
 
 	int i,j,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                       //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2; //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                       //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2; //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
 	}
 
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
-	//¾Ö²¿Ì°ĞÄËã·¨
+	//å±€éƒ¨è´ªå¿ƒç®—æ³•
 	int uncoverednum;
 	int currentvertex, minsatisfied, bestvertex;
 
-	uncoverednum=gvertexnum;         //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Î´Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;         //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æœªæ»¡è¶³ç‚¹çš„ä¸ªæ•°
 	while(uncoverednum)
-	{//Èç¹ûuncoverednum>0, ¼´»¹ÓĞÎ´Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	{//å¦‚æœuncoverednum>0, å³è¿˜æœ‰æœªæ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 
-        minsatisfied=0;              //ÓÃÓÚÕÒ³öÂú×ã³Ì¶È×îĞ¡µÄ½Úµã(¼´Satisfied[]ÖµÎª¸ºÇÒÖµ×îĞ¡µÄµã,Æä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ã³Ì¶ÈµÄ×î´ó)
+        minsatisfied=0;              //ç”¨äºæ‰¾å‡ºæ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹(å³Satisfied[]å€¼ä¸ºè´Ÿä¸”å€¼æœ€å°çš„ç‚¹,å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³ç¨‹åº¦çš„æœ€å¤§)
 		currentvertex=0;
-		for(i=1;i<=gvertexnum;i++)   //Ñ°ÕÒµ±Ç°Âú×ã³Ì¶È×îĞ¡µÄ½Úµã´¦Àí(Èç¹û¼òµ¥µã´¦Àí,Ò²¿ÉÒÔ°´µã¶È×î´óµÄÎ´Âú×ã½ÚµãÓÅÏÈ´úÌæ)
+		for(i=1;i<=gvertexnum;i++)   //å¯»æ‰¾å½“å‰æ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹å¤„ç†(å¦‚æœç®€å•ç‚¹å¤„ç†,ä¹Ÿå¯ä»¥æŒ‰ç‚¹åº¦æœ€å¤§çš„æœªæ»¡è¶³èŠ‚ç‚¹ä¼˜å…ˆä»£æ›¿)
 		    if(Satisfied[i]<minsatisfied)
 			{
 		    	minsatisfied=Satisfied[i];
@@ -965,83 +1106,83 @@ int LocalGreedy3_PIDS(void)
 
 		if(currentvertex==0) break;
 
-        //******¾Ö²¿Ì°ĞÄ²ßÂÔ:Ò»´ÎĞÔ½«µ±Ç°Î´Âú×ãµÄ½Úµãcurrentvertex±äÎªÂú×ã½Úµã(ÒÀ´Î½«ÆäÁÚÓòÖĞµã¶È×î´óµÄÈô¸É·ÇÖ§Åäµã±äÎªÖ§Åäµã)
-		while(Satisfied[currentvertex]<0) //Satisfied[currentvertex]<0±íÊ¾currentvertexÊÇÎ´Âú×ãµã
+        //******å±€éƒ¨è´ªå¿ƒç­–ç•¥:ä¸€æ¬¡æ€§å°†å½“å‰æœªæ»¡è¶³çš„èŠ‚ç‚¹currentvertexå˜ä¸ºæ»¡è¶³èŠ‚ç‚¹(ä¾æ¬¡å°†å…¶é‚»åŸŸä¸­ç‚¹åº¦æœ€å¤§çš„è‹¥å¹²éæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹)
+		while(Satisfied[currentvertex]<0) //Satisfied[currentvertex]<0è¡¨ç¤ºcurrentvertexæ˜¯æœªæ»¡è¶³ç‚¹
 		{
 			for(i=1;i<=gvertexnum;i++)
-				if(GAdjMatrix[currentvertex][i] && DSList[i]==0)  //¾Ö²¿Ì°ĞÄµØÑ¡ÔñÒ»¸öÁÚµã(·ÇÖ§Åäµã)--µã¶È´óÓÅÏÈ(×ÔÈ»´ÎĞò¼´±íÊ¾¶È´óµÄÓÅÏÈ,ÕâÊÇÒòÎªÍ¼µãĞòÒÑ°´µã¶È½µĞòÅÅÁË)
+				if(GAdjMatrix[currentvertex][i] && DSList[i]==0)  //å±€éƒ¨è´ªå¿ƒåœ°é€‰æ‹©ä¸€ä¸ªé‚»ç‚¹(éæ”¯é…ç‚¹)--ç‚¹åº¦å¤§ä¼˜å…ˆ(è‡ªç„¶æ¬¡åºå³è¡¨ç¤ºåº¦å¤§çš„ä¼˜å…ˆ,è¿™æ˜¯å› ä¸ºå›¾ç‚¹åºå·²æŒ‰ç‚¹åº¦é™åºæ’äº†)
 				{		bestvertex=i;
 				        break;
 				}
-		    if(i==gvertexnum+1)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎÁÚµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÎ´Âú×ãµÄµãµÄÂú×ã³Ì¶È. ¿ÉÒÔÖ¤Ã÷ÕâÖÖÇé¿öÔÚ²»º¬¹ÂÁ¢µãµÄÍ¼ÖĞ²»»á·¢Éú
+		    if(i==gvertexnum+1)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•é‚»ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æœªæ»¡è¶³çš„ç‚¹çš„æ»¡è¶³ç¨‹åº¦. å¯ä»¥è¯æ˜è¿™ç§æƒ…å†µåœ¨ä¸å«å­¤ç«‹ç‚¹çš„å›¾ä¸­ä¸ä¼šå‘ç”Ÿ
 			{
 				printf("No solution to the instance!\n");
 				return 0;
 			}
 
-			DSList[bestvertex]=1;          //¼ÓÈëĞÂµÄÖ§Åäµã
-			dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-			for(j=1;j<=gvertexnum;j++)     //¸üĞÂÏà¹ØµãµÄÎ´Âú×ã³Ì¶ÈSatisfied[.]
+			DSList[bestvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+			dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+			for(j=1;j<=gvertexnum;j++)     //æ›´æ–°ç›¸å…³ç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦Satisfied[.]
 				if(GAdjMatrix[bestvertex][j])
 				{    Satisfied[j]++;
-  					 if(Satisfied[j]==0)   //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÒÑÂú×ãµÄµãÀà
+  					 if(Satisfied[j]==0)   //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºå·²æ»¡è¶³çš„ç‚¹ç±»
 						 uncoverednum--;
 				}
 		}
 	}
 
 
-    //***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+    //***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with LocalGreedy3_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nLocalGreedy3_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
+	printf("\nLocalGreedy3_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
 
-    //ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+    //ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with LocaGreedy3_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nLocalGreedy3_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nLocalGreedy3_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
 
 
-//***ĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄ·½·¨1***
+//***æ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•1***
 int NewLocalGreedy1_PIDS(void)
-{//²ßÂÔ: Ã¿´ÎÑ¡Ôñµ±Ç°×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞÊ¹ÓÃ²ßÂÔ1(Ê¹ÓÃ1´Î)
- //×î²»Âú×ãµãuÊÇSatisfied[.]ÖµÎª¸ºÇÒ¾ø¶ÔÖµ×î´óµÄµã.ÔÚµãuµÄÁÚÓòÖĞÑ¡Ôñ¸²¸ÇÃæ×î´ó(¼´Coverage[.]Öµ´óÇÒÓëuÏàÁÚ)µÄÒ»¸ö·ÇÖ§Åäµã±äÎªÖ§Åäµã.
+{//ç­–ç•¥: æ¯æ¬¡é€‰æ‹©å½“å‰æœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­ä½¿ç”¨ç­–ç•¥1(ä½¿ç”¨1æ¬¡)
+ //æœ€ä¸æ»¡è¶³ç‚¹uæ˜¯Satisfied[.]å€¼ä¸ºè´Ÿä¸”ç»å¯¹å€¼æœ€å¤§çš„ç‚¹.åœ¨ç‚¹uçš„é‚»åŸŸä¸­é€‰æ‹©è¦†ç›–é¢æœ€å¤§(å³Coverage[.]å€¼å¤§ä¸”ä¸uç›¸é‚»)çš„ä¸€ä¸ªéæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹.
 
 	int i,j,k,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                       //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2; //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
-		Coverage[i]=DegreeList[i];         //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄÁÚÓòÄÚ°üº¬ÓĞµÄÎ´Âú×ãµÄµã¸öÊı--¼´¼ÇÂ¼Ã¿¸ö·ÇÖ§ÅäµãµÄ¸²¸ÇÃæ
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                       //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2; //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
+		Coverage[i]=DegreeList[i];         //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„é‚»åŸŸå†…åŒ…å«æœ‰çš„æœªæ»¡è¶³çš„ç‚¹ä¸ªæ•°--å³è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹çš„è¦†ç›–é¢
 	}
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
-	//ĞÂµÄ¾Ö²¿Ì°ĞÄËã·¨
+	//æ–°çš„å±€éƒ¨è´ªå¿ƒç®—æ³•
 	int uncoverednum;
 	int currentvertex, minsatisfied, maxcoverage, maxcvertex;
 
-	uncoverednum=gvertexnum;   //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Î´Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;   //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æœªæ»¡è¶³ç‚¹çš„ä¸ªæ•°
 	while(uncoverednum)
-	{//Èç¹ûuncoverednum>0, ¼´»¹ÓĞÎ´Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	{//å¦‚æœuncoverednum>0, å³è¿˜æœ‰æœªæ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 
-        minsatisfied=0;        //ÓÃÓÚÕÒ³öÂú×ã³Ì¶È×îĞ¡µÄ½Úµã(¼´Satisfied[]ÖµÎª¸ºÇÒÖµ×îĞ¡µÄµã,Æä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ã³Ì¶ÈµÄ×î´ó)
+        minsatisfied=0;        //ç”¨äºæ‰¾å‡ºæ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹(å³Satisfied[]å€¼ä¸ºè´Ÿä¸”å€¼æœ€å°çš„ç‚¹,å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³ç¨‹åº¦çš„æœ€å¤§)
 		currentvertex=0;
-		for(i=1;i<=gvertexnum;i++)   //Ñ°ÕÒµ±Ç°Âú×ã³Ì¶È×îĞ¡µÄ½Úµã´¦Àí(Èç¹û¼òµ¥µã´¦Àí,Ò²¿ÉÒÔ°´µã¶È×î´óµÄÎ´Âú×ã½ÚµãÓÅÏÈ´úÌæ)
+		for(i=1;i<=gvertexnum;i++)   //å¯»æ‰¾å½“å‰æ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹å¤„ç†(å¦‚æœç®€å•ç‚¹å¤„ç†,ä¹Ÿå¯ä»¥æŒ‰ç‚¹åº¦æœ€å¤§çš„æœªæ»¡è¶³èŠ‚ç‚¹ä¼˜å…ˆä»£æ›¿)
 		    if(Satisfied[i]<minsatisfied)
 			{
 		    	minsatisfied=Satisfied[i];
@@ -1050,34 +1191,34 @@ int NewLocalGreedy1_PIDS(void)
 
 		if(currentvertex==0) break;
 
-        //******ĞÂµÄ¾Ö²¿Ì°ĞÄ²ßÂÔ: ½«µ±Ç°Î´Âú×ã½ÚµãcurrentvertexµÄÁÚÓòÖĞ¸²¸ÇÃæ×î´óµÄÒ»¸ö·ÇÖ§Åäµã±äÎªÖ§Åäµã
-		maxcoverage=0;   //ÓÃÓÚÕÒ³öÄÜ¸²¸ÇÎ´Âú×ã½Úµã×î¶àµÄÒ»¸ö·ÇÖ§Åäµã(currentvertexµÄÁÚµã)
+        //******æ–°çš„å±€éƒ¨è´ªå¿ƒç­–ç•¥: å°†å½“å‰æœªæ»¡è¶³èŠ‚ç‚¹currentvertexçš„é‚»åŸŸä¸­è¦†ç›–é¢æœ€å¤§çš„ä¸€ä¸ªéæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹
+		maxcoverage=0;   //ç”¨äºæ‰¾å‡ºèƒ½è¦†ç›–æœªæ»¡è¶³èŠ‚ç‚¹æœ€å¤šçš„ä¸€ä¸ªéæ”¯é…ç‚¹(currentvertexçš„é‚»ç‚¹)
 
-		//¿ÉÒÔÈ¡ÏûÏÂÃæ¼¸ĞĞ±ê¼ÇÎª  //**µÄ´úÂë(Èç¹ûÊµÑé·¢ÏÖ²»¿¼ÂÇµ±Ç°µãÒ²¿É±äÎªÖ§ÅäµãÊ±Ğ§¹û¸üºÃµÄ»°)
-		//if(DSList[currentvertex]==0 && Coverage[currentvertex]>maxcoverage)  //** Èç¹ûµ±Ç°Î´Âú×ã½ÚµãcurrentvertexÊÇ·ÇÖ§ÅäµãÊ±,Ò²¿¼ÂÇËü¿É±äÎªÖ§Åäµã
+		//å¯ä»¥å–æ¶ˆä¸‹é¢å‡ è¡Œæ ‡è®°ä¸º  //**çš„ä»£ç (å¦‚æœå®éªŒå‘ç°ä¸è€ƒè™‘å½“å‰ç‚¹ä¹Ÿå¯å˜ä¸ºæ”¯é…ç‚¹æ—¶æ•ˆæœæ›´å¥½çš„è¯)
+		//if(DSList[currentvertex]==0 && Coverage[currentvertex]>maxcoverage)  //** å¦‚æœå½“å‰æœªæ»¡è¶³èŠ‚ç‚¹currentvertexæ˜¯éæ”¯é…ç‚¹æ—¶,ä¹Ÿè€ƒè™‘å®ƒå¯å˜ä¸ºæ”¯é…ç‚¹
 		//{	maxcoverage=Coverage[currentvertex];  //*
 		//	maxcvertex=currentvertex;      //*
 		//}
 
 		for(i=1;i<=gvertexnum;i++)
-			if(GAdjMatrix[currentvertex][i] && DSList[i]==0 && Coverage[i]>maxcoverage)  //¾Ö²¿Ì°ĞÄµØÑ¡ÔñÒ»¸öÁÚµã(·ÇÖ§Åäµã)
+			if(GAdjMatrix[currentvertex][i] && DSList[i]==0 && Coverage[i]>maxcoverage)  //å±€éƒ¨è´ªå¿ƒåœ°é€‰æ‹©ä¸€ä¸ªé‚»ç‚¹(éæ”¯é…ç‚¹)
 			{   	maxcoverage=Coverage[i];
 					maxcvertex=i;
 			}
-		if(maxcoverage==0)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎÁÚµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÎ´Âú×ãµÄµãµÄÂú×ã³Ì¶È. ¿ÉÒÔÖ¤Ã÷ÕâÖÖÇé¿öÔÚ²»º¬¹ÂÁ¢µãµÄÍ¼ÖĞ²»»á·¢Éú
+		if(maxcoverage==0)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•é‚»ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æœªæ»¡è¶³çš„ç‚¹çš„æ»¡è¶³ç¨‹åº¦. å¯ä»¥è¯æ˜è¿™ç§æƒ…å†µåœ¨ä¸å«å­¤ç«‹ç‚¹çš„å›¾ä¸­ä¸ä¼šå‘ç”Ÿ
 		{
 			printf("No solution to the instance!\n");
 			return 0;
 		}
 
-		DSList[maxcvertex]=1;          //¼ÓÈëĞÂµÄÖ§Åäµã
-		dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-		for(j=1;j<=gvertexnum;j++)     //¸üĞÂÏà¹ØµãµÄÎ´Âú×ã³Ì¶ÈSatisfied[.]
+		DSList[maxcvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+		dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+		for(j=1;j<=gvertexnum;j++)     //æ›´æ–°ç›¸å…³ç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦Satisfied[.]
 			if(GAdjMatrix[maxcvertex][j])
 			{   Satisfied[j]++;
-				if(Satisfied[j]==0)    //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÂú×ãµÄµãÀà
+				if(Satisfied[j]==0)    //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºæ»¡è¶³çš„ç‚¹ç±»
 				{	uncoverednum--;
-				    for(k=1;k<=gvertexnum;k++)               //¸üĞÂÏà¹ØµãµÄ¸²¸ÇÃæCoverage[.]**************
+				    for(k=1;k<=gvertexnum;k++)               //æ›´æ–°ç›¸å…³ç‚¹çš„è¦†ç›–é¢Coverage[.]**************
 						if(GAdjMatrix[j][k] && DSList[k]==0)
 							Coverage[k]--;
 				}
@@ -1085,61 +1226,61 @@ int NewLocalGreedy1_PIDS(void)
 		}
 
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with NewLocalGreedy1_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nNewLocalGreedy1_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
-	//ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+	printf("\nNewLocalGreedy1_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
+	//ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with NewLocaGreedy1_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nNewLocalGreedy1_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nNewLocalGreedy1_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
-//***ĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄ·½·¨2***
+//***æ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•2***
 int NewLocalGreedy2_PIDS(void)
-{//²ßÂÔ: Ã¿´ÎÑ¡Ôñµ±Ç°×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞÊ¹ÓÃ²ßÂÔ2(Ê¹ÓÃ1´Î).
- //×î²»Âú×ãµãuÊÇSatisfied[]ÖµÎª¸ºÇÒ¾ø¶ÔÖµ×î´óµÄµã.ÔÚµãuÁÚÓòÖĞÑ¡Ôñ±»ĞèÒª³Ì¶È×î´ó(¼´Needed[.]¾ø¶ÔÖµ×î´óÇÒÓëuÏàÁÚ)µÄÒ»¸ö·ÇÖ§Åäµãw±äÎªÖ§Åäµã.
- //º¬Òå:u×îĞèÒª±ğÈËÇÒwÒ²×î±»ÈËĞèÒª
+{//ç­–ç•¥: æ¯æ¬¡é€‰æ‹©å½“å‰æœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­ä½¿ç”¨ç­–ç•¥2(ä½¿ç”¨1æ¬¡).
+ //æœ€ä¸æ»¡è¶³ç‚¹uæ˜¯Satisfied[]å€¼ä¸ºè´Ÿä¸”ç»å¯¹å€¼æœ€å¤§çš„ç‚¹.åœ¨ç‚¹ué‚»åŸŸä¸­é€‰æ‹©è¢«éœ€è¦ç¨‹åº¦æœ€å¤§(å³Needed[.]ç»å¯¹å€¼æœ€å¤§ä¸”ä¸uç›¸é‚»)çš„ä¸€ä¸ªéæ”¯é…ç‚¹wå˜ä¸ºæ”¯é…ç‚¹.
+ //å«ä¹‰:uæœ€éœ€è¦åˆ«äººä¸”wä¹Ÿæœ€è¢«äººéœ€è¦
 	int i,j,k,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                       //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2; //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                       //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2; //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
 	}
     for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		Needed[i]=0;         //***¼ÇÂ¼Ã¿¸ö·ÇÖ§Åäµã(¼´DSList[.]ÖµÎª0µÄµã)µÄËùÓĞÎ´Âú×ãÁÚµãµÄÎ´Âú×ã¶ÈÖ®ºÍ(Îª¸ºÊı,Æä¾ø¶ÔÖµ±íÊ¾¸Ã·ÇÖ§Åäµã±»ĞèÒªµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		Needed[i]=0;         //***è®°å½•æ¯ä¸ªéæ”¯é…ç‚¹(å³DSList[.]å€¼ä¸º0çš„ç‚¹)çš„æ‰€æœ‰æœªæ»¡è¶³é‚»ç‚¹çš„æœªæ»¡è¶³åº¦ä¹‹å’Œ(ä¸ºè´Ÿæ•°,å…¶ç»å¯¹å€¼è¡¨ç¤ºè¯¥éæ”¯é…ç‚¹è¢«éœ€è¦çš„ç¨‹åº¦)
 		for(j=1;j<=gvertexnum;j++)
            if(GAdjMatrix[i][j])
 			   Needed[i]+=Satisfied[j];
 
 	}
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
-	//¾Ö²¿Ì°ĞÄËã·¨
+	//å±€éƒ¨è´ªå¿ƒç®—æ³•
 	int uncoverednum;
 	int currentvertex, minsatisfied, minneeded, minneededvertex;
 
-	uncoverednum=gvertexnum;         //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Î´Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;         //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æœªæ»¡è¶³ç‚¹çš„ä¸ªæ•°
 	while(uncoverednum)
-	{//Èç¹ûuncoverednum>0, ¼´»¹ÓĞÎ´Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	{//å¦‚æœuncoverednum>0, å³è¿˜æœ‰æœªæ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 
-        minsatisfied=0;              //ÓÃÓÚÕÒ³öÂú×ã³Ì¶È×îĞ¡µÄ½Úµã(¼´Satisfied[]ÖµÎª¸ºÇÒÖµ×îĞ¡µÄµã,Æä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ã³Ì¶ÈµÄ×î´ó)
+        minsatisfied=0;              //ç”¨äºæ‰¾å‡ºæ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹(å³Satisfied[]å€¼ä¸ºè´Ÿä¸”å€¼æœ€å°çš„ç‚¹,å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³ç¨‹åº¦çš„æœ€å¤§)
 		currentvertex=0;
-		for(i=1;i<=gvertexnum;i++)   //Ñ°ÕÒµ±Ç°Âú×ã³Ì¶È×îĞ¡µÄ½Úµã´¦Àí(Èç¹û¼òµ¥µã´¦Àí,Ò²¿ÉÒÔ°´µã¶È×î´óµÄÎ´Âú×ã½ÚµãÓÅÏÈ´úÌæ)
+		for(i=1;i<=gvertexnum;i++)   //å¯»æ‰¾å½“å‰æ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹å¤„ç†(å¦‚æœç®€å•ç‚¹å¤„ç†,ä¹Ÿå¯ä»¥æŒ‰ç‚¹åº¦æœ€å¤§çš„æœªæ»¡è¶³èŠ‚ç‚¹ä¼˜å…ˆä»£æ›¿)
 		    if(Satisfied[i]<minsatisfied)
 			{
 		    	minsatisfied=Satisfied[i];
@@ -1148,88 +1289,88 @@ int NewLocalGreedy2_PIDS(void)
 
 		if(currentvertex==0) break;
 
-        //******¾Ö²¿Ì°ĞÄ·¨²ßÂÔ:½«µ±Ç°Î´Âú×ãµÄ½ÚµãcurrentvertexÁÚÓòÖĞ±»ĞèÒª³Ì¶È×î´óµÄÒ»¸ö·ÇÖ§Åäµã±äÎªÖ§Åäµã
-		minneeded=0;   //ÓÃÓÚÕÒ³ö±»ĞèÒª³Ì¶È×î´ó(¼´Needed[]ÖµÎª¸ºÇÒ¾ø¶ÔÖµ×î´ó)µÄÒ»¸ö·ÇÖ§Åäµã(currentvertexµÄÁÚµã)
+        //******å±€éƒ¨è´ªå¿ƒæ³•ç­–ç•¥:å°†å½“å‰æœªæ»¡è¶³çš„èŠ‚ç‚¹currentvertexé‚»åŸŸä¸­è¢«éœ€è¦ç¨‹åº¦æœ€å¤§çš„ä¸€ä¸ªéæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹
+		minneeded=0;   //ç”¨äºæ‰¾å‡ºè¢«éœ€è¦ç¨‹åº¦æœ€å¤§(å³Needed[]å€¼ä¸ºè´Ÿä¸”ç»å¯¹å€¼æœ€å¤§)çš„ä¸€ä¸ªéæ”¯é…ç‚¹(currentvertexçš„é‚»ç‚¹)
 
-		//¿ÉÒÔÈ¡ÏûÏÂÃæ¼¸ĞĞ±ê¼ÇÎª  //**µÄ´úÂë(Èç¹ûÊµÑé·¢ÏÖ²»¿¼ÂÇµ±Ç°µãÒ²¿É±äÎªÖ§ÅäµãÊ±Ğ§¹û¸üºÃµÄ»°)
-		//if(DSList[currentvertex]==0 && Needed[currentvertex]<minneeded)  //** Èç¹ûµ±Ç°Î´Âú×ã½ÚµãcurrentvertexÊÇ·ÇÖ§ÅäµãÊ±,Ò²¿¼ÂÇËü¿É±äÎªÖ§Åäµã
+		//å¯ä»¥å–æ¶ˆä¸‹é¢å‡ è¡Œæ ‡è®°ä¸º  //**çš„ä»£ç (å¦‚æœå®éªŒå‘ç°ä¸è€ƒè™‘å½“å‰ç‚¹ä¹Ÿå¯å˜ä¸ºæ”¯é…ç‚¹æ—¶æ•ˆæœæ›´å¥½çš„è¯)
+		//if(DSList[currentvertex]==0 && Needed[currentvertex]<minneeded)  //** å¦‚æœå½“å‰æœªæ»¡è¶³èŠ‚ç‚¹currentvertexæ˜¯éæ”¯é…ç‚¹æ—¶,ä¹Ÿè€ƒè™‘å®ƒå¯å˜ä¸ºæ”¯é…ç‚¹
 		//{	minneeded=Needed[currentvertex];  //*
 		//	minneededvertex=currentvertex;      //*
 		//}
 		for(i=1;i<=gvertexnum;i++)
-			if(GAdjMatrix[currentvertex][i] && DSList[i]==0 && Needed[i]<minneeded)  //¾Ö²¿Ì°ĞÄµØÑ¡ÔñÒ»¸öÁÚµã(·ÇÖ§Åäµã)
+			if(GAdjMatrix[currentvertex][i] && DSList[i]==0 && Needed[i]<minneeded)  //å±€éƒ¨è´ªå¿ƒåœ°é€‰æ‹©ä¸€ä¸ªé‚»ç‚¹(éæ”¯é…ç‚¹)
 			{   	minneeded=Needed[i];
 					minneededvertex=i;
 			}
-	    if(minneeded==0)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎÁÚµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÎ´Âú×ãµÄµãµÄÂú×ã³Ì¶È. ¿ÉÒÔÖ¤Ã÷ÕâÖÖÇé¿öÔÚ²»º¬¹ÂÁ¢µãµÄÍ¼ÖĞ²»»á·¢Éú
+	    if(minneeded==0)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•é‚»ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æœªæ»¡è¶³çš„ç‚¹çš„æ»¡è¶³ç¨‹åº¦. å¯ä»¥è¯æ˜è¿™ç§æƒ…å†µåœ¨ä¸å«å­¤ç«‹ç‚¹çš„å›¾ä¸­ä¸ä¼šå‘ç”Ÿ
 		{
 			printf("No solution to the instance!\n");
 			return 0;
 		}
 
-		DSList[minneededvertex]=1;     //¼ÓÈëĞÂµÄÖ§Åäµã
-		dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-		for(j=1;j<=gvertexnum;j++)     //¸üĞÂÏà¹ØµãµÄÎ´Âú×ã³Ì¶ÈSatisfied[.]
+		DSList[minneededvertex]=1;     //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+		dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+		for(j=1;j<=gvertexnum;j++)     //æ›´æ–°ç›¸å…³ç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦Satisfied[.]
 			if(GAdjMatrix[minneededvertex][j])
 			{    Satisfied[j]++;
- 				 if(Satisfied[j]<=0)   //Ö»ÓĞ¶ÔÖ®Ç°µÄÎ´Âú×ãµÄÁÚµã(¸Õ¸Õ»ñµÃÂú×ãµÄµãÖ®Ç°Ò²ÊÇÎ´Âú×ãµã)²ÅÓĞ±ØÒª¸üĞÂÏà¹ØĞÅÏ¢
-				 {	for(k=1;k<=gvertexnum;k++)                //¸üĞÂÏà¹ØµãµÄÁÚµãµÄ²»Âú×ãÖ®ºÍNeeded[]
-    					if(GAdjMatrix[j][k] && DSList[k]==0)  //ÁÚµãÊÇ·ÇÖ§ÅäµãÊ±²ÅÓĞ±ØÒª¸üĞÂ
-							Needed[k]++;                      //×¢: ÖµÎª¸º,Æä¾ø¶ÔÖµ±íÊ¾±»ĞèÒªµÄ³Ì¶È
+ 				 if(Satisfied[j]<=0)   //åªæœ‰å¯¹ä¹‹å‰çš„æœªæ»¡è¶³çš„é‚»ç‚¹(åˆšåˆšè·å¾—æ»¡è¶³çš„ç‚¹ä¹‹å‰ä¹Ÿæ˜¯æœªæ»¡è¶³ç‚¹)æ‰æœ‰å¿…è¦æ›´æ–°ç›¸å…³ä¿¡æ¯
+				 {	for(k=1;k<=gvertexnum;k++)                //æ›´æ–°ç›¸å…³ç‚¹çš„é‚»ç‚¹çš„ä¸æ»¡è¶³ä¹‹å’ŒNeeded[]
+    					if(GAdjMatrix[j][k] && DSList[k]==0)  //é‚»ç‚¹æ˜¯éæ”¯é…ç‚¹æ—¶æ‰æœ‰å¿…è¦æ›´æ–°
+							Needed[k]++;                      //æ³¨: å€¼ä¸ºè´Ÿ,å…¶ç»å¯¹å€¼è¡¨ç¤ºè¢«éœ€è¦çš„ç¨‹åº¦
 				}
-				if(Satisfied[j]==0)                           //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÒÑÂú×ãµÄµãÀà
+				if(Satisfied[j]==0)                           //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºå·²æ»¡è¶³çš„ç‚¹ç±»
 					 uncoverednum--;
 			}
 	}
 
-    //***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+    //***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with NewLocalGreedy2_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nNewLocalGreedy2_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
+	printf("\nNewLocalGreedy2_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
 
-    //ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+    //ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with NewLocaGreedy2_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nNewLocalGreedy2_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nNewLocalGreedy2_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
-//ĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄ·½·¨3(¿ìËÙËã·¨--¸ÃËã·¨Ê±¼ä¸´ÔÓ¶ÈÎªO(n^2),ÆäËüËã·¨Ê±¼ä¸´ÔÓ¶¼ÊÇO(n^3))
+//æ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒæ–¹æ³•3(å¿«é€Ÿç®—æ³•--è¯¥ç®—æ³•æ—¶é—´å¤æ‚åº¦ä¸ºO(n^2),å…¶å®ƒç®—æ³•æ—¶é—´å¤æ‚éƒ½æ˜¯O(n^3))
 int NewLocalGreedy3_PIDS(void)
-{//²ßÂÔ: Ã¿´ÎÑ¡Ôñµ±Ç°×î²»Âú×ãµãu, È»ºóÔÚuµÄ·ÇÖ§ÅäµãĞÍÁÚµãÖĞÌí¼Ó×î¶ÈµÄµãÎªĞÂÖ§Åäµã.(¶ÁÍ¼»ò½¨Í¼Ê±Ô¤´¦ÀíÖĞÍ¼µãĞòÒÑ°´µã¶È½µĞòÅÅÁË)
- //×î²»Âú×ãµãuÊÇSatisfied[.]ÖµÎª¸ºÇÒ¾ø¶ÔÖµ×î´óµÄµã.µãuÁÚÓòÖĞÌí¼Ó¶È×î´óµÄÒ»¸ö·ÇÖ§ÅäĞÍÁÚµã×÷ÎªĞÂµÄÖ§Åäµã
+{//ç­–ç•¥: æ¯æ¬¡é€‰æ‹©å½“å‰æœ€ä¸æ»¡è¶³ç‚¹u, ç„¶ååœ¨uçš„éæ”¯é…ç‚¹å‹é‚»ç‚¹ä¸­æ·»åŠ æœ€åº¦çš„ç‚¹ä¸ºæ–°æ”¯é…ç‚¹.(è¯»å›¾æˆ–å»ºå›¾æ—¶é¢„å¤„ç†ä¸­å›¾ç‚¹åºå·²æŒ‰ç‚¹åº¦é™åºæ’äº†)
+ //æœ€ä¸æ»¡è¶³ç‚¹uæ˜¯Satisfied[.]å€¼ä¸ºè´Ÿä¸”ç»å¯¹å€¼æœ€å¤§çš„ç‚¹.ç‚¹ué‚»åŸŸä¸­æ·»åŠ åº¦æœ€å¤§çš„ä¸€ä¸ªéæ”¯é…å‹é‚»ç‚¹ä½œä¸ºæ–°çš„æ”¯é…ç‚¹
 	int i,j,dssize;
 
 	for(i=1;i<=gvertexnum;i++)
-	{//³õÊ¼»¯
-		DSList[i]=0;                       //***¼ÇÂ¼Ö§Åäµã(ÖµÎª0µÄµãÎª·ÇÖ§Åäµã,ÖµÎª1µÄµãÎªÖ§Åäµã)
-		Satisfied[i]=-(DegreeList[i]+1)/2; //***¼ÇÂ¼Ã¿¸öµãµÄÎ´Âú×ã³Ì¶È(Öµ>=0±íÊ¾ÊÇÒÑÂú×ãµã; Öµ<0±íÊ¾Î´Âú×ãµã,ÇÒÆä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ãµÄ³Ì¶È)
+	{//åˆå§‹åŒ–
+		DSList[i]=0;                       //***è®°å½•æ”¯é…ç‚¹(å€¼ä¸º0çš„ç‚¹ä¸ºéæ”¯é…ç‚¹,å€¼ä¸º1çš„ç‚¹ä¸ºæ”¯é…ç‚¹)
+		Satisfied[i]=-(DegreeList[i]+1)/2; //***è®°å½•æ¯ä¸ªç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦(å€¼>=0è¡¨ç¤ºæ˜¯å·²æ»¡è¶³ç‚¹; å€¼<0è¡¨ç¤ºæœªæ»¡è¶³ç‚¹,ä¸”å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³çš„ç¨‹åº¦)
 	}
 
-    dssize=0;//Ö§Åäµã¸öÊı³õÊ¼»¯
+    dssize=0;//æ”¯é…ç‚¹ä¸ªæ•°åˆå§‹åŒ–
 
-	//¾Ö²¿Ì°ĞÄËã·¨
+	//å±€éƒ¨è´ªå¿ƒç®—æ³•
 	int uncoverednum;
 	int currentvertex, minsatisfied, bestvertex;
 
-	uncoverednum=gvertexnum;         //³õÊ¼»¯,±íÊ¾¿ªÊ¼Ê±Î´Âú×ãµãµÄ¸öÊı
+	uncoverednum=gvertexnum;         //åˆå§‹åŒ–,è¡¨ç¤ºå¼€å§‹æ—¶æœªæ»¡è¶³ç‚¹çš„ä¸ªæ•°
 	while(uncoverednum)
-	{//Èç¹ûuncoverednum>0, ¼´»¹ÓĞÎ´Âú×ãµÄ½Úµã¾ÍĞèÒª¼ÌĞøÌí¼ÓĞÂµÄÖ§Åäµã
+	{//å¦‚æœuncoverednum>0, å³è¿˜æœ‰æœªæ»¡è¶³çš„èŠ‚ç‚¹å°±éœ€è¦ç»§ç»­æ·»åŠ æ–°çš„æ”¯é…ç‚¹
 
-        minsatisfied=0;              //ÓÃÓÚÕÒ³öÂú×ã³Ì¶È×îĞ¡µÄ½Úµã(¼´Satisfied[]ÖµÎª¸ºÇÒÖµ×îĞ¡µÄµã,Æä¾ø¶ÔÖµ±íÊ¾ÆäÎ´Âú×ã³Ì¶ÈµÄ×î´ó)
+        minsatisfied=0;              //ç”¨äºæ‰¾å‡ºæ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹(å³Satisfied[]å€¼ä¸ºè´Ÿä¸”å€¼æœ€å°çš„ç‚¹,å…¶ç»å¯¹å€¼è¡¨ç¤ºå…¶æœªæ»¡è¶³ç¨‹åº¦çš„æœ€å¤§)
 		currentvertex=0;
-		for(i=1;i<=gvertexnum;i++)   //Ñ°ÕÒµ±Ç°Âú×ã³Ì¶È×îĞ¡µÄ½Úµã´¦Àí(Èç¹û¼òµ¥µã´¦Àí,Ò²¿ÉÒÔ°´µã¶È×î´óµÄÎ´Âú×ã½ÚµãÓÅÏÈ´úÌæ)
+		for(i=1;i<=gvertexnum;i++)   //å¯»æ‰¾å½“å‰æ»¡è¶³ç¨‹åº¦æœ€å°çš„èŠ‚ç‚¹å¤„ç†(å¦‚æœç®€å•ç‚¹å¤„ç†,ä¹Ÿå¯ä»¥æŒ‰ç‚¹åº¦æœ€å¤§çš„æœªæ»¡è¶³èŠ‚ç‚¹ä¼˜å…ˆä»£æ›¿)
 		    if(Satisfied[i]<minsatisfied)
 			{
 		    	minsatisfied=Satisfied[i];
@@ -1238,49 +1379,49 @@ int NewLocalGreedy3_PIDS(void)
 
 		if(currentvertex==0) break;
 
-        //******¾Ö²¿Ì°ĞÄ²ßÂÔ:½«µ±Ç°Î´Âú×ãµÄ½ÚµãcurrentvertexÁÚÓòÖĞµã¶È×î´óµÄÒ»¸ö·ÇÖ§Åäµã±äÎªÖ§Åäµã
+        //******å±€éƒ¨è´ªå¿ƒç­–ç•¥:å°†å½“å‰æœªæ»¡è¶³çš„èŠ‚ç‚¹currentvertexé‚»åŸŸä¸­ç‚¹åº¦æœ€å¤§çš„ä¸€ä¸ªéæ”¯é…ç‚¹å˜ä¸ºæ”¯é…ç‚¹
 		for(i=1;i<=gvertexnum;i++)
-			if(GAdjMatrix[currentvertex][i] && DSList[i]==0)  //¾Ö²¿Ì°ĞÄµØÑ¡ÔñÒ»¸öÁÚµã(·ÇÖ§Åäµã)--µã¶È´óÓÅÏÈ(×ÔÈ»´ÎĞò¼´±íÊ¾¶È´óµÄÓÅÏÈ,ÕâÊÇÒòÎªÍ¼µãĞòÒÑ°´µã¶È½µĞòÅÅÁË)
+			if(GAdjMatrix[currentvertex][i] && DSList[i]==0)  //å±€éƒ¨è´ªå¿ƒåœ°é€‰æ‹©ä¸€ä¸ªé‚»ç‚¹(éæ”¯é…ç‚¹)--ç‚¹åº¦å¤§ä¼˜å…ˆ(è‡ªç„¶æ¬¡åºå³è¡¨ç¤ºåº¦å¤§çš„ä¼˜å…ˆ,è¿™æ˜¯å› ä¸ºå›¾ç‚¹åºå·²æŒ‰ç‚¹åº¦é™åºæ’äº†)
 			{		bestvertex=i;
 			        break;
 			}
-		if(i==gvertexnum+1)   //±íÊ¾ĞÂÌí¼ÓÈÎºÎÁÚµã×÷ÎªÖ§Åäµã¶¼²»»áÔö¼ÓÈÎºÎÎ´Âú×ãµÄµãµÄÂú×ã³Ì¶È. ¿ÉÒÔÖ¤Ã÷ÕâÖÖÇé¿öÔÚ²»º¬¹ÂÁ¢µãµÄÍ¼ÖĞ²»»á·¢Éú
+		if(i==gvertexnum+1)   //è¡¨ç¤ºæ–°æ·»åŠ ä»»ä½•é‚»ç‚¹ä½œä¸ºæ”¯é…ç‚¹éƒ½ä¸ä¼šå¢åŠ ä»»ä½•æœªæ»¡è¶³çš„ç‚¹çš„æ»¡è¶³ç¨‹åº¦. å¯ä»¥è¯æ˜è¿™ç§æƒ…å†µåœ¨ä¸å«å­¤ç«‹ç‚¹çš„å›¾ä¸­ä¸ä¼šå‘ç”Ÿ
 		{
 			printf("No solution to the instance!\n");
 			return 0;
 		}
 
-		DSList[bestvertex]=1;          //¼ÓÈëĞÂµÄÖ§Åäµã
-		dssize++;                      //Ö§Åäµã¸öÊı¸üĞÂ
-		for(j=1;j<=gvertexnum;j++)     //¸üĞÂÏà¹ØµãµÄÎ´Âú×ã³Ì¶ÈSatisfied[.]
+		DSList[bestvertex]=1;          //åŠ å…¥æ–°çš„æ”¯é…ç‚¹
+		dssize++;                      //æ”¯é…ç‚¹ä¸ªæ•°æ›´æ–°
+		for(j=1;j<=gvertexnum;j++)     //æ›´æ–°ç›¸å…³ç‚¹çš„æœªæ»¡è¶³ç¨‹åº¦Satisfied[.]
 			if(GAdjMatrix[bestvertex][j])
 			{    Satisfied[j]++;
-  				 if(Satisfied[j]==0)   //Èç¹ûµãj±»Ö§Åä´ÎÊıÏÖÔÚÄÜ´ïµ½Æäµã¶ÈÒ»°ë,Ôò¹éÓÚÒÑÂú×ãµÄµãÀà
+  				 if(Satisfied[j]==0)   //å¦‚æœç‚¹jè¢«æ”¯é…æ¬¡æ•°ç°åœ¨èƒ½è¾¾åˆ°å…¶ç‚¹åº¦ä¸€åŠ,åˆ™å½’äºå·²æ»¡è¶³çš„ç‚¹ç±»
 					 uncoverednum--;
 			}
 	}
 
 
-    //***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+    //***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(dssize))
 	{	printf("There is some wrong with NewLocalGreedy3_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nNewLocalGreedy3_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯Ç°): %5d\n",dssize);
+	printf("\nNewLocalGreedy3_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å‰): %5d\n",dssize);
 
-    //ÓÅ»¯½×¶Î: ÓÉËùµÃÕıÓ°ÏìÖ§Åä¼¯µ¼³öÒ»¸ö¼«Ğ¡ÕıÓ°ÏìÖ§Åä¼¯
+    //ä¼˜åŒ–é˜¶æ®µ: ç”±æ‰€å¾—æ­£å½±å“æ”¯é…é›†å¯¼å‡ºä¸€ä¸ªæå°æ­£å½±å“æ”¯é…é›†
     int newdssize;
 	newdssize=RefinePIDS(dssize);
 
-	//***ÓÃÓÚµ÷ÊÔ½×¶Î: ¼ì²éËùµÃÕıÓ°ÏìµÄÖ§Åä¼¯ÊÇ·ñÕıÈ·
+	//***ç”¨äºè°ƒè¯•é˜¶æ®µ: æ£€æŸ¥æ‰€å¾—æ­£å½±å“çš„æ”¯é…é›†æ˜¯å¦æ­£ç¡®
 	if(!CheckPIDS(newdssize))
 	{	printf("There is some wrong with NewLocaGreedy3_PIDS!\n");
 		getch();
-	}//***ÓÃÓÚµ÷ÊÔ½×¶Î
+	}//***ç”¨äºè°ƒè¯•é˜¶æ®µ
 
-	printf("\nNewLocalGreedy3_PIDSËùÇóÕıÓ°ÏìÖ§Åä¼¯´óĞ¡Îª(ÓÅ»¯ºó): %5d\n",newdssize);
-	return newdssize;//·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	printf("\nNewLocalGreedy3_PIDSæ‰€æ±‚æ­£å½±å“æ”¯é…é›†å¤§å°ä¸º(ä¼˜åŒ–å): %5d\n",newdssize);
+	return newdssize;//è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 }
 
 
@@ -1289,49 +1430,49 @@ int NewLocalGreedy3_PIDS(void)
 
 
 
-//***ÊäÈëºÍÊä³öº¯Êı***
+//***è¾“å…¥å’Œè¾“å‡ºå‡½æ•°***
 
 void ReadGraph(char *txtgraphfilename)
 {//To read the data file of graph G=<V,E>(V={1,2,...,n}) to obtain the adjacent matrix.
  //The format of the data file is as follows: the node number,the edge number, every edge <x,y> followed
       FILE  *in;
 
-      //¸ù¾İ¸ø¶¨µÄÎÄ¼şÃû×Ö´ò¿ªÎÄ¼ş¡£²ÎÊır±íÊ¾¶ÔÎÄ¼ş½øĞĞÖ»¶Á²Ù×÷
+      //æ ¹æ®ç»™å®šçš„æ–‡ä»¶åå­—æ‰“å¼€æ–‡ä»¶ã€‚å‚æ•°rè¡¨ç¤ºå¯¹æ–‡ä»¶è¿›è¡Œåªè¯»æ“ä½œ
 	  if ((in=fopen(txtgraphfilename, "r"))==NULL)
       {  	fprintf(stderr, "Cannot open the data file.\n");
 		return;
       }
 
-      fscanf(in,"%d",&gvertexnum);                         //¶ÁÈ¡Í¼µÄÊµ¼ÊµãÊı
-      fscanf(in,"%d",&gedgenum);                           //¶ÁÈ¡Í¼µÄ±ßÊı
+      fscanf(in,"%d",&gvertexnum);                         //è¯»å–å›¾çš„å®é™…ç‚¹æ•°
+      fscanf(in,"%d",&gedgenum);                           //è¯»å–å›¾çš„è¾¹æ•°
 
       int i,j,k;
       for(i=1;i<=gvertexnum;i++)                          //initialize the adjacent matrix
 		for(j=1;j<=gvertexnum;j++)
 			GAdjMatrix[i][j]=0;             /**/
 
-      k=0;                                                 //k ÓÃÀ´¼Ç×¡Êµ¼ÊµÄ±ßÊı¡£×¢£ºÎÄ¼şÖĞÄ³±ß¿ÉÄÜÖØ¸´³öÏÖ¶à´Î
-      while(!feof(in))                                     //¶Á³öÃ¿Ò»Ìõ±ß(Ã¿Ìõ±ßÎÄ¼şÖĞÊÇÓÃÒ»¶ÔµãÀ´±íÊ¾µÄ)
+      k=0;                                                 //k ç”¨æ¥è®°ä½å®é™…çš„è¾¹æ•°ã€‚æ³¨ï¼šæ–‡ä»¶ä¸­æŸè¾¹å¯èƒ½é‡å¤å‡ºç°å¤šæ¬¡
+      while(!feof(in))                                     //è¯»å‡ºæ¯ä¸€æ¡è¾¹(æ¯æ¡è¾¹æ–‡ä»¶ä¸­æ˜¯ç”¨ä¸€å¯¹ç‚¹æ¥è¡¨ç¤ºçš„)
       {
 	    fscanf(in,"%d",&i);
     	fscanf(in,"%d",&j);
 
-	    if(GAdjMatrix[i][j])                              //Èç¹û±ßÓĞÁË¾Í²»ÒªÖØ¸´¡£×¢£ºÎÄ¼şÖĞ±ß¿ÉÄÜÖØ¸´³öÏÖ¶à´Î
+	    if(GAdjMatrix[i][j])                              //å¦‚æœè¾¹æœ‰äº†å°±ä¸è¦é‡å¤ã€‚æ³¨ï¼šæ–‡ä»¶ä¸­è¾¹å¯èƒ½é‡å¤å‡ºç°å¤šæ¬¡
              continue;
 	    GAdjMatrix[i][j]=1;
 	    GAdjMatrix[j][i]=GAdjMatrix[i][j];                //For an undirected graph, the adjacent matrix is symmetrical
 	    k++;
       }
-      gedgenum=k;                                         //µÃµ½Êµ¼ÊµÄ±ßÊı
-      fclose(in);                                         //´ò¿ªµÄÎÄ¼ş×îºó±ØĞë¹Ø±Õ
+      gedgenum=k;                                         //å¾—åˆ°å®é™…çš„è¾¹æ•°
+      fclose(in);                                         //æ‰“å¼€çš„æ–‡ä»¶æœ€åå¿…é¡»å…³é—­
 
-     //³õÊ¼»¯¸÷µã¶È,²¢´¦Àí¹ÂÁ¢µã(Í¼ÖĞº¬ÓĞ¹ÂÁ¢µãÔòÎÊÌâÎŞ½â). ¼ì²éÊÇ·ñº¬ÓĞ¹ÂÁ¢µã. Èç¹ûº¬ÓĞ¹ÂÁ¢µã,Ôò½«¹ÂÁ¢µãËæ»úÁ¬±ß¼´¿É±£Ö¤²»º¬¹ÂÁ¢µã
+     //åˆå§‹åŒ–å„ç‚¹åº¦,å¹¶å¤„ç†å­¤ç«‹ç‚¹(å›¾ä¸­å«æœ‰å­¤ç«‹ç‚¹åˆ™é—®é¢˜æ— è§£). æ£€æŸ¥æ˜¯å¦å«æœ‰å­¤ç«‹ç‚¹. å¦‚æœå«æœ‰å­¤ç«‹ç‚¹,åˆ™å°†å­¤ç«‹ç‚¹éšæœºè¿è¾¹å³å¯ä¿è¯ä¸å«å­¤ç«‹ç‚¹
   	 for(i=1;i<=gvertexnum;i++)
 	 {  DegreeList[i]=0;
 		for(j=1;j<=gvertexnum;j++)
 			if(GAdjMatrix[i][j])
 				DegreeList[i]++;
-		if(DegreeList[i]==0)  //±íÊ¾½ÚµãiÊÇ¹ÂÁ¢µã,´ËÊ±½«½ÚµãiËæ»úÁ¬½Óµ½ÁíÒ»½Úµãk
+		if(DegreeList[i]==0)  //è¡¨ç¤ºèŠ‚ç‚¹iæ˜¯å­¤ç«‹ç‚¹,æ­¤æ—¶å°†èŠ‚ç‚¹iéšæœºè¿æ¥åˆ°å¦ä¸€èŠ‚ç‚¹k
 		{
            k=(rand()%gvertexnum)+1;
 		   if(k==i && k<gvertexnum)
@@ -1346,8 +1487,8 @@ void ReadGraph(char *txtgraphfilename)
 		}
 	 }
 
-	 //¶Ô½Úµã¶È°´ÕÕÓÉ´óµ½Ğ¡ÅÅĞò, È»ºó¶ÔÍ¼°´ÕÕ¶ÈÓÉ´óµ½Ğ¡ÖØĞÂ±àºÅ: ĞÂ1ºÅ½Úµã¶È×î´ó, ĞÂ×îºóµÚgvertexnumºÅ½Úµã¶È×îĞ¡
-	 //²ÉÓÃÑ¡ÔñÅÅĞò·½·¨
+	 //å¯¹èŠ‚ç‚¹åº¦æŒ‰ç…§ç”±å¤§åˆ°å°æ’åº, ç„¶åå¯¹å›¾æŒ‰ç…§åº¦ç”±å¤§åˆ°å°é‡æ–°ç¼–å·: æ–°1å·èŠ‚ç‚¹åº¦æœ€å¤§, æ–°æœ€åç¬¬gvertexnumå·èŠ‚ç‚¹åº¦æœ€å°
+	 //é‡‡ç”¨é€‰æ‹©æ’åºæ–¹æ³•
 	 short int temp;
 	 bool tempf;
      int a;
@@ -1358,18 +1499,18 @@ void ReadGraph(char *txtgraphfilename)
 			 if(DegreeList[j]>DegreeList[k])
 			     k=j;
 	     if(k!=i)
-		 {//½»»»½ÚµãiºÍ½ÚµãkµÄ±àºÅ: ÏàÓ¦½Úµã¶ÈÒª½»»»,Í¬Ê±Òª½»»»ÁÚ½Ó¾ØÕóµÄµÚiĞĞºÍµÚkĞĞ,ÒÔ¼°µÚiÁĞºÍµÚkÁĞ
-            temp=DegreeList[k];        //½»»»Á½½ÚµãµÄ¶È
+		 {//äº¤æ¢èŠ‚ç‚¹iå’ŒèŠ‚ç‚¹kçš„ç¼–å·: ç›¸åº”èŠ‚ç‚¹åº¦è¦äº¤æ¢,åŒæ—¶è¦äº¤æ¢é‚»æ¥çŸ©é˜µçš„ç¬¬iè¡Œå’Œç¬¬kè¡Œ,ä»¥åŠç¬¬iåˆ—å’Œç¬¬kåˆ—
+            temp=DegreeList[k];        //äº¤æ¢ä¸¤èŠ‚ç‚¹çš„åº¦
 			DegreeList[k]=DegreeList[i];
 			DegreeList[i]=temp;
 
-			for(a=1;a<=gvertexnum;a++) //½»»»ÁÚ½Ó¾ØÕóµÄÁ½ĞĞ
+			for(a=1;a<=gvertexnum;a++) //äº¤æ¢é‚»æ¥çŸ©é˜µçš„ä¸¤è¡Œ
 			{	tempf=GAdjMatrix[k][a];
 				GAdjMatrix[k][a]=GAdjMatrix[i][a];
 				GAdjMatrix[i][a]=tempf;
 			}
 
-            for(a=1;a<=gvertexnum;a++) //½»»»ÁÚ½Ó¾ØÕóµÄÁ½ÁĞ
+            for(a=1;a<=gvertexnum;a++) //äº¤æ¢é‚»æ¥çŸ©é˜µçš„ä¸¤åˆ—
 			{	tempf=GAdjMatrix[a][k];
 				GAdjMatrix[a][k]=GAdjMatrix[a][i];
 				GAdjMatrix[a][i]=tempf;
@@ -1378,7 +1519,7 @@ void ReadGraph(char *txtgraphfilename)
 		 }
 	 }
 
-	 //Çó×î´ó¶Èmaxdegree, ×îĞ¡¶Èmindegree, ËùÓĞ¶ÈÎª1µÄ½Úµã¸öÊıonedegreenum, Å¼Êı¶È½Úµã¸öÊıevendegreenum(ÆæÊı¶È½Úµã¸öÊıÎªgvertexnum-evendegreenum)
+	 //æ±‚æœ€å¤§åº¦maxdegree, æœ€å°åº¦mindegree, æ‰€æœ‰åº¦ä¸º1çš„èŠ‚ç‚¹ä¸ªæ•°onedegreenum, å¶æ•°åº¦èŠ‚ç‚¹ä¸ªæ•°evendegreenum(å¥‡æ•°åº¦èŠ‚ç‚¹ä¸ªæ•°ä¸ºgvertexnum-evendegreenum)
 	 maxdegree=DegreeList[1];
 	 mindegree=DegreeList[gvertexnum];
 	 onedegreenum=0;
@@ -1398,37 +1539,37 @@ void ReadGraph(char *txtgraphfilename)
 
 
 
-//¼¯³É»·¾³ÏÂÖ´ĞĞ²¿·Ö(begin)****************************************************************
+//é›†æˆç¯å¢ƒä¸‹æ‰§è¡Œéƒ¨åˆ†(begin)****************************************************************
   int main(void)
   {
 
     char  graphfilename[50];
 	char  resultfilename[50];
-    //¼üÅÌÉÏÊäÈëÔÚReadGraph()ÖĞÒª´ò¿ªµÄÍ¼Êı¾İÎÄ¼şÃû(txtÎÄ¼ş,´øÀ©Õ¹Ãû.ÎÄ¼ş¸ñÊ½:µÚÒ»ĞĞÍ¼µÄµãÊın,µÚ¶şĞĞÍ¼µÄ±ßÊım,ÓàÏÂÃ¿Ò»ĞĞÊÇÒ»Ìõ±ß(i,j)µÄÒ»¸ö½Úµãi  j)
+    //é”®ç›˜ä¸Šè¾“å…¥åœ¨ReadGraph()ä¸­è¦æ‰“å¼€çš„å›¾æ•°æ®æ–‡ä»¶å(txtæ–‡ä»¶,å¸¦æ‰©å±•å.æ–‡ä»¶æ ¼å¼:ç¬¬ä¸€è¡Œå›¾çš„ç‚¹æ•°n,ç¬¬äºŒè¡Œå›¾çš„è¾¹æ•°m,ä½™ä¸‹æ¯ä¸€è¡Œæ˜¯ä¸€æ¡è¾¹(i,j)çš„ä¸€ä¸ªèŠ‚ç‚¹i  j)
 	printf("Please input the filename of the data file:\n");
 	scanf("%s",graphfilename);
-    //¼üÅÌÉÏÊäÈëÔÚÏÂÃæÖĞÒª´´½¨µÄ±£´æ¼ÆËã½á¹ûµÄÎÄ¼şÃû(txtÎÄ¼ş,´øÀ©Õ¹Ãû)
+    //é”®ç›˜ä¸Šè¾“å…¥åœ¨ä¸‹é¢ä¸­è¦åˆ›å»ºçš„ä¿å­˜è®¡ç®—ç»“æœçš„æ–‡ä»¶å(txtæ–‡ä»¶,å¸¦æ‰©å±•å)
 	printf("Please input the filename of the result file:\n");
 	scanf("%s",resultfilename);
 
-//¼¯³É»·¾³ÏÂÖ´ĞĞ²¿·Ö(end)******************************************************************
+//é›†æˆç¯å¢ƒä¸‹æ‰§è¡Œéƒ¨åˆ†(end)******************************************************************
 
 
 
 
 
-	//------------------------------ÊäÈëÊı¾İ--------------------------------------
+	//------------------------------è¾“å…¥æ•°æ®--------------------------------------
 
-  	ReadGraph(graphfilename);  //¶Á³öÍ¼µÄÊı¾İ
-    //CreateGraph(graphfilename);  //Ëæ»ú²úÉúÒ»¸öÍ¼,²¢´æ´¢µ½ÎÄ¼şÖĞ
+  	ReadGraph(graphfilename);  //è¯»å‡ºå›¾çš„æ•°æ®
+    //CreateGraph(graphfilename);  //éšæœºäº§ç”Ÿä¸€ä¸ªå›¾,å¹¶å­˜å‚¨åˆ°æ–‡ä»¶ä¸­
 
 
-	//-----------------------------Ö´ĞĞËã·¨--------------------------------------
+	//-----------------------------æ‰§è¡Œç®—æ³•--------------------------------------
 	FILE *out;
 	clock_t start, end;
     int dssize;
 
-	//¸ù¾İ¸ø¶¨µÄ½á¹ûÎÄ¼şÃû×Ö´ò¿ªÎÄ¼ş¡£²ÎÊıw±íÊ¾¶ÔÎÄ¼ş½øĞĞĞ´²Ù×÷
+	//æ ¹æ®ç»™å®šçš„ç»“æœæ–‡ä»¶åå­—æ‰“å¼€æ–‡ä»¶ã€‚å‚æ•°wè¡¨ç¤ºå¯¹æ–‡ä»¶è¿›è¡Œå†™æ“ä½œ
     if ((out=fopen(resultfilename, "w"))==NULL)
 	{   	fprintf(stderr, "Cannot open the data file.\n");
 			return 0;
@@ -1437,10 +1578,10 @@ void ReadGraph(char *txtgraphfilename)
 	fprintf(out,"vertexnum=%d,edgenum=%d,maxdegree=%d,averdegree=%6.2lf,density=%10.5lf\n",gvertexnum,gedgenum,maxdegree,2.0*gedgenum/gvertexnum,2.0*gedgenum/(gvertexnum*(gvertexnum-1.0)));
 	fprintf(out, "mindegree=%d,onedegreenum=%d,evendegreenum=%d,odddegreenum=%d\n\n",mindegree,onedegreenum,evendegreenum,gvertexnum-evendegreenum);
 
-    //******Ì°ĞÄ½üËÆËã·¨1(ÎÄÏ×ÖĞ·½·¨)*********
+    //******è´ªå¿ƒè¿‘ä¼¼ç®—æ³•1(æ–‡çŒ®ä¸­æ–¹æ³•)*********
 	printf("\nGreedy1_PIDS is running...");
     start=clock();
-   	dssize=Greedy1_PIDS();      //Ö´ĞĞÌ°ĞÄ½üËÆËã·¨,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+   	dssize=Greedy1_PIDS_ILMA();      //æ‰§è¡Œè´ªå¿ƒè¿‘ä¼¼ç®—æ³•,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 	end=clock();
 	if(dssize)
 		fprintf(out,"\nGreedy1_PIDS obtains a PIDS of size %d.", dssize);
@@ -1449,11 +1590,25 @@ void ReadGraph(char *txtgraphfilename)
 	fprintf(out,"\nGreedy1_PIDS has running time %.3lf.\n", 1.0*(end-start)/CLK_TCK);
 	//getch();
 
+
+
+//	//*****æ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•1*********
+//	printf("\nNewGreedy1_PIDS is running...");
+//    start=clock();
+//	dssize=NewGreedy1_PIDS();      //æ‰§è¡Œæ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•1,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
+//	end=clock();
+//	if(dssize)
+//		fprintf(out,"\nNewGreedy1_PIDS obtains a PIDS of size %d.", dssize);
+//	else
+//		fprintf(out,"\nNo solution to the instance.");
+//    fprintf(out,"\nNewGreedy1_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
+//    //getch();
+
 	/*
-	//******Ì°ĞÄËã·¨2(ÎÄÏ×ÖĞ·½·¨)*********
+	//******è´ªå¿ƒç®—æ³•2(æ–‡çŒ®ä¸­æ–¹æ³•)*********
 	printf("\nGreedy2_PIDS is running...");
     start=clock();
-   	dssize=Greedy2_PIDS();      //Ö´ĞĞÌ°ĞÄ½üËÆËã·¨,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+   	dssize=Greedy2_PIDS();      //æ‰§è¡Œè´ªå¿ƒè¿‘ä¼¼ç®—æ³•,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 	end=clock();
 	if(dssize)
 		fprintf(out,"\nGreedy2_PIDS obtains a PIDS of size %d.", dssize);
@@ -1463,22 +1618,12 @@ void ReadGraph(char *txtgraphfilename)
 	//getch();
 
 
-	//*****ĞÂÉè¼ÆµÄÌ°ĞÄËã·¨1*********
-	printf("\nNewGreedy1_PIDS is running...");
-    start=clock();
-	dssize=NewGreedy1_PIDS();      //Ö´ĞĞĞÂÉè¼ÆµÄÌ°ĞÄËã·¨1,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
-	end=clock();
-	if(dssize)
-		fprintf(out,"\nNewGreedy1_PIDS obtains a PIDS of size %d.", dssize);
-	else
-		fprintf(out,"\nNo solution to the instance.");
-    fprintf(out,"\nNewGreedy1_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
-    //getch();
 
-	//*****ĞÂÉè¼ÆµÄÌ°ĞÄËã·¨2*********
+
+	//*****æ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•2*********
 	printf("\nNewGreedy2_PIDS is running...");
     start=clock();
-	dssize=NewGreedy2_PIDS();      //Ö´ĞĞĞÂÉè¼ÆµÄÌ°ĞÄËã·¨2,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	dssize=NewGreedy2_PIDS();      //æ‰§è¡Œæ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•2,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 	end=clock();
 	if(dssize)
 		fprintf(out,"\nNewGreedy2_PIDS obtains a PIDS of size %d.", dssize);
@@ -1487,10 +1632,10 @@ void ReadGraph(char *txtgraphfilename)
     fprintf(out,"\nNewGreedy2_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
     //getch();
 
-	//*****ĞÂÉè¼ÆµÄÌ°ĞÄËã·¨2*********
+	//*****æ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•2*********
 	printf("\nNewGreedy3_PIDS is running...");
     start=clock();
-	dssize=NewGreedy3_PIDS();      //Ö´ĞĞĞÂÉè¼ÆµÄÌ°ĞÄËã·¨2,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	dssize=NewGreedy3_PIDS();      //æ‰§è¡Œæ–°è®¾è®¡çš„è´ªå¿ƒç®—æ³•2,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 	end=clock();
 	if(dssize)
 		fprintf(out,"\nNewGreedy3_PIDS obtains a PIDS of size %d.", dssize);
@@ -1499,10 +1644,10 @@ void ReadGraph(char *txtgraphfilename)
     fprintf(out,"\nNewGreedy3_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
     //getch();
 
-	//*****ĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄËã·¨1*********
+	//*****æ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒç®—æ³•1*********
 	printf("\nLocalGreedy1_PIDS is running...");
     start=clock();
-	dssize=LocalGreedy1_PIDS();      //Ö´ĞĞĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄËã·¨1,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	dssize=LocalGreedy1_PIDS();      //æ‰§è¡Œæ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒç®—æ³•1,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 	end=clock();
 	if(dssize)
 		fprintf(out,"\nLocalGreedy1_PIDS obtains a PIDS of size %d.", dssize);
@@ -1511,10 +1656,10 @@ void ReadGraph(char *txtgraphfilename)
     fprintf(out,"\nLocalGreedy1_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
     //getch();
 
-	//*****ĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄËã·¨2*********
+	//*****æ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒç®—æ³•2*********
 	printf("\nLocalGreedy2_PIDS is running...");
     start=clock();
-	dssize=LocalGreedy2_PIDS();      //Ö´ĞĞĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄËã·¨2,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	dssize=LocalGreedy2_PIDS();      //æ‰§è¡Œæ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒç®—æ³•2,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 	end=clock();
 	if(dssize)
 		fprintf(out,"\nLocalGreedy2_PIDS obtains a PIDS of size %d.", dssize);
@@ -1523,10 +1668,10 @@ void ReadGraph(char *txtgraphfilename)
     fprintf(out,"\nLocalGreedy2_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
     //getch();
 
-	//*****ĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄËã·¨3*********
+	//*****æ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒç®—æ³•3*********
 	printf("\nLocalGreedy3_PIDS is running...");
     start=clock();
-	dssize=LocalGreedy3_PIDS();      //Ö´ĞĞĞÂÉè¼ÆµÄ¾Ö²¿Ì°ĞÄËã·¨3,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	dssize=LocalGreedy3_PIDS();      //æ‰§è¡Œæ–°è®¾è®¡çš„å±€éƒ¨è´ªå¿ƒç®—æ³•3,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 	end=clock();
 	if(dssize)
 		fprintf(out,"\nLocalGreedy3_PIDS obtains a PIDS of size %d.", dssize);
@@ -1535,10 +1680,10 @@ void ReadGraph(char *txtgraphfilename)
     fprintf(out,"\nLocalGreedy3_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
     //getch();
 
-	//*****ĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄËã·¨1*********
+	//*****æ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒç®—æ³•1*********
 	printf("\nNewLocalGreedy1_PIDS is running...");
     start=clock();
-	dssize=NewLocalGreedy1_PIDS();  //Ö´ĞĞĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄËã·¨1,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	dssize=NewLocalGreedy1_PIDS();  //æ‰§è¡Œæ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒç®—æ³•1,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 	end=clock();
 	if(dssize)
 		fprintf(out,"\nNewLocalGreedy1_PIDS obtains a PIDS of size %d.", dssize);
@@ -1547,10 +1692,10 @@ void ReadGraph(char *txtgraphfilename)
     fprintf(out,"\nNewLocalGreedy1_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
     //getch();
 
-	//*****ĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄËã·¨2*********
+	//*****æ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒç®—æ³•2*********
 	printf("\nNewLocalGreedy2_PIDS is running...");
     start=clock();
-	dssize=NewLocalGreedy2_PIDS();  //Ö´ĞĞĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄËã·¨2,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	dssize=NewLocalGreedy2_PIDS();  //æ‰§è¡Œæ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒç®—æ³•2,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 	end=clock();
 	if(dssize)
 		fprintf(out,"\nNewLocalGreedy2_PIDS obtains a PIDS of size %d.", dssize);
@@ -1559,10 +1704,10 @@ void ReadGraph(char *txtgraphfilename)
     fprintf(out,"\nNewLocalGreedy2_PIDS has running time %.3lf\n", 1.0*(end-start)/CLK_TCK);
     //getch();
 
-	//*****ĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄËã·¨3*********
+	//*****æ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒç®—æ³•3*********
 	printf("\nNewLocalGreedy3_PIDS is running...");
     start=clock();
-	dssize=NewLocalGreedy3_PIDS();  //Ö´ĞĞĞÂÉè¼ÆµÄĞÂµÄ¾Ö²¿Ì°ĞÄËã·¨3,·µ»ØËùÇóÖ§Åä¼¯´óĞ¡
+	dssize=NewLocalGreedy3_PIDS();  //æ‰§è¡Œæ–°è®¾è®¡çš„æ–°çš„å±€éƒ¨è´ªå¿ƒç®—æ³•3,è¿”å›æ‰€æ±‚æ”¯é…é›†å¤§å°
 	end=clock();
 	if(dssize)
 		fprintf(out,"\nNewLocalGreedy3_PIDS obtains a PIDS of size %d.", dssize);
@@ -1574,8 +1719,8 @@ void ReadGraph(char *txtgraphfilename)
 
     */
 
-	fclose(out);           //´ò¿ªµÄÎÄ¼ş×îºó±ØĞë¹Ø±Õ
-    printf("³ÌĞòÔËĞĞÍê±Ï!\n");
+	fclose(out);           //æ‰“å¼€çš„æ–‡ä»¶æœ€åå¿…é¡»å…³é—­
+    printf("ç¨‹åºè¿è¡Œå®Œæ¯•!\n");
 	//getch();
 }
 
@@ -1609,34 +1754,34 @@ void ReadGraph(char *txtgraphfilename)
 
 
 
-/*Ëæ»ú²úÉúÍ¼µÄº¯ÊıÃ»ÓĞÊ¹ÓÃ¡£°¡¹ş¹ş¹ş*/
+/*éšæœºäº§ç”Ÿå›¾çš„å‡½æ•°æ²¡æœ‰ä½¿ç”¨ã€‚å•Šå“ˆå“ˆå“ˆ*/
 void CreateGraph(char *txtgraphfilename)
-{//²úÉúÎŞÏòÍ¼,Í¼ÖĞn¸öµã1,2,...,n, Í¼µÄÆ½¾ù¶Èaverd=2m/n, ±ßµÄ³íÃÜ¶Èr=2m/(n(n-1)),Òò´ËÓĞr=averd/(n-1).
-  //Í¼ÖĞÈÎÒâµãiºÍjÖ®¼ä´æÔÚ±ßµÄ¸ÅÂÊÎªr(0<r<1)--r¿ÉÒÔ¿´×÷ÊÇ±ßµÄ³íÃÜ¶È.
+{//äº§ç”Ÿæ— å‘å›¾,å›¾ä¸­nä¸ªç‚¹1,2,...,n, å›¾çš„å¹³å‡åº¦averd=2m/n, è¾¹çš„ç¨ å¯†åº¦r=2m/(n(n-1)),å› æ­¤æœ‰r=averd/(n-1).
+  //å›¾ä¸­ä»»æ„ç‚¹iå’Œjä¹‹é—´å­˜åœ¨è¾¹çš„æ¦‚ç‡ä¸ºr(0<r<1)--rå¯ä»¥çœ‹ä½œæ˜¯è¾¹çš„ç¨ å¯†åº¦.
    printf("Please input the number of nodes of the graph:\n");
-   scanf("%d",&gvertexnum);       //È·¶¨Í¼µÄµãÊı
+   scanf("%d",&gvertexnum);       //ç¡®å®šå›¾çš„ç‚¹æ•°
 
    double r;
    int averd;
    //printf("Please input the density r of edges of the graph (0<r<1):\n");
-   //scanf("%lf",&r);             //È·¶¨Í¼ÖĞ±ßµÄ³íÃÜ¶È
+   //scanf("%lf",&r);             //ç¡®å®šå›¾ä¸­è¾¹çš„ç¨ å¯†åº¦
    printf("Please input the average degree of the graph (1<=averd<=n-1):\n");
-	   scanf("%d", &averd);       //ÊäÈëÍ¼µÄÆ½¾ùµã¶È
-   r=(1.0*averd)/(gvertexnum-1.0);           //È·¶¨Í¼ÖĞ±ßµÄ³íÃÜ¶È
+	   scanf("%d", &averd);       //è¾“å…¥å›¾çš„å¹³å‡ç‚¹åº¦
+   r=(1.0*averd)/(gvertexnum-1.0);           //ç¡®å®šå›¾ä¸­è¾¹çš„ç¨ å¯†åº¦
 
    int i,j;
-   for(i=1;i<=gvertexnum;i++)     //³õÊ¼»¯ÁÚ½Ó¾ØÕó
+   for(i=1;i<=gvertexnum;i++)     //åˆå§‹åŒ–é‚»æ¥çŸ©é˜µ
 	   for(j=1;j<=gvertexnum;j++)
   	      GAdjMatrix[i][j]=0;
 
    time_t t;
 
-   //Ëæ»ú²úÉúÍ¼. Èç¹ûº¬ÓĞ¹ÂÁ¢µãÔò½«¹ÂÁ¢µãËæ»úÁ¬±ß¼´¿ÉÒÔ±£Ö¤²»º¬¹ÂÁ¢µã
+   //éšæœºäº§ç”Ÿå›¾. å¦‚æœå«æœ‰å­¤ç«‹ç‚¹åˆ™å°†å­¤ç«‹ç‚¹éšæœºè¿è¾¹å³å¯ä»¥ä¿è¯ä¸å«å­¤ç«‹ç‚¹
 
    srand((unsigned) time(&t));
    gedgenum=0;
 
-   for(i=1;i<gvertexnum;i++)     //Ëæ»ú²úÉúÍ¼µÄÁÚ½Ó¾ØÕó
+   for(i=1;i<gvertexnum;i++)     //éšæœºäº§ç”Ÿå›¾çš„é‚»æ¥çŸ©é˜µ
 	   for(j=i+1;j<=gvertexnum;j++)
 	   {
 		   GAdjMatrix[i][j]=rand()%1000<(r*1000)?1:0;
@@ -1647,14 +1792,14 @@ void CreateGraph(char *txtgraphfilename)
 		   }
 	   }
 
-//³õÊ¼»¯¸÷µã¶È,²¢´¦Àí¹ÂÁ¢µã(Í¼ÖĞº¬ÓĞ¹ÂÁ¢µãÔòÎÊÌâÎŞ½â). ¼ì²éÊÇ·ñº¬ÓĞ¹ÂÁ¢µã. Èç¹ûº¬ÓĞ¹ÂÁ¢µã,Ôò½«¹ÂÁ¢µãËæ»úÁ¬±ß¼´¿É±£Ö¤²»º¬¹ÂÁ¢µã
+//åˆå§‹åŒ–å„ç‚¹åº¦,å¹¶å¤„ç†å­¤ç«‹ç‚¹(å›¾ä¸­å«æœ‰å­¤ç«‹ç‚¹åˆ™é—®é¢˜æ— è§£). æ£€æŸ¥æ˜¯å¦å«æœ‰å­¤ç«‹ç‚¹. å¦‚æœå«æœ‰å­¤ç«‹ç‚¹,åˆ™å°†å­¤ç«‹ç‚¹éšæœºè¿è¾¹å³å¯ä¿è¯ä¸å«å­¤ç«‹ç‚¹
 	 int k;
   	 for(i=1;i<=gvertexnum;i++)
 	 {  DegreeList[i]=0;
 		for(j=1;j<=gvertexnum;j++)
 			if(GAdjMatrix[i][j])
 				DegreeList[i]++;
-		if(DegreeList[i]==0)  //±íÊ¾½ÚµãiÊÇ¹ÂÁ¢µã,´ËÊ±½«½ÚµãiËæ»úÁ¬½Óµ½ÁíÒ»½Úµãk
+		if(DegreeList[i]==0)  //è¡¨ç¤ºèŠ‚ç‚¹iæ˜¯å­¤ç«‹ç‚¹,æ­¤æ—¶å°†èŠ‚ç‚¹iéšæœºè¿æ¥åˆ°å¦ä¸€èŠ‚ç‚¹k
 		{
            k=(rand()%gvertexnum)+1;
 		   if(k==i && k<gvertexnum)
@@ -1669,8 +1814,8 @@ void CreateGraph(char *txtgraphfilename)
 		}
 	 }
 
-	 //¶Ô½Úµã¶È°´ÕÕÓÉ´óµ½Ğ¡ÅÅĞò, È»ºó¶ÔÍ¼°´ÕÕ¶ÈÓÉ´óµ½Ğ¡ÖØĞÂ±àºÅ: ĞÂ1ºÅ½Úµã¶È×î´ó, ĞÂ×îºóµÚgvertexnumºÅ½Úµã¶È×îĞ¡
-	 //²ÉÓÃÑ¡ÔñÅÅĞò·½·¨
+	 //å¯¹èŠ‚ç‚¹åº¦æŒ‰ç…§ç”±å¤§åˆ°å°æ’åº, ç„¶åå¯¹å›¾æŒ‰ç…§åº¦ç”±å¤§åˆ°å°é‡æ–°ç¼–å·: æ–°1å·èŠ‚ç‚¹åº¦æœ€å¤§, æ–°æœ€åç¬¬gvertexnumå·èŠ‚ç‚¹åº¦æœ€å°
+	 //é‡‡ç”¨é€‰æ‹©æ’åºæ–¹æ³•
 	 short int temp;
 	 bool tempf;
      int a;
@@ -1681,18 +1826,18 @@ void CreateGraph(char *txtgraphfilename)
 			 if(DegreeList[j]>DegreeList[k])
 			     k=j;
 	     if(k!=i)
-		 {//½»»»½ÚµãiºÍ½ÚµãkµÄ±àºÅ: ÏàÓ¦½Úµã¶ÈÒª½»»»,Í¬Ê±Òª½»»»ÁÚ½Ó¾ØÕóµÄµÚiĞĞºÍµÚkĞĞ,ÒÔ¼°µÚiÁĞºÍµÚkÁĞ
-            temp=DegreeList[k];        //½»»»Á½½ÚµãµÄ¶È
+		 {//äº¤æ¢èŠ‚ç‚¹iå’ŒèŠ‚ç‚¹kçš„ç¼–å·: ç›¸åº”èŠ‚ç‚¹åº¦è¦äº¤æ¢,åŒæ—¶è¦äº¤æ¢é‚»æ¥çŸ©é˜µçš„ç¬¬iè¡Œå’Œç¬¬kè¡Œ,ä»¥åŠç¬¬iåˆ—å’Œç¬¬kåˆ—
+            temp=DegreeList[k];        //äº¤æ¢ä¸¤èŠ‚ç‚¹çš„åº¦
 			DegreeList[k]=DegreeList[i];
 			DegreeList[i]=temp;
 
-			for(a=1;a<=gvertexnum;a++) //½»»»ÁÚ½Ó¾ØÕóµÄÁ½ĞĞ
+			for(a=1;a<=gvertexnum;a++) //äº¤æ¢é‚»æ¥çŸ©é˜µçš„ä¸¤è¡Œ
 			{	tempf=GAdjMatrix[k][a];
 				GAdjMatrix[k][a]=GAdjMatrix[i][a];
 				GAdjMatrix[i][a]=tempf;
 			}
 
-            for(a=1;a<=gvertexnum;a++) //½»»»ÁÚ½Ó¾ØÕóµÄÁ½ÁĞ
+            for(a=1;a<=gvertexnum;a++) //äº¤æ¢é‚»æ¥çŸ©é˜µçš„ä¸¤åˆ—
 			{	tempf=GAdjMatrix[a][k];
 				GAdjMatrix[a][k]=GAdjMatrix[a][i];
 				GAdjMatrix[a][i]=tempf;
@@ -1701,7 +1846,7 @@ void CreateGraph(char *txtgraphfilename)
 		 }
 	 }
 
-	 //Çó×î´ó¶Èmaxdegree, ×îĞ¡¶Èmindegree, ËùÓĞ¶ÈÎª1µÄ½Úµã¸öÊıonedegreenum, Å¼Êı¶È½Úµã¸öÊıevendegreenum(ÆæÊı¶È½Úµã¸öÊıÎªgvertexnum-evendegreenum)
+	 //æ±‚æœ€å¤§åº¦maxdegree, æœ€å°åº¦mindegree, æ‰€æœ‰åº¦ä¸º1çš„èŠ‚ç‚¹ä¸ªæ•°onedegreenum, å¶æ•°åº¦èŠ‚ç‚¹ä¸ªæ•°evendegreenum(å¥‡æ•°åº¦èŠ‚ç‚¹ä¸ªæ•°ä¸ºgvertexnum-evendegreenum)
 	 maxdegree=DegreeList[1];
 	 mindegree=DegreeList[gvertexnum];
 	 onedegreenum=0;
@@ -1716,11 +1861,11 @@ void CreateGraph(char *txtgraphfilename)
 	 printf("mindegree=%d,onedegreenum=%d,evendegreenum=%d,odddegreenum=%d\n",mindegree,onedegreenum,evendegreenum,gvertexnum-evendegreenum);
 
 	bool savegraph;
-	savegraph=1;                      //savegraph=0 ±íÊ¾²»ÓÃ´æ´¢Í¼µ½ÎÄ¼şÖĞ
+	savegraph=1;                      //savegraph=0 è¡¨ç¤ºä¸ç”¨å­˜å‚¨å›¾åˆ°æ–‡ä»¶ä¸­
 	if(savegraph)
-	{	//´æ´¢Í¼µ½Ö¸¶¨µÄÎÄ¼şÖĞ
+	{	//å­˜å‚¨å›¾åˆ°æŒ‡å®šçš„æ–‡ä»¶ä¸­
 		FILE  *out;
-		//¸ù¾İº¯Êı´«ÈëµÄÎÄ¼şÃû×Ö£¬´´½¨²¢´ò¿ªÎÄ¼ş¡£²ÎÊıw±íÊ¾¶ÔÎÄ¼ş½øĞĞĞ´²Ù×÷
+		//æ ¹æ®å‡½æ•°ä¼ å…¥çš„æ–‡ä»¶åå­—ï¼Œåˆ›å»ºå¹¶æ‰“å¼€æ–‡ä»¶ã€‚å‚æ•°wè¡¨ç¤ºå¯¹æ–‡ä»¶è¿›è¡Œå†™æ“ä½œ
 		if ((out=fopen(txtgraphfilename, "w"))==NULL)
 		{   	fprintf(stderr, "Cannot open the data file.\n");
 			return;
@@ -1730,9 +1875,9 @@ void CreateGraph(char *txtgraphfilename)
 
 		for(i=1;i<gvertexnum;i++)
 			for(j=i+1;j<=gvertexnum;j++)
-				if(GAdjMatrix[i][j])    //´æ´¢Ã¿Ìõ±ß
+				if(GAdjMatrix[i][j])    //å­˜å‚¨æ¯æ¡è¾¹
 					fprintf(out,"%5d  %5d\n",i,j);
-		fclose(out);                   //´ò¿ªµÄÎÄ¼ş×îºó±ØĞë¹Ø±Õ
+		fclose(out);                   //æ‰“å¼€çš„æ–‡ä»¶æœ€åå¿…é¡»å…³é—­
 	}
 }
 

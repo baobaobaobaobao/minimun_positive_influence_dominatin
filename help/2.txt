@@ -1,7 +1,0 @@
-******The graph file is 1.txt******
-vertexnum=4039,edgenum=88249,maxdegree=1044,averdegree= 43.70,density=   0.01082
-mindegree=1,onedegreenum=102,evendegreenum=2009,odddegreenum=2030
-
-
-Greedy1_PIDS obtains a PIDS of size 1942.
-Greedy1_PIDS has running time 0.230.
